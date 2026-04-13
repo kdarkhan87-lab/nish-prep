@@ -12,3 +12,24 @@
 .animate-shake {
   animation: shake 0.4s ease-in-out;
 }
+
+/* Slow bounce for mascots */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.animate-bounce-slow {
+  animation: bounce-slow 3s ease-in-out infinite;
+}
+
+/* Floating up animation for math symbols */
+@keyframes float-up {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0.08; }
+  50% { opacity: 0.15; }
+  100% { transform: translateY(-30px) rotate(15deg); opacity: 0.05; }
+}
+
+.animate-float-up {
+  animation: float-up 5s ease-in-out infinite alternate;
+}

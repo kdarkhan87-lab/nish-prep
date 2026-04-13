@@ -34,8 +34,36 @@ export default async function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-20 relative overflow-hidden">
+        {/* Animated Penguin - left */}
+        <div className="hidden md:block absolute left-6 lg:left-16 top-1/2 -translate-y-1/2 animate-bounce-slow">
+          <div className="text-7xl lg:text-8xl drop-shadow-2xl select-none" style={{ animationDuration: '3s' }}>
+            🐧
+          </div>
+          <div className="text-center mt-2 bg-white/20 backdrop-blur rounded-xl px-3 py-1 text-xs font-bold">
+            Оқы!
+          </div>
+        </div>
+
+        {/* Animated Lion - right */}
+        <div className="hidden md:block absolute right-6 lg:right-16 top-1/2 -translate-y-1/2 animate-bounce-slow" style={{ animationDelay: '1.5s' }}>
+          <div className="text-7xl lg:text-8xl drop-shadow-2xl select-none">
+            🦁
+          </div>
+          <div className="text-center mt-2 bg-white/20 backdrop-blur rounded-xl px-3 py-1 text-xs font-bold">
+            Тапсыр!
+          </div>
+        </div>
+
+        {/* Floating math symbols */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <span className="absolute text-white/10 text-4xl animate-float-up left-[10%] top-[20%]">+</span>
+          <span className="absolute text-white/10 text-5xl animate-float-up left-[25%] top-[60%]" style={{ animationDelay: '2s' }}>%</span>
+          <span className="absolute text-white/10 text-3xl animate-float-up right-[15%] top-[30%]" style={{ animationDelay: '1s' }}>=</span>
+          <span className="absolute text-white/10 text-4xl animate-float-up right-[25%] top-[70%]" style={{ animationDelay: '3s' }}>?</span>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="text-orange-400">НИШ</span> және{" "}
             <span className="text-green-400">БИЛ</span>-ге дайындал!
@@ -56,6 +84,12 @@ export default async function Home() {
             >
               Тіркелу
             </Link>
+          </div>
+
+          {/* Mobile mascots */}
+          <div className="flex justify-center gap-8 mt-8 md:hidden">
+            <div className="text-5xl animate-bounce-slow">🐧</div>
+            <div className="text-5xl animate-bounce-slow" style={{ animationDelay: '1s' }}>🦁</div>
           </div>
         </div>
       </section>
