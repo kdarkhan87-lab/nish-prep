@@ -20,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main className="flex-1">{children}</main>
           <footer className="bg-gray-800 text-white py-6 text-center text-sm">
             <p>НИШ/БИЛ Дайындық — 2026. Емтиханда сәттілік!</p>
+            <a href="/about" className="text-blue-400 hover:text-blue-300 mt-1 inline-block">Байланыс / Ынтымақтастық</a>
           </footer>
         </Providers>
       </body>
