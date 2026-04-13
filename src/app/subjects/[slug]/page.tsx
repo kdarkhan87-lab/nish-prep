@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
+export const dynamic = "force-dynamic";
+
 export default async function SubjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const subject = await prisma.subject.findUnique({
