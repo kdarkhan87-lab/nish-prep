@@ -1,10 +1,35 @@
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const subjects = await prisma.subject.findMany({
     include: { topics: true },
   });
+
+  // Top 10 leaderboard
+  const allResults = await prisma.testResult.findMany({
+    include: { user: { select: { id: true, name: true, grade: true, role: true } } },
+  });
+
+  const userStats: Record<string, { name: string; grade: number; totalScore: number; totalPossible: number; tests: number }> = {};
+  for (const r of allResults) {
+    if (r.user.role === "admin") continue;
+    if (!userStats[r.user.id]) {
+      userStats[r.user.id] = { name: r.user.name, grade: r.user.grade, totalScore: 0, totalPossible: 0, tests: 0 };
+    }
+    userStats[r.user.id].totalScore += r.score;
+    userStats[r.user.id].totalPossible += r.total;
+    userStats[r.user.id].tests++;
+  }
+
+  const leaderboard = Object.values(userStats)
+    .map(u => ({ ...u, avg: Math.round((u.totalScore / u.totalPossible) * 100) }))
+    .sort((a, b) => b.avg - a.avg || b.tests - a.tests)
+    .slice(0, 10);
+
+  const medals = ["🥇", "🥈", "🥉"];
 
   return (
     <div>
@@ -61,6 +86,75 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      {/* Leaderboard */}
+      {leaderboard.length > 0 && (
+        <section className="bg-gradient-to-br from-yellow-50 to-orange-50 py-16">
+          <div className="max-w-3xl mx-auto px-4">
+            <h2 className="text-3xl font-bold text-center mb-2 text-gray-800">
+              🏆 Үздік оқушылар
+            </h2>
+            <p className="text-center text-gray-500 mb-8">Ең жақсы нәтиже көрсеткен оқушылар</p>
+
+            <div className="space-y-3">
+              {leaderboard.map((user, i) => (
+                <div
+                  key={i}
+                  className={`flex items-center gap-4 p-4 rounded-2xl transition ${
+                    i === 0 ? "bg-yellow-100 border-2 border-yellow-400 shadow-md" :
+                    i === 1 ? "bg-gray-100 border-2 border-gray-300" :
+                    i === 2 ? "bg-orange-100 border-2 border-orange-300" :
+                    "bg-white border border-gray-200"
+                  }`}
+                >
+                  {/* Rank */}
+                  <div className="flex-shrink-0 w-10 text-center">
+                    {i < 3 ? (
+                      <span className="text-2xl">{medals[i]}</span>
+                    ) : (
+                      <span className="text-lg font-bold text-gray-400">{i + 1}</span>
+                    )}
+                  </div>
+
+                  {/* Avatar */}
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-white flex-shrink-0 ${
+                    i === 0 ? "bg-yellow-500" : i === 1 ? "bg-gray-400" : i === 2 ? "bg-orange-400" : "bg-blue-400"
+                  }`}>
+                    {user.name.charAt(0)}
+                  </div>
+
+                  {/* Name & grade */}
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-gray-800 truncate">{user.name}</div>
+                    <div className="text-xs text-gray-500">{user.grade}-сынып · {user.tests} тест</div>
+                  </div>
+
+                  {/* Score */}
+                  <div className="flex items-center gap-3 flex-shrink-0">
+                    <div className="w-20 bg-gray-200 rounded-full h-2.5 hidden sm:block">
+                      <div
+                        className={`h-2.5 rounded-full ${
+                          user.avg >= 80 ? "bg-green-500" : user.avg >= 50 ? "bg-orange-400" : "bg-red-400"
+                        }`}
+                        style={{ width: `${user.avg}%` }}
+                      />
+                    </div>
+                    <span className={`text-lg font-extrabold ${
+                      user.avg >= 80 ? "text-green-600" : user.avg >= 50 ? "text-orange-500" : "text-red-500"
+                    }`}>
+                      {user.avg}%
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {leaderboard.length === 0 && (
+              <p className="text-center text-gray-400 py-8">Әзірше нәтижелер жоқ. Бірінші бол!</p>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Mock Exam CTA */}
       <section className="bg-gradient-to-r from-red-500 to-orange-500 py-12">
