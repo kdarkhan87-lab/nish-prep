@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
 
 export async function GET() {
-  const error = await requireAdmin();
+  const { error } = await requireAdmin();
   if (error) return error;
 
   const [userCount, subjectCount, topicCount, questionCount, resultCount] = await Promise.all([
