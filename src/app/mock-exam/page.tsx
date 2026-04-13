@@ -109,7 +109,7 @@ export default function MockExamPage() {
       <div className="max-w-2xl mx-auto px-4 py-16 text-center">
         <div className="bg-white rounded-2xl shadow-lg p-10">
           <div className="text-6xl mb-4">🎯</div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Пробный экзамен НИШ/КТЛ</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-4">Пробный экзамен НИШ/БІЛ</h1>
           <div className="text-gray-500 mb-8 space-y-2">
             <p>Нақты емтихан форматы:</p>
             <div className="grid grid-cols-3 gap-4 mt-4">
@@ -302,7 +302,7 @@ export default function MockExamPage() {
       {/* Таймер + прогресс */}
       <div className="flex items-center justify-between mb-4">
         <span className="text-sm text-gray-500 font-medium">
-          Пробный емтихан НИШ/КТЛ
+          Пробный емтихан НИШ/БІЛ
         </span>
         <div className={`px-4 py-2 rounded-xl font-bold text-lg ${
           timeLeft <= 120 ? "bg-red-100 text-red-700 animate-pulse" :

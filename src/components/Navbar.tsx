@@ -15,7 +15,7 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="text-xl font-bold flex items-center gap-2">
             <span className="text-2xl">🎓</span>
-            НИШ/КТЛ Дайындық
+            НИШ/БІЛ Дайындық
           </Link>
 
           {/* Desktop */}

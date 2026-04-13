@@ -7,8 +7,8 @@ import { Navbar } from "@/components/Navbar";
 const geist = Geist({ variable: "--font-geist", subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
-  title: "НИШ/КТЛ Дайындық — Математика және Логика",
-  description: "5-6 сынып оқушыларына НИШ және КТЛ-ге түсуге дайындық онлайн-платформасы",
+  title: "НИШ/БІЛ Дайындық — Математика және Логика",
+  description: "5-6 сынып оқушыларына НИШ және БІЛ-ге түсуге дайындық онлайн-платформасы",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Navbar />
           <main className="flex-1">{children}</main>
           <footer className="bg-gray-800 text-white py-6 text-center text-sm">
-            <p>НИШ/КТЛ Дайындық — 2026. Емтиханда сәттілік!</p>
+            <p>НИШ/БІЛ Дайындық — 2026. Емтиханда сәттілік!</p>
           </footer>
         </Providers>
       </body>
