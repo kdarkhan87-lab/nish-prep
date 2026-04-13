@@ -61,65 +61,57 @@ export default async function SubjectPage({ params }: { params: Promise<{ slug: 
           return (
             <div
               key={topic.id}
-              className="bg-white rounded-2xl shadow-md p-5 flex items-center justify-between gap-4"
+              className="bg-white rounded-2xl shadow-md p-4 md:p-5"
             >
-              {/* Сол жақ: нөмір + атау */}
-              <div className="flex items-center gap-4 flex-1 min-w-0">
-                <span className="bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                  {i + 1}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="text-lg font-bold text-gray-800 truncate">{topic.name}</h3>
-                  <p className="text-sm text-gray-500">{topic.questions.length} сұрақ</p>
+              {/* Верхняя строка: номер + название + кнопки */}
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 flex-1 min-w-0">
+                  <span className="bg-blue-600 text-white w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold flex-shrink-0 text-sm md:text-base">
+                    {i + 1}
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="text-base md:text-lg font-bold text-gray-800 leading-tight">{topic.name}</h3>
+                    <p className="text-xs md:text-sm text-gray-500">{topic.questions.length} сұрақ</p>
+                  </div>
+                </div>
+
+                <div className="flex gap-2 flex-shrink-0">
+                  <Link
+                    href={`/subjects/${slug}/${topic.id}/theory`}
+                    className="bg-blue-100 text-blue-700 hover:bg-blue-200 px-2 md:px-3 py-1.5 md:py-2 rounded-lg font-medium transition text-xs md:text-sm"
+                  >
+                    Теория
+                  </Link>
+                  <Link
+                    href={`/subjects/${slug}/${topic.id}/test`}
+                    className="bg-orange-100 text-orange-700 hover:bg-orange-200 px-2 md:px-3 py-1.5 md:py-2 rounded-lg font-medium transition text-xs md:text-sm"
+                  >
+                    Тест
+                  </Link>
                 </div>
               </div>
 
-              {/* Орта: батырмалар */}
-              <div className="flex gap-2 flex-shrink-0">
-                <Link
-                  href={`/subjects/${slug}/${topic.id}/theory`}
-                  className="bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-2 rounded-lg font-medium transition text-sm"
-                >
-                  📚 Теория
-                </Link>
-                <Link
-                  href={`/subjects/${slug}/${topic.id}/test`}
-                  className="bg-orange-100 text-orange-700 hover:bg-orange-200 px-3 py-2 rounded-lg font-medium transition text-sm"
-                >
-                  ✏️ Тест
-                </Link>
-              </div>
-
-              {/* Оң жақ: прогресс (Тесттен кейін) */}
-              <div className="flex-shrink-0 w-28">
-                {pct >= 0 ? (
-                  <div className="text-center">
+              {/* Нижняя строка: результат (всегда видно) */}
+              {pct >= 0 ? (
+                <div className="mt-3 flex items-center gap-3">
+                  <div className="flex-1 bg-gray-200 rounded-full h-2.5">
                     <div
-                      className={`text-2xl font-extrabold ${
-                        pct >= 80 ? "text-green-600" : pct >= 50 ? "text-orange-500" : "text-red-500"
+                      className={`h-2.5 rounded-full transition-all ${
+                        pct >= 80 ? "bg-green-500" : pct >= 50 ? "bg-orange-400" : "bg-red-400"
                       }`}
-                    >
-                      {pct}%
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2 mt-1">
-                      <div
-                        className={`h-2 rounded-full transition-all ${
-                          pct >= 80 ? "bg-green-500" : pct >= 50 ? "bg-orange-400" : "bg-red-400"
-                        }`}
-                        style={{ width: `${pct}%` }}
-                      />
-                    </div>
-                    <p className="text-xs text-gray-400 mt-1">
-                      {result.attempts} рет
-                    </p>
+                      style={{ width: `${pct}%` }}
+                    />
                   </div>
-                ) : (
-                  <div className="text-center">
-                    <div className="text-gray-300 text-lg font-bold">—</div>
-                    <p className="text-xs text-gray-400">тапсырылмаған</p>
-                  </div>
-                )}
-              </div>
+                  <span className={`text-sm font-bold flex-shrink-0 ${
+                    pct >= 80 ? "text-green-600" : pct >= 50 ? "text-orange-500" : "text-red-500"
+                  }`}>
+                    {pct}%
+                  </span>
+                  <span className="text-xs text-gray-400 flex-shrink-0">{result.attempts} рет</span>
+                </div>
+              ) : (
+                <div className="mt-2 text-xs text-gray-400">тапсырылмаған</div>
+              )}
             </div>
           );
         })}
