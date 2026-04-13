@@ -35,32 +35,22 @@ export default async function Home() {
     <div>
       {/* Hero */}
       <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-20 relative overflow-hidden">
-        {/* Animated Penguin - left */}
-        <div className="hidden md:block absolute left-6 lg:left-16 top-1/2 -translate-y-1/2 animate-bounce-slow">
-          <div className="text-7xl lg:text-8xl drop-shadow-2xl select-none" style={{ animationDuration: '3s' }}>
-            🐧
-          </div>
-          <div className="text-center mt-2 bg-white/20 backdrop-blur rounded-xl px-3 py-1 text-xs font-bold">
-            Оқы!
-          </div>
+        {/* Geometric shapes - left */}
+        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-48 lg:w-64 pointer-events-none">
+          <div className="absolute left-8 top-[15%] w-16 h-16 border-2 border-white/15 rounded-xl animate-spin-very-slow" />
+          <div className="absolute left-20 top-[45%] w-10 h-10 bg-orange-400/15 rounded-full animate-float-up" />
+          <div className="absolute left-6 top-[70%] w-20 h-20 border-2 border-green-400/15 rounded-full animate-pulse-slow" />
+          <div className="absolute left-24 top-[25%] text-white/10 text-3xl font-mono animate-float-up" style={{ animationDelay: '1s' }}>&#x3C0;</div>
+          <div className="absolute left-12 top-[55%] text-white/10 text-2xl font-mono animate-float-up" style={{ animationDelay: '2.5s' }}>&#x221A;</div>
         </div>
 
-        {/* Animated Lion - right */}
-        <div className="hidden md:block absolute right-6 lg:right-16 top-1/2 -translate-y-1/2 animate-bounce-slow" style={{ animationDelay: '1.5s' }}>
-          <div className="text-7xl lg:text-8xl drop-shadow-2xl select-none">
-            🦁
-          </div>
-          <div className="text-center mt-2 bg-white/20 backdrop-blur rounded-xl px-3 py-1 text-xs font-bold">
-            Тапсыр!
-          </div>
-        </div>
-
-        {/* Floating math symbols */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <span className="absolute text-white/10 text-4xl animate-float-up left-[10%] top-[20%]">+</span>
-          <span className="absolute text-white/10 text-5xl animate-float-up left-[25%] top-[60%]" style={{ animationDelay: '2s' }}>%</span>
-          <span className="absolute text-white/10 text-3xl animate-float-up right-[15%] top-[30%]" style={{ animationDelay: '1s' }}>=</span>
-          <span className="absolute text-white/10 text-4xl animate-float-up right-[25%] top-[70%]" style={{ animationDelay: '3s' }}>?</span>
+        {/* Geometric shapes - right */}
+        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-48 lg:w-64 pointer-events-none">
+          <div className="absolute right-12 top-[20%] w-14 h-14 border-2 border-cyan-300/15 rotate-45 animate-spin-very-slow" style={{ animationDirection: 'reverse' }} />
+          <div className="absolute right-24 top-[50%] w-8 h-8 bg-yellow-400/15 rounded-full animate-float-up" style={{ animationDelay: '1.5s' }} />
+          <div className="absolute right-8 top-[75%] w-16 h-16 border-2 border-pink-400/15 rounded-lg animate-pulse-slow" style={{ animationDelay: '1s' }} />
+          <div className="absolute right-20 top-[30%] text-white/10 text-3xl font-mono animate-float-up" style={{ animationDelay: '0.5s' }}>&#x03A3;</div>
+          <div className="absolute right-10 top-[60%] text-white/10 text-2xl font-mono animate-float-up" style={{ animationDelay: '3s' }}>&#x0394;</div>
         </div>
 
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
@@ -86,11 +76,6 @@ export default async function Home() {
             </Link>
           </div>
 
-          {/* Mobile mascots */}
-          <div className="flex justify-center gap-8 mt-8 md:hidden">
-            <div className="text-5xl animate-bounce-slow">🐧</div>
-            <div className="text-5xl animate-bounce-slow" style={{ animationDelay: '1s' }}>🦁</div>
-          </div>
         </div>
       </section>
 
