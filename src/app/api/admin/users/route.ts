@@ -14,6 +14,7 @@ export async function GET() {
       email: true,
       role: true,
       grade: true,
+      blocked: true,
       createdAt: true,
       results: {
         orderBy: { createdAt: "desc" },
