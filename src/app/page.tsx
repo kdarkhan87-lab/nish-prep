@@ -13,7 +13,7 @@ export default async function Home() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="text-orange-400">НИШ</span> және{" "}
-            <span className="text-green-400">БІЛ</span>-ге дайындал!
+            <span className="text-green-400">БИЛ</span>-ге дайындал!
           </h1>
           <p className="text-xl md:text-2xl text-blue-100 mb-8">
             5-6 сынып оқушыларына математика және логика бойынша интерактивті тесттер мен теория
@@ -66,7 +66,7 @@ export default async function Home() {
       <section className="bg-gradient-to-r from-red-500 to-orange-500 py-12">
         <div className="max-w-4xl mx-auto px-4 text-center text-white">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">
-            🎯 Пробный емтихан НИШ/БІЛ
+            🎯 Пробный емтихан НИШ/БИЛ
           </h2>
           <p className="text-red-100 mb-6">
             30 сұрақ · 60 минут · Барлық тақырыптан микс · Нақты емтихан форматы
