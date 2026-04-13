@@ -34,26 +34,8 @@ export default async function Home() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-20 relative overflow-hidden">
-        {/* Geometric shapes - left */}
-        <div className="hidden md:block absolute left-0 top-0 bottom-0 w-48 lg:w-64 pointer-events-none">
-          <div className="absolute left-8 top-[15%] w-16 h-16 border-2 border-white/15 rounded-xl animate-spin-very-slow" />
-          <div className="absolute left-20 top-[45%] w-10 h-10 bg-orange-400/15 rounded-full animate-float-up" />
-          <div className="absolute left-6 top-[70%] w-20 h-20 border-2 border-green-400/15 rounded-full animate-pulse-slow" />
-          <div className="absolute left-24 top-[25%] text-white/10 text-3xl font-mono animate-float-up" style={{ animationDelay: '1s' }}>&#x3C0;</div>
-          <div className="absolute left-12 top-[55%] text-white/10 text-2xl font-mono animate-float-up" style={{ animationDelay: '2.5s' }}>&#x221A;</div>
-        </div>
-
-        {/* Geometric shapes - right */}
-        <div className="hidden md:block absolute right-0 top-0 bottom-0 w-48 lg:w-64 pointer-events-none">
-          <div className="absolute right-12 top-[20%] w-14 h-14 border-2 border-cyan-300/15 rotate-45 animate-spin-very-slow" style={{ animationDirection: 'reverse' }} />
-          <div className="absolute right-24 top-[50%] w-8 h-8 bg-yellow-400/15 rounded-full animate-float-up" style={{ animationDelay: '1.5s' }} />
-          <div className="absolute right-8 top-[75%] w-16 h-16 border-2 border-pink-400/15 rounded-lg animate-pulse-slow" style={{ animationDelay: '1s' }} />
-          <div className="absolute right-20 top-[30%] text-white/10 text-3xl font-mono animate-float-up" style={{ animationDelay: '0.5s' }}>&#x03A3;</div>
-          <div className="absolute right-10 top-[60%] text-white/10 text-2xl font-mono animate-float-up" style={{ animationDelay: '3s' }}>&#x0394;</div>
-        </div>
-
-        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-20">
+        <div className="max-w-4xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
             <span className="text-orange-400">НИШ</span> және{" "}
             <span className="text-green-400">БИЛ</span>-ге дайындал!
