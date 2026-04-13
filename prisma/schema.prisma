@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String       @id @default(cuid())
+  name      String
+  email     String       @unique
+  password  String
+  role      String       @default("student")
+  grade     Int          @default(5)
+  results   TestResult[]
+  createdAt DateTime     @default(now())
+}
+
+model Subject {
+  id     String  @id @default(cuid())
+  name   String
+  slug   String  @unique
+  icon   String
+  topics Topic[]
+}
+
+model Topic {
+  id        String     @id @default(cuid())
+  name      String
+  theory    String
+  quizzes   String     @default("[]")
+  order     Int
+  subject   Subject    @relation(fields: [subjectId], references: [id])
+  subjectId String
+  questions Question[]
+}
+
+model Question {
+  id          String  @id @default(cuid())
+  text        String
+  options     String
+  answer      Int
+  explanation String  @default("")
+  topic       Topic   @relation(fields: [topicId], references: [id])
+  topicId     String
+}
+
+model TestResult {
+  id        String   @id @default(cuid())
+  score     Int
+  total     Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  topicId   String
+  createdAt DateTime @default(now())
+}
