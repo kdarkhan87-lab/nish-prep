@@ -14,6 +14,7 @@ export default function AdminPage() {
   const router = useRouter();
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState<{ userCount: number; resultCount: number; avgScore: number; recentResults: any[] } | null>(null);
 
   // New subject form
   const [newName, setNewName] = useState("");
@@ -33,7 +34,10 @@ export default function AdminPage() {
   useEffect(() => {
     if (status === "unauthenticated") router.push("/auth/login");
     if (status === "authenticated" && role !== "admin") router.push("/");
-    if (status === "authenticated" && role === "admin") loadData();
+    if (status === "authenticated" && role === "admin") {
+      loadData();
+      fetch("/api/admin/stats").then(r => r.json()).then(setStats).catch(() => {});
+    }
   }, [status, role, router, loadData]);
 
   async function createSubject(e: React.FormEvent) {
@@ -72,8 +76,18 @@ export default function AdminPage() {
         <Link href="/" className="text-blue-600 hover:underline">На сайт &rarr;</Link>
       </div>
 
+      {/* Navigation */}
+      <div className="flex gap-3 mb-8">
+        <Link href="/admin" className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium text-sm">
+          Контент
+        </Link>
+        <Link href="/admin/users" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium text-sm">
+          Пользователи {stats ? `(${stats.userCount})` : ""}
+        </Link>
+      </div>
+
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-4 mb-8">
         <div className="bg-blue-50 rounded-xl p-4 text-center">
           <div className="text-2xl font-bold text-blue-700">{subjects.length}</div>
           <div className="text-sm text-blue-600">Предметов</div>
@@ -86,7 +100,46 @@ export default function AdminPage() {
           <div className="text-2xl font-bold text-orange-700">{totalQuestions}</div>
           <div className="text-sm text-orange-600">Вопросов</div>
         </div>
+        <div className="bg-purple-50 rounded-xl p-4 text-center">
+          <div className="text-2xl font-bold text-purple-700">{stats?.userCount ?? "—"}</div>
+          <div className="text-sm text-purple-600">Учеников</div>
+        </div>
+        <div className="bg-indigo-50 rounded-xl p-4 text-center">
+          <div className="text-2xl font-bold text-indigo-700">{stats?.resultCount ?? "—"}</div>
+          <div className="text-sm text-indigo-600">Тестов сдано</div>
+        </div>
+        <div className="bg-rose-50 rounded-xl p-4 text-center">
+          <div className="text-2xl font-bold text-rose-700">{stats?.avgScore ? `${stats.avgScore}%` : "—"}</div>
+          <div className="text-sm text-rose-600">Ср. балл</div>
+        </div>
       </div>
+
+      {/* Recent test results */}
+      {stats?.recentResults && stats.recentResults.length > 0 && (
+        <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
+          <h2 className="text-xl font-bold text-gray-800 mb-4">Последние результаты тестов</h2>
+          <div className="space-y-2">
+            {stats.recentResults.slice(0, 10).map((r: any) => {
+              const pct = Math.round((r.score / r.total) * 100);
+              return (
+                <div key={r.id} className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+                  <div className="flex items-center gap-3">
+                    <span className="text-sm font-medium text-gray-800">{r.user?.name || "—"}</span>
+                    <span className="text-xs text-gray-400">{r.user?.email}</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm text-gray-600">{r.topicName}</span>
+                    <span className={`text-sm font-bold px-2 py-0.5 rounded ${pct >= 70 ? "bg-green-100 text-green-700" : pct >= 40 ? "bg-orange-100 text-orange-700" : "bg-red-100 text-red-700"}`}>
+                      {r.score}/{r.total} ({pct}%)
+                    </span>
+                    <span className="text-xs text-gray-400">{new Date(r.createdAt).toLocaleDateString("ru-RU")}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       {/* Add subject */}
       <div className="mb-6">
