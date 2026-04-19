@@ -131,7 +131,8 @@ export type LessonKey =
   | "lesson-03-amaldar-reti"
   | "lesson-04-darezhe"
   | "lesson-05-addition-properties"
-  | "lesson-06-multiplication-properties";
+  | "lesson-06-multiplication-properties"
+  | "lesson-t02-intro-shamalar";
 
 export const LESSON_02_RAZRYAD: LessonConfig = {
   audioSrc: "/lessons/lesson-02-audio.mp3",
@@ -780,6 +781,132 @@ export const LESSON_06_MULTIPLICATION_PROPS: LessonConfig = {
   ],
 };
 
+// ═══════════════════════════════════════════════════════════════
+// TOPIC 2: Шамалар және өлшем бірліктері
+// ═══════════════════════════════════════════════════════════════
+
+export const LESSON_T02_INTRO_SHAMALAR: LessonConfig = {
+  audioSrc: "/lessons/lesson-t02-intro-audio.mp3",
+  title: "ТАҚЫРЫП №2 · ШАМАЛАР",
+  durationLabel: "Ұзақтығы: 1 минут",
+  scenes: [
+    {
+      duration: 8000,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 text-center">
+          <span className="px-5 py-2 rounded-full bg-teal-500/15 border border-teal-400/40 text-teal-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            ТАҚЫРЫП №2
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black leading-tight bg-gradient-to-r from-white to-teal-400 bg-clip-text text-transparent">
+            Шамалар және
+            <br />
+            өлшем бірліктері
+          </h1>
+          <p className="text-slate-400 text-base md:text-xl mt-1">Математика · 5-6 сынып</p>
+        </div>
+      ),
+    },
+    {
+      duration: 11132,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
+          <h2 className="text-xl md:text-3xl font-bold">Шама дегеніміз не?</h2>
+          <p className="text-slate-300 text-base md:text-xl text-center max-w-lg">
+            <b className="text-teal-300">Өлшенетін нәрсе</b>
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 w-full mt-2 text-xs md:text-base">
+            <div className="p-2 md:p-3 rounded-lg bg-white/5 border border-white/10 text-center">
+              <div className="text-2xl md:text-3xl mb-1">🍎</div>
+              <div className="text-slate-300">Алманың салмағы</div>
+            </div>
+            <div className="p-2 md:p-3 rounded-lg bg-white/5 border border-white/10 text-center">
+              <div className="text-2xl md:text-3xl mb-1">⏱</div>
+              <div className="text-slate-300">Жүру уақыты</div>
+            </div>
+            <div className="p-2 md:p-3 rounded-lg bg-white/5 border border-white/10 text-center">
+              <div className="text-2xl md:text-3xl mb-1">🛣</div>
+              <div className="text-slate-300">Қашықтық</div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      duration: 15289,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 w-full max-w-3xl">
+          <h2 className="text-xl md:text-3xl font-bold">6 түрлі өлшем</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-3 w-full">
+            {[
+              { icon: "📏", name: "Ұзындық", unit: "м, км", color: "border-sky-500/40 bg-sky-500/10", delay: "1s" },
+              { icon: "⚖️", name: "Масса", unit: "г, кг", color: "border-amber-500/40 bg-amber-500/10", delay: "3s" },
+              { icon: "⏰", name: "Уақыт", unit: "с, мин, сағ", color: "border-purple-500/40 bg-purple-500/10", delay: "5s" },
+              { icon: "🔲", name: "Аудан", unit: "м², га", color: "border-emerald-500/40 bg-emerald-500/10", delay: "7.5s" },
+              { icon: "📦", name: "Көлем", unit: "м³, л", color: "border-pink-500/40 bg-pink-500/10", delay: "9s" },
+              { icon: "🚀", name: "Жылдамдық", unit: "км/сағ", color: "border-rose-500/40 bg-rose-500/10", delay: "11s" },
+            ].map((m) => (
+              <div
+                key={m.name}
+                className={`p-2 md:p-3 rounded-xl border ${m.color} text-center opacity-0 animate-fade-up`}
+                style={{ animationDelay: m.delay }}
+              >
+                <div className="text-xl md:text-3xl mb-1">{m.icon}</div>
+                <div className="text-xs md:text-base font-bold">{m.name}</div>
+                <div className="text-[10px] md:text-xs text-slate-400 font-mono">{m.unit}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ),
+    },
+    {
+      duration: 11261,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 text-center w-full max-w-xl">
+          <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            Негізгі идея
+          </span>
+          <h2 className="text-xl md:text-3xl font-bold">Бірліктерді ауыстыру</h2>
+          <div className="font-mono text-2xl md:text-4xl font-black p-4 rounded-xl bg-white/5 border border-white/10">
+            1 м <span className="text-amber-300">=</span> 100 см
+          </div>
+          <div className="font-mono text-lg md:text-2xl opacity-0 animate-fade-up" style={{ animationDelay: "5s" }}>
+            5 м <span className="text-slate-500">=</span> <span className="text-emerald-400 font-bold">500 см</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      duration: 9239,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 text-center">
+          <h2 className="text-xl md:text-3xl font-bold">НИШ емтиханында</h2>
+          <div className="px-10 py-6 md:px-12 md:py-8 rounded-2xl bg-gradient-to-br from-teal-700 to-cyan-700 shadow-[0_20px_60px_rgba(13,148,136,0.3)]">
+            <div className="text-6xl md:text-8xl font-black text-white leading-none">3–4</div>
+            <div className="text-xs md:text-base text-slate-200 mt-1">сұрақ</div>
+          </div>
+          <p className="text-xs md:text-sm text-amber-300 max-w-md">
+            ⚠️ Аудан мен көлемге аса назар — жиі шатастырылады!
+          </p>
+        </div>
+      ),
+    },
+    {
+      duration: 5026,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 text-center">
+          <span className="px-5 py-2 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            ДАЙЫНСЫҢ БА?
+          </span>
+          <div className="text-4xl md:text-6xl font-black bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent leading-tight">
+            Бастадық!
+          </div>
+        </div>
+      ),
+    },
+  ],
+};
+
 export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-01-natural-numbers": LESSON_01_NATURAL_NUMBERS,
   "lesson-02-razryad": LESSON_02_RAZRYAD,
@@ -787,4 +914,5 @@ export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-04-darezhe": LESSON_04_DAREZHE,
   "lesson-05-addition-properties": LESSON_05_ADDITION_PROPS,
   "lesson-06-multiplication-properties": LESSON_06_MULTIPLICATION_PROPS,
+  "lesson-t02-intro-shamalar": LESSON_T02_INTRO_SHAMALAR,
 };

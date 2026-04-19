@@ -1,0 +1,103 @@
+{
+  "lesson-01-audio.mp3": {
+    "file": "lesson-01-audio.mp3",
+    "total_ms": 60368,
+    "sentence_count": 16,
+    "scene_durations_ms": [
+      8487,
+      7947,
+      14908,
+      16961,
+      7355,
+      4711
+    ],
+    "scene_count": 6
+  },
+  "lesson-02-audio.mp3": {
+    "file": "lesson-02-audio.mp3",
+    "total_ms": 61855,
+    "sentence_count": 17,
+    "scene_durations_ms": [
+      6105,
+      6987,
+      15118,
+      16092,
+      11316,
+      6237
+    ],
+    "scene_count": 6
+  },
+  "lesson-03-audio.mp3": {
+    "file": "lesson-03-audio.mp3",
+    "total_ms": 76814,
+    "sentence_count": 19,
+    "scene_durations_ms": [
+      10184,
+      15342,
+      8842,
+      12171,
+      12487,
+      17788,
+      5472
+    ],
+    "scene_count": 7
+  },
+  "lesson-05-audio.mp3": {
+    "file": "lesson-05-audio.mp3",
+    "total_ms": 52039,
+    "sentence_count": 16,
+    "scene_durations_ms": [
+      7132,
+      12947,
+      9842,
+      8895,
+      8895,
+      4329
+    ],
+    "scene_count": 6
+  },
+  "lesson-06-audio.mp3": {
+    "file": "lesson-06-audio.mp3",
+    "total_ms": 54118,
+    "sentence_count": 15,
+    "scene_durations_ms": [
+      7737,
+      10500,
+      10500,
+      7394,
+      8211,
+      5987,
+      3789
+    ],
+    "scene_count": 7
+  },
+  "lesson-t02-intro-audio.mp3": {
+    "file": "lesson-t02-intro-audio.mp3",
+    "total_ms": 59947,
+    "sentence_count": 17,
+    "scene_durations_ms": [
+      8000,
+      11132,
+      15289,
+      11261,
+      9239,
+      5026
+    ],
+    "scene_count": 6
+  },
+  "lesson-04-audio.mp3": {
+    "file": "lesson-04-audio.mp3",
+    "total_ms": 69170,
+    "sentence_count": 19,
+    "scene_durations_ms": [
+      7158,
+      10697,
+      10408,
+      8342,
+      10697,
+      13895,
+      7972
+    ],
+    "scene_count": 7
+  }
+}

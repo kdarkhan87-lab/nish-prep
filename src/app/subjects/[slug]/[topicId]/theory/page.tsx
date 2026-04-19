@@ -32,9 +32,12 @@ export default async function TheoryPage({
         &larr; {topic.subject.name}
       </Link>
 
-      {/* Интро-видео для темы 1 (натурал сандар) — показывается сверху */}
-      {topic.order === 1 && topic.subject.slug === "math" && (
+      {/* Интро-видео над теорией */}
+      {topic.subject.slug === "math" && topic.order === 1 && (
         <LessonVideoByKey lessonKey="lesson-01-natural-numbers" />
+      )}
+      {topic.subject.slug === "math" && topic.order === 2 && (
+        <LessonVideoByKey lessonKey="lesson-t02-intro-shamalar" />
       )}
 
       {/* Теория + инлайн quiz + секционные видео */}
