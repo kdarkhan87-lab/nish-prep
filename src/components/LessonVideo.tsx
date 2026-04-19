@@ -22,11 +22,12 @@ export function LessonVideo({
   const [progress, setProgress] = useState(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const rafRef = useRef<number | null>(null);
-  const startTimeRef = useRef<number>(0);
   const elapsedRef = useRef<number>(0);
 
+  // Тик теперь читает реальное время аудио — идеальная синхронизация
   const tick = () => {
-    const elapsed = Date.now() - startTimeRef.current;
+    const audio = audioRef.current;
+    const elapsed = audio ? audio.currentTime * 1000 : 0;
     elapsedRef.current = elapsed;
     setProgress(Math.min(elapsed / totalDuration, 1));
 
@@ -42,7 +43,7 @@ export function LessonVideo({
     }
     setSceneIdx(idx);
 
-    if (elapsed < totalDuration) {
+    if (elapsed < totalDuration && audio && !audio.paused) {
       rafRef.current = requestAnimationFrame(tick);
     }
   };
@@ -50,24 +51,24 @@ export function LessonVideo({
   const start = () => {
     setStarted(true);
     setPaused(false);
-    startTimeRef.current = Date.now();
     elapsedRef.current = 0;
-    // Небольшая задержка: пусть сцена успеет отрендериться через fade, потом звук
-    setTimeout(() => {
-      audioRef.current?.play().catch(() => {});
-    }, 900);
+    const audio = audioRef.current;
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    }
     tick();
   };
 
   const togglePause = () => {
+    const audio = audioRef.current;
     if (paused) {
-      startTimeRef.current = Date.now() - elapsedRef.current;
-      audioRef.current?.play().catch(() => {});
+      audio?.play().catch(() => {});
       tick();
       setPaused(false);
     } else {
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
-      audioRef.current?.pause();
+      audio?.pause();
       setPaused(true);
     }
   };
@@ -87,7 +88,6 @@ export function LessonVideo({
 
   const restart = () => {
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    if (audioRef.current) audioRef.current.currentTime = 0;
     start();
   };
 
