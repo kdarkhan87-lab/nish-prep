@@ -55,7 +55,7 @@ export function LessonVideo({
     // Небольшая задержка: пусть сцена успеет отрендериться через fade, потом звук
     setTimeout(() => {
       audioRef.current?.play().catch(() => {});
-    }, 600);
+    }, 900);
     tick();
   };
 
