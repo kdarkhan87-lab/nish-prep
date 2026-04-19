@@ -2,8 +2,8 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { TheoryRenderer } from "@/components/TheoryRenderer";
-import { LessonVideo } from "@/components/LessonVideo";
-import { LESSON_01_NATURAL_NUMBERS, LESSON_02_RAZRYAD, type LessonConfig } from "@/data/lessons";
+import { LessonVideoByKey } from "@/components/LessonVideoByKey";
+import type { LessonKey } from "@/data/lessons";
 
 export default async function TheoryPage({
   params,
@@ -34,12 +34,7 @@ export default async function TheoryPage({
 
       {/* Интро-видео для темы 1 (натурал сандар) — показывается сверху */}
       {topic.order === 1 && topic.subject.slug === "math" && (
-        <LessonVideo
-          audioSrc={LESSON_01_NATURAL_NUMBERS.audioSrc}
-          scenes={LESSON_01_NATURAL_NUMBERS.scenes}
-          title={LESSON_01_NATURAL_NUMBERS.title}
-          durationLabel={LESSON_01_NATURAL_NUMBERS.durationLabel}
-        />
+        <LessonVideoByKey lessonKey="lesson-01-natural-numbers" />
       )}
 
       {/* Теория + инлайн quiz + секционные видео */}
@@ -47,9 +42,9 @@ export default async function TheoryPage({
         <TheoryRenderer
           theory={topic.theory}
           quizzes={quizzes}
-          sectionLessons={
+          sectionLessonKeys={
             topic.order === 1 && topic.subject.slug === "math"
-              ? ([LESSON_02_RAZRYAD] as LessonConfig[])
+              ? (["lesson-02-razryad"] as LessonKey[])
               : []
           }
         />

@@ -1,3 +1,5 @@
+"use client";
+
 import type { ReactNode } from "react";
 
 export type Scene = {
@@ -122,6 +124,8 @@ export const LESSON_01_NATURAL_NUMBERS: LessonConfig = {
     },
   ],
 };
+
+export type LessonKey = "lesson-01-natural-numbers" | "lesson-02-razryad";
 
 export const LESSON_02_RAZRYAD: LessonConfig = {
   audioSrc: "/lessons/lesson-02-audio.mp3",
@@ -248,4 +252,9 @@ export const LESSON_02_RAZRYAD: LessonConfig = {
       ),
     },
   ],
+};
+
+export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
+  "lesson-01-natural-numbers": LESSON_01_NATURAL_NUMBERS,
+  "lesson-02-razryad": LESSON_02_RAZRYAD,
 };

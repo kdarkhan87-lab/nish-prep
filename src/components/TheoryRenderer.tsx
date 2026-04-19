@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { LessonVideo } from "@/components/LessonVideo";
-import type { LessonConfig } from "@/data/lessons";
+import { LESSONS_BY_KEY, type LessonKey, type LessonConfig } from "@/data/lessons";
 
 interface QuizData {
   question: string;
@@ -261,12 +261,15 @@ function detectVisuals(sectionText: string): string | null {
 export function TheoryRenderer({
   theory,
   quizzes,
-  sectionLessons = [],
+  sectionLessonKeys = [],
 }: {
   theory: string;
   quizzes: QuizData[] | QuizData[][];
-  sectionLessons?: LessonConfig[];
+  sectionLessonKeys?: LessonKey[];
 }) {
+  const sectionLessons: LessonConfig[] = sectionLessonKeys
+    .map((k) => LESSONS_BY_KEY[k])
+    .filter(Boolean);
   const sections = theory.split(/(?=^## )/m);
 
   const isNested = quizzes.length > 0 && Array.isArray(quizzes[0]);
