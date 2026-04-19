@@ -61,24 +61,18 @@ export default async function TheoryPage({
           theory={topic.theory}
           quizzes={quizzes}
           sectionLessonKeys={
-            topic.subject.slug === "math" && topic.order === 1
-              ? ([
-                  "lesson-02-razryad",
-                  "lesson-03-amaldar-reti",
-                  "lesson-04-darezhe",
-                  "lesson-05-addition-properties",
-                  "lesson-06-multiplication-properties",
-                ] as LessonKey[])
-              : topic.subject.slug === "math" && topic.order === 2
-              ? ([
-                  "lesson-t02-length",
-                  "lesson-t02-mass",
-                  "lesson-t02-time",
-                  "lesson-t02-area",
-                  "lesson-t02-volume",
-                  "lesson-t02-speed",
-                  "lesson-t02-compare",
-                ] as LessonKey[])
+            topic.subject.slug !== "math"
+              ? []
+              : topic.order === 1
+              ? (["lesson-02-razryad", "lesson-03-amaldar-reti", "lesson-04-darezhe", "lesson-05-addition-properties", "lesson-06-multiplication-properties"] as LessonKey[])
+              : topic.order === 2
+              ? (["lesson-t02-length", "lesson-t02-mass", "lesson-t02-time", "lesson-t02-area", "lesson-t02-volume", "lesson-t02-speed", "lesson-t02-compare"] as LessonKey[])
+              : topic.order === 3
+              ? (["lesson-t03-divisibility", "lesson-t03-prime", "lesson-t03-factor", "lesson-t03-gcd-lcm"] as LessonKey[])
+              : topic.order === 4
+              ? (["lesson-t04-what", "lesson-t04-types", "lesson-t04-reduce", "lesson-t04-addsubtract", "lesson-t04-multdiv"] as LessonKey[])
+              : topic.order === 5
+              ? (["lesson-t05-what", "lesson-t05-digits", "lesson-t05-addsubtract", "lesson-t05-multdiv", "lesson-t05-convert"] as LessonKey[])
               : []
           }
         />
