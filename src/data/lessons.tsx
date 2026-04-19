@@ -995,7 +995,7 @@ export const LESSON_T02_MASS: LessonConfig = {
   matchSection: /масса/i,
   scenes: [
     {
-      duration: 5697,
+      duration: 7097,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">БӨЛІМ №2</span>
@@ -1005,7 +1005,7 @@ export const LESSON_T02_MASS: LessonConfig = {
       ),
     },
     {
-      duration: 11586,
+      duration: 12986,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold">Негізгі бірліктер</h2>
@@ -1026,7 +1026,7 @@ export const LESSON_T02_MASS: LessonConfig = {
       ),
     },
     {
-      duration: 12600,
+      duration: 14000,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-2xl">
           <h2 className="text-lg md:text-2xl font-bold text-slate-300">Қайсы — қашан?</h2>
@@ -1051,7 +1051,7 @@ export const LESSON_T02_MASS: LessonConfig = {
       ),
     },
     {
-      duration: 8529,
+      duration: 9929,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center font-mono max-w-xl">
           <span className="px-4 py-1.5 rounded-full bg-sky-500/15 border border-sky-400/40 text-sky-300 text-xs font-semibold tracking-[0.2em] uppercase">Мысал</span>
