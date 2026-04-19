@@ -44,7 +44,7 @@ export default async function TheoryPage({
           quizzes={quizzes}
           sectionLessonKeys={
             topic.order === 1 && topic.subject.slug === "math"
-              ? (["lesson-02-razryad"] as LessonKey[])
+              ? (["lesson-02-razryad", "lesson-03-amaldar-reti"] as LessonKey[])
               : []
           }
         />
