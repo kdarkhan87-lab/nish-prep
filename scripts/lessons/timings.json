@@ -1009,20 +1009,20 @@
   },
   "lesson-t08-set-audio.mp3": {
     "file": "lesson-t08-set-audio.mp3",
-    "total_ms": 48250,
+    "total_ms": 40860,
     "scene_audio_durs_ms": [
-      4700,
-      6960,
+      3380,
+      5500,
       5740,
-      7420,
-      3430
+      2040,
+      4200
     ],
     "scene_durations_ms": [
-      8700,
-      10960,
+      7380,
+      9500,
       9740,
-      11420,
-      7430
+      6040,
+      8200
     ],
     "scene_count": 5,
     "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
@@ -1549,6 +1549,26 @@
       8420,
       11010,
       9660
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t08-module-audio.mp3": {
+    "file": "lesson-t08-module-audio.mp3",
+    "total_ms": 50240,
+    "scene_audio_durs_ms": [
+      6430,
+      6000,
+      6670,
+      4780,
+      6360
+    ],
+    "scene_durations_ms": [
+      10430,
+      10000,
+      10670,
+      8780,
+      10360
     ],
     "scene_count": 5,
     "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"

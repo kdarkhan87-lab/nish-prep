@@ -182,6 +182,7 @@ export type LessonKey =
   | "lesson-t07-types"
   // Topic 8 sections
   | "lesson-t08-set"
+  | "lesson-t08-module"
   | "lesson-t08-compare"
   | "lesson-t08-addsubtract"
   | "lesson-t08-multdiv"
@@ -2139,14 +2140,27 @@ export const LESSON_T07_TYPES: LessonConfig = makeSection({
 
 export const LESSON_T08_SET: LessonConfig = makeSection({
   audioSrc: "/lessons/lesson-t08-set-audio.mp3",
-  shortTitle: "Бүтін сандар, модуль",
+  shortTitle: "Бүтін сандар жиыны",
   matchSection: /бүтін сандар жиыны/i,
   scenes: [
-    { duration: 8700, node: <BadgeTitle topicNum="№8·1" title="Бүтін сандар" subtitle="Оң + Теріс + 0" color="red" /> },
-    { duration: 10960, node: <BigText text="..., −3, −2, −1, 0, 1, 2, 3, ..." /> },
-    { duration: 9740, node: <BigText text="|a| = Модуль" sub="Нөлден алыстық, әрқашан оң" /> },
-    { duration: 11420, node: <BigText text="|−7| = 7   ·   |7| = 7" sub="Белгісінсіз мәні" /> },
-    { duration: 7430, node: <CTA text="Санның абсолют мәні" color="red" /> },
+    { duration: 7380, node: <BadgeTitle topicNum="№8·1" title="Бүтін сандар жиыны" subtitle="Үш бөліктен тұрады" color="red" /> },
+    { duration: 9500, node: <BigText text="Оң сандар" sub="1, 2, 3, ..." /> },
+    { duration: 9740, node: <BigText text="Теріс сандар" sub="−1, −2, −3, ..." /> },
+    { duration: 6040, node: <BigText text="Нөл" /> },
+    { duration: 8200, node: <BigText text="..., −3, −2, −1, 0, 1, 2, 3, ..." /> },
+  ],
+});
+
+export const LESSON_T08_MODULE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t08-module-audio.mp3",
+  shortTitle: "Модуль",
+  matchSection: /^#*\s*модуль\s*$/i,
+  scenes: [
+    { duration: 10430, node: <BadgeTitle topicNum="№8·2" title="Модуль" subtitle="Санның нөлден алыстығы" color="red" /> },
+    { duration: 10000, node: <BigText text="|a|" sub="Екі тік сызықпен жазылады" /> },
+    { duration: 10670, node: <BigText text="|−7| = 7   ·   |7| = 7" sub="Тең, өйткені нөлден қашықтық бірдей" /> },
+    { duration: 8780, node: <BigText text="Сан түзуінде — нөлден арашықтық" /> },
+    { duration: 10360, node: <CTA text="Модуль = белгіні алып тастайды" color="red" /> },
   ],
 });
 
@@ -2562,6 +2576,7 @@ export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-t07-types": LESSON_T07_TYPES,
   // Topic 8 sections
   "lesson-t08-set": LESSON_T08_SET,
+  "lesson-t08-module": LESSON_T08_MODULE,
   "lesson-t08-compare": LESSON_T08_COMPARE,
   "lesson-t08-addsubtract": LESSON_T08_ADDSUBTRACT,
   "lesson-t08-multdiv": LESSON_T08_MULTDIV,
