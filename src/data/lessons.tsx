@@ -282,9 +282,9 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
     {
       duration: 20000,
       render: () => (
-        <div className="flex flex-col items-center gap-5 w-full max-w-2xl">
-          <h2 className="text-2xl md:text-4xl font-bold">4 қадамдық тәртіп</h2>
-          <div className="flex flex-col gap-3 w-full">
+        <div className="flex flex-col items-center gap-2 md:gap-4 w-full max-w-2xl">
+          <h2 className="text-lg md:text-3xl font-bold">4 қадамдық тәртіп</h2>
+          <div className="flex flex-col gap-1.5 md:gap-3 w-full">
             {[
               { n: 1, name: "Жақша", sym: "( )", color: "border-sky-500", bgColor: "bg-sky-500/15", delay: "0.3s" },
               { n: 2, name: "Дәреже", sym: "²  ³", color: "border-amber-500", bgColor: "bg-amber-500/15", delay: "5s" },
@@ -293,14 +293,14 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
             ].map((r) => (
               <div
                 key={r.n}
-                className={`flex items-center gap-4 p-3 md:p-4 ${r.bgColor} border-l-4 ${r.color} rounded-lg opacity-0 animate-slide-in`}
+                className={`flex items-center gap-2 md:gap-4 px-2 py-1.5 md:p-4 ${r.bgColor} border-l-4 ${r.color} rounded-lg opacity-0 animate-slide-in`}
                 style={{ animationDelay: r.delay }}
               >
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/10 flex items-center justify-center text-xl md:text-2xl font-black">
+                <div className="w-6 h-6 md:w-11 md:h-11 rounded-full bg-white/10 flex items-center justify-center text-xs md:text-xl font-black flex-shrink-0">
                   {r.n}
                 </div>
-                <div className="flex-1 text-lg md:text-2xl font-semibold">{r.name}</div>
-                <div className="font-mono text-xl md:text-3xl font-bold">{r.sym}</div>
+                <div className="flex-1 text-sm md:text-2xl font-semibold truncate">{r.name}</div>
+                <div className="font-mono text-base md:text-2xl font-bold flex-shrink-0">{r.sym}</div>
               </div>
             ))}
           </div>

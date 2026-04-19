@@ -52,7 +52,10 @@ export function LessonVideo({
     setPaused(false);
     startTimeRef.current = Date.now();
     elapsedRef.current = 0;
-    audioRef.current?.play().catch(() => {});
+    // Небольшая задержка: пусть сцена успеет отрендериться через fade, потом звук
+    setTimeout(() => {
+      audioRef.current?.play().catch(() => {});
+    }, 600);
     tick();
   };
 
