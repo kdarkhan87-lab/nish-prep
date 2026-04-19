@@ -169,7 +169,27 @@ export type LessonKey =
   | "lesson-t05-digits"
   | "lesson-t05-addsubtract"
   | "lesson-t05-multdiv"
-  | "lesson-t05-convert";
+  | "lesson-t05-convert"
+  // Topic 6 sections
+  | "lesson-t06-what"
+  | "lesson-t06-find"
+  | "lesson-t06-inverse"
+  | "lesson-t06-change"
+  // Topic 7 sections
+  | "lesson-t07-ratio"
+  | "lesson-t07-what"
+  | "lesson-t07-unknown"
+  | "lesson-t07-types"
+  // Topic 8 sections
+  | "lesson-t08-set"
+  | "lesson-t08-compare"
+  | "lesson-t08-addsubtract"
+  | "lesson-t08-multdiv"
+  // Topic 9 sections
+  | "lesson-t09-what"
+  | "lesson-t09-simple"
+  | "lesson-t09-complex"
+  | "lesson-t09-word";
 
 export const LESSON_02_RAZRYAD: LessonConfig = {
   audioSrc: "/lessons/lesson-02-audio.mp3",
@@ -1981,6 +2001,224 @@ export const LESSON_T05_CONVERT: LessonConfig = makeSection({
   ],
 });
 
+// ───────── TOPIC 6 section videos ─────────
+
+export const LESSON_T06_WHAT: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t06-what-audio.mp3",
+  shortTitle: "Пайыз деген не",
+  matchSection: /пайыз дегеніміз/i,
+  scenes: [
+    { duration: 9420, node: <BadgeTitle topicNum="№6·1" title="Пайыз деген не?" subtitle="Жүзден алынған бөлік" color="yellow" /> },
+    { duration: 9830, node: <BigText text="Пайыз = Жай бөлшек = Ондық" sub="Бір нәрсенің үш жазылуы" /> },
+    { duration: 8580, node: <BigText text="50% = ½ = 0,5" /> },
+    { duration: 7820, node: <BigText text="10% = 1/10 = 0,1" /> },
+    { duration: 9450, node: <CTA text="Өмірде жиі: баға, салық, банк" color="yellow" /> },
+  ],
+});
+
+export const LESSON_T06_FIND: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t06-find-audio.mp3",
+  shortTitle: "Санның пайызын табу",
+  matchSection: /санның пайызын табу/i,
+  scenes: [
+    { duration: 7600, node: <BadgeTitle topicNum="№6·2" title="Санның %-ын табу" subtitle="Ең жиі есеп" color="yellow" /> },
+    { duration: 8460, node: <BigText text="Санды ÷ 100, × пайызға" /> },
+    { duration: 13530, node: <BigText text="200-дің 10%-ы" sub="200 ÷ 100 = 2   ·   2 × 10 = 20" /> },
+    { duration: 7360, node: <BigText text="= 20" /> },
+    { duration: 14540, node: <CTA text="Ойша есептеуге болады!" color="yellow" /> },
+  ],
+});
+
+export const LESSON_T06_INVERSE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t06-inverse-audio.mp3",
+  shortTitle: "Кері есеп",
+  matchSection: /пайызбен табу|кері есеп|неше пайызы/i,
+  scenes: [
+    { duration: 7100, node: <BadgeTitle topicNum="№6·3" title="Кері есеп" subtitle="Пайыздан санды табу" color="yellow" /> },
+    { duration: 8850, node: <BigText text="20%-ы = 40 → сан қанша?" /> },
+    { duration: 8970, node: <BigText text="Шама ÷ пайыз × 100" /> },
+    { duration: 9980, node: <BigText text="40 ÷ 20 × 100 = 200" /> },
+    { duration: 16770, node: <BigText text="50 бөлу 200 × 100 = 25%" sub="Бір сан екіншісінің %-ы" /> },
+  ],
+});
+
+export const LESSON_T06_CHANGE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t06-change-audio.mp3",
+  shortTitle: "Пайыз бойынша өзгеріс",
+  matchSection: /пайыз бойынша өзгеріс/i,
+  scenes: [
+    { duration: 8680, node: <BadgeTitle topicNum="№6·4" title="Жеңілдік/Қымбаттау" subtitle="Баға өзгеруі" color="yellow" /> },
+    { duration: 9810, node: <BigText text="1000 тг → 20% жеңілдік" /> },
+    { duration: 14060, node: <BigText text="Жеңілдік: 1000×20÷100 = 200" sub="Жаңа баға: 1000 − 200 = 800 тг" /> },
+    { duration: 7120, node: <BigText text="Қымбаттау — сол сияқты, тек +" /> },
+    { duration: 10790, node: <CTA text="Айырма ÷ бастапқы × 100 = %" color="yellow" /> },
+  ],
+});
+
+// ───────── TOPIC 7 section videos ─────────
+
+export const LESSON_T07_RATIO: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t07-ratio-audio.mp3",
+  shortTitle: "Қатынас",
+  matchSection: /^#*\s*қатынас\s*$/i,
+  scenes: [
+    { duration: 7700, node: <BadgeTitle topicNum="№7·1" title="Қатынас" subtitle="Екі санды салыстыру" color="emerald" /> },
+    { duration: 11970, node: <BigText text="3 : 5  немесе  3/5" sub="Үштің беске қатынасы" /> },
+    { duration: 7550, node: <BigText text="Бөлшек ретінде қарастыр" /> },
+    { duration: 8059, node: <BigText text="Қысқартуға болады" /> },
+    { duration: 8270, node: <BigText text="6 : 8  =  3 : 4" /> },
+  ],
+});
+
+export const LESSON_T07_WHAT: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t07-what-audio.mp3",
+  shortTitle: "Пропорция",
+  matchSection: /пропорция дегеніміз/i,
+  scenes: [
+    { duration: 7700, node: <BadgeTitle topicNum="№7·2" title="Пропорция" subtitle="Екі қатынастың теңдігі" color="emerald" /> },
+    { duration: 7820, node: <BigText text="2/3 = 4/6" /> },
+    { duration: 9520, node: <BigText text='"Екінің үшке қатынасы төрттің алтыға қатынасына тең"' /> },
+    { duration: 9140, node: <BigText text="4 мүше: 2 шеткі + 2 ортаңғы" /> },
+    { duration: 11850, node: <BigText text="a · d = b · c" sub="Негізгі қасиет" /> },
+    { duration: 10860, node: <BigText text="2 × 6 = 3 × 4" sub="12 = 12 ✓" /> },
+  ],
+});
+
+export const LESSON_T07_UNKNOWN: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t07-unknown-audio.mp3",
+  shortTitle: "Белгісізді табу",
+  matchSection: /белгісізді табу/i,
+  scenes: [
+    { duration: 8730, node: <BadgeTitle topicNum="№7·3" title="Белгісізді табу" subtitle="Қиылысқа көбейту" color="emerald" /> },
+    { duration: 8180, node: <BigText text="x/5 = 6/15" /> },
+    { duration: 14970, node: <BigText text="x · 15 = 5 · 6 = 30" sub="x = 30 ÷ 15 = 2" /> },
+    { duration: 8059, node: <BigText text="x = 2" /> },
+    { duration: 7910, node: <CTA text="Қиылысқа × → қалғанына ÷" color="emerald" /> },
+  ],
+});
+
+export const LESSON_T07_TYPES: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t07-types-audio.mp3",
+  shortTitle: "Тура, кері, масштаб",
+  matchSection: /тура пропорция/i,
+  scenes: [
+    { duration: 7020, node: <BadgeTitle topicNum="№7·4" title="Түрлері" subtitle="Тура, кері, масштаб" color="emerald" /> },
+    { duration: 12140, node: <BigText text="Тура: х↑ → у↑" sub="Мысалы, құс салмағы — құны" /> },
+    { duration: 15040, node: <BigText text="Кері: х↑ → у↓" sub="Жылдам жүрсең — аз уақыт" /> },
+    { duration: 8700, node: <BigText text="Масштаб = карта : нағыз" /> },
+    { duration: 10790, node: <BigText text="1 : 100 000" sub="1 см → 1 км" /> },
+  ],
+});
+
+// ───────── TOPIC 8 section videos ─────────
+
+export const LESSON_T08_SET: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t08-set-audio.mp3",
+  shortTitle: "Бүтін сандар, модуль",
+  matchSection: /бүтін сандар жиыны/i,
+  scenes: [
+    { duration: 8700, node: <BadgeTitle topicNum="№8·1" title="Бүтін сандар" subtitle="Оң + Теріс + 0" color="red" /> },
+    { duration: 10960, node: <BigText text="..., −3, −2, −1, 0, 1, 2, 3, ..." /> },
+    { duration: 9740, node: <BigText text="|a| = Модуль" sub="Нөлден алыстық, әрқашан оң" /> },
+    { duration: 11420, node: <BigText text="|−7| = 7   ·   |7| = 7" sub="Белгісінсіз мәні" /> },
+    { duration: 7430, node: <CTA text="Санның абсолют мәні" color="red" /> },
+  ],
+});
+
+export const LESSON_T08_COMPARE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t08-compare-audio.mp3",
+  shortTitle: "Салыстыру",
+  matchSection: /сандарды салыстыру/i,
+  scenes: [
+    { duration: 6570, node: <BadgeTitle topicNum="№8·2" title="Салыстыру" subtitle="Теріс сандармен" color="red" /> },
+    { duration: 7600, node: <BigText text="+ > −  әрқашан" /> },
+    { duration: 8150, node: <BigText text="Теріс: кіші модуль = үлкен сан" /> },
+    { duration: 10910, node: <BigText text="−2 > −5" sub="Модулі 2-нің кішірек" /> },
+    { duration: 8270, node: <CTA text="Сан түзуі: оң жақ = үлкен" color="red" /> },
+  ],
+});
+
+export const LESSON_T08_ADDSUBTRACT: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t08-addsubtract-audio.mp3",
+  shortTitle: "Қосу, азайту",
+  matchSection: /^#*\s*қосу\s*$/i,
+  scenes: [
+    { duration: 7430, node: <BadgeTitle topicNum="№8·3" title="Қосу / Азайту" subtitle="Белгі ережесі" color="red" /> },
+    { duration: 10070, node: <BigText text="Белгілер = → модульдерді +, белгі қал" /> },
+    { duration: 8250, node: <BigText text="−3 + (−2) = −5" /> },
+    { duration: 10890, node: <BigText text="Белгілер ≠ → модульдерді −" sub="Үлкеннің белгісін ал" /> },
+    { duration: 10620, node: <BigText text="−7 + 5 = −2" /> },
+    { duration: 7720, node: <CTA text="Азайту = қарама-қарсы қосу" color="red" /> },
+  ],
+});
+
+export const LESSON_T08_MULTDIV: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t08-multdiv-audio.mp3",
+  shortTitle: "Көбейту, бөлу",
+  matchSection: /көбейту және бөлу/i,
+  scenes: [
+    { duration: 7380, node: <BadgeTitle topicNum="№8·4" title="× ÷ Белгі ережесі" subtitle="Ең маңызды ереже" color="red" /> },
+    { duration: 10600, node: <BulletList title="Ереже" items={["Белгілер = → нәтиже +", "Белгілер ≠ → нәтиже −"]} color="red" /> },
+    { duration: 9400, node: <BigText text="(−3) × (−4) = +12" sub="Теріс × теріс = оң!" /> },
+    { duration: 9140, node: <BigText text="(−6) × 2 = −12" /> },
+    { duration: 9690, node: <BigText text="× 0 = 0   ·   ÷ 0 — болмайды!" /> },
+  ],
+});
+
+// ───────── TOPIC 9 section videos ─────────
+
+export const LESSON_T09_WHAT: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t09-what-audio.mp3",
+  shortTitle: "Теңдеу деген не",
+  matchSection: /теңдеу дегеніміз/i,
+  scenes: [
+    { duration: 6950, node: <BadgeTitle topicNum="№9·1" title="Теңдеу" subtitle="Белгісізі бар теңдік" color="blue" /> },
+    { duration: 7290, node: <BigText text="x + 5 = 10" /> },
+    { duration: 9400, node: <BigText text="Түбір — теңдікті шын ететін мән" /> },
+    { duration: 10580, node: <BigText text="x = 5" sub="5 + 5 = 10 ✓" /> },
+    { duration: 7020, node: <CTA text="Теңдеуді шешу = түбір табу" color="blue" /> },
+  ],
+});
+
+export const LESSON_T09_SIMPLE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t09-simple-audio.mp3",
+  shortTitle: "Қарапайым теңдеулер",
+  matchSection: /қарапайым теңдеулер/i,
+  scenes: [
+    { duration: 7120, node: <BadgeTitle topicNum="№9·2" title="Қарапайым теңдеу" subtitle="Бір амал" color="blue" /> },
+    { duration: 11660, node: <BigText text="x + 3 = 8" sub="x = 8 − 3 = 5" /> },
+    { duration: 11320, node: <BigText text="x − 4 = 7" sub="x = 7 + 4 = 11" /> },
+    { duration: 11610, node: <BigText text="x · 3 = 15" sub="x = 15 ÷ 3 = 5" /> },
+    { duration: 11560, node: <BigText text="x ÷ 2 = 6" sub="x = 6 · 2 = 12" /> },
+  ],
+});
+
+export const LESSON_T09_COMPLEX: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t09-complex-audio.mp3",
+  shortTitle: "Күрделі теңдеулер",
+  matchSection: /күрделі теңдеулер/i,
+  scenes: [
+    { duration: 7430, node: <BadgeTitle topicNum="№9·3" title="Күрделі теңдеу" subtitle="Екі амал" color="blue" /> },
+    { duration: 7740, node: <BigText text="2x + 3 = 11" /> },
+    { duration: 12109, node: <BigText text="2x = 11 − 3 = 8" sub="Саннан — қарама-қарсы" /> },
+    { duration: 7550, node: <BigText text="x = 8 ÷ 2 = 4" /> },
+    { duration: 8180, node: <CTA text="Екі жақта x → бірігеді" color="blue" /> },
+  ],
+});
+
+export const LESSON_T09_WORD: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t09-word-audio.mp3",
+  shortTitle: "Мәтіннен теңдеу",
+  matchSection: /мәтінді есептен теңдеу/i,
+  scenes: [
+    { duration: 8010, node: <BadgeTitle topicNum="№9·4" title="Мәтіннен теңдеу" subtitle="Сөзден формулаға" color="blue" /> },
+    { duration: 12620, node: <BigText text="2 кітап = 1000 тг" sub="Қымбаты − арзаны = 300" /> },
+    { duration: 12280, node: <BigText text="Арзан = x   ·   Қымбат = x + 300" /> },
+    { duration: 13910, node: <BigText text="x + x + 300 = 1000" sub="2x = 700 → x = 350" /> },
+    { duration: 8490, node: <BigText text="Арзан — 350, қымбат — 650" /> },
+  ],
+});
+
 export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-01-natural-numbers": LESSON_01_NATURAL_NUMBERS,
   "lesson-02-razryad": LESSON_02_RAZRYAD,
@@ -2026,4 +2264,24 @@ export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-t05-addsubtract": LESSON_T05_ADDSUBTRACT,
   "lesson-t05-multdiv": LESSON_T05_MULTDIV,
   "lesson-t05-convert": LESSON_T05_CONVERT,
+  // Topic 6 sections
+  "lesson-t06-what": LESSON_T06_WHAT,
+  "lesson-t06-find": LESSON_T06_FIND,
+  "lesson-t06-inverse": LESSON_T06_INVERSE,
+  "lesson-t06-change": LESSON_T06_CHANGE,
+  // Topic 7 sections
+  "lesson-t07-ratio": LESSON_T07_RATIO,
+  "lesson-t07-what": LESSON_T07_WHAT,
+  "lesson-t07-unknown": LESSON_T07_UNKNOWN,
+  "lesson-t07-types": LESSON_T07_TYPES,
+  // Topic 8 sections
+  "lesson-t08-set": LESSON_T08_SET,
+  "lesson-t08-compare": LESSON_T08_COMPARE,
+  "lesson-t08-addsubtract": LESSON_T08_ADDSUBTRACT,
+  "lesson-t08-multdiv": LESSON_T08_MULTDIV,
+  // Topic 9 sections
+  "lesson-t09-what": LESSON_T09_WHAT,
+  "lesson-t09-simple": LESSON_T09_SIMPLE,
+  "lesson-t09-complex": LESSON_T09_COMPLEX,
+  "lesson-t09-word": LESSON_T09_WORD,
 };

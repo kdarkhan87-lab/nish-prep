@@ -73,6 +73,14 @@ export default async function TheoryPage({
               ? (["lesson-t04-what", "lesson-t04-types", "lesson-t04-reduce", "lesson-t04-addsubtract", "lesson-t04-multdiv"] as LessonKey[])
               : topic.order === 5
               ? (["lesson-t05-what", "lesson-t05-digits", "lesson-t05-addsubtract", "lesson-t05-multdiv", "lesson-t05-convert"] as LessonKey[])
+              : topic.order === 6
+              ? (["lesson-t06-what", "lesson-t06-find", "lesson-t06-inverse", "lesson-t06-change"] as LessonKey[])
+              : topic.order === 7
+              ? (["lesson-t07-ratio", "lesson-t07-what", "lesson-t07-unknown", "lesson-t07-types"] as LessonKey[])
+              : topic.order === 8
+              ? (["lesson-t08-set", "lesson-t08-compare", "lesson-t08-addsubtract", "lesson-t08-multdiv"] as LessonKey[])
+              : topic.order === 9
+              ? (["lesson-t09-what", "lesson-t09-simple", "lesson-t09-complex", "lesson-t09-word"] as LessonKey[])
               : []
           }
         />

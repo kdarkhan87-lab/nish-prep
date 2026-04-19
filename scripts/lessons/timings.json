@@ -844,5 +844,329 @@
     ],
     "scene_count": 5,
     "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t06-what-audio.mp3": {
+    "file": "lesson-t06-what-audio.mp3",
+    "total_ms": 45100,
+    "scene_audio_durs_ms": [
+      5420,
+      5830,
+      4580,
+      3820,
+      5450
+    ],
+    "scene_durations_ms": [
+      9420,
+      9830,
+      8580,
+      7820,
+      9450
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t06-find-audio.mp3": {
+    "file": "lesson-t06-find-audio.mp3",
+    "total_ms": 51490,
+    "scene_audio_durs_ms": [
+      3600,
+      4460,
+      9530,
+      3360,
+      10540
+    ],
+    "scene_durations_ms": [
+      7600,
+      8460,
+      13530,
+      7360,
+      14540
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t06-inverse-audio.mp3": {
+    "file": "lesson-t06-inverse-audio.mp3",
+    "total_ms": 51670,
+    "scene_audio_durs_ms": [
+      3100,
+      4850,
+      4970,
+      5980,
+      12770
+    ],
+    "scene_durations_ms": [
+      7100,
+      8850,
+      8970,
+      9980,
+      16770
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t06-change-audio.mp3": {
+    "file": "lesson-t06-change-audio.mp3",
+    "total_ms": 50460,
+    "scene_audio_durs_ms": [
+      4680,
+      5810,
+      10060,
+      3120,
+      6790
+    ],
+    "scene_durations_ms": [
+      8680,
+      9810,
+      14060,
+      7120,
+      10790
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t07-ratio-audio.mp3": {
+    "file": "lesson-t07-ratio-audio.mp3",
+    "total_ms": 43549,
+    "scene_audio_durs_ms": [
+      3700,
+      7970,
+      3550,
+      4059,
+      4270
+    ],
+    "scene_durations_ms": [
+      7700,
+      11970,
+      7550,
+      8059,
+      8270
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t07-what-audio.mp3": {
+    "file": "lesson-t07-what-audio.mp3",
+    "total_ms": 56890,
+    "scene_audio_durs_ms": [
+      3700,
+      3820,
+      5520,
+      5140,
+      7850,
+      6860
+    ],
+    "scene_durations_ms": [
+      7700,
+      7820,
+      9520,
+      9140,
+      11850,
+      10860
+    ],
+    "scene_count": 6,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t07-unknown-audio.mp3": {
+    "file": "lesson-t07-unknown-audio.mp3",
+    "total_ms": 47849,
+    "scene_audio_durs_ms": [
+      4730,
+      4180,
+      10970,
+      4059,
+      3910
+    ],
+    "scene_durations_ms": [
+      8730,
+      8180,
+      14970,
+      8059,
+      7910
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t07-types-audio.mp3": {
+    "file": "lesson-t07-types-audio.mp3",
+    "total_ms": 53690,
+    "scene_audio_durs_ms": [
+      3020,
+      8140,
+      11040,
+      4700,
+      6790
+    ],
+    "scene_durations_ms": [
+      7020,
+      12140,
+      15040,
+      8700,
+      10790
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t08-set-audio.mp3": {
+    "file": "lesson-t08-set-audio.mp3",
+    "total_ms": 48250,
+    "scene_audio_durs_ms": [
+      4700,
+      6960,
+      5740,
+      7420,
+      3430
+    ],
+    "scene_durations_ms": [
+      8700,
+      10960,
+      9740,
+      11420,
+      7430
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t08-compare-audio.mp3": {
+    "file": "lesson-t08-compare-audio.mp3",
+    "total_ms": 41500,
+    "scene_audio_durs_ms": [
+      2570,
+      3600,
+      4150,
+      6910,
+      4270
+    ],
+    "scene_durations_ms": [
+      6570,
+      7600,
+      8150,
+      10910,
+      8270
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t08-addsubtract-audio.mp3": {
+    "file": "lesson-t08-addsubtract-audio.mp3",
+    "total_ms": 54980,
+    "scene_audio_durs_ms": [
+      3430,
+      6070,
+      4250,
+      6890,
+      6620,
+      3720
+    ],
+    "scene_durations_ms": [
+      7430,
+      10070,
+      8250,
+      10890,
+      10620,
+      7720
+    ],
+    "scene_count": 6,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t08-multdiv-audio.mp3": {
+    "file": "lesson-t08-multdiv-audio.mp3",
+    "total_ms": 46210,
+    "scene_audio_durs_ms": [
+      3380,
+      6600,
+      5400,
+      5140,
+      5690
+    ],
+    "scene_durations_ms": [
+      7380,
+      10600,
+      9400,
+      9140,
+      9690
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t09-what-audio.mp3": {
+    "file": "lesson-t09-what-audio.mp3",
+    "total_ms": 41240,
+    "scene_audio_durs_ms": [
+      2950,
+      3290,
+      5400,
+      6580,
+      3020
+    ],
+    "scene_durations_ms": [
+      6950,
+      7290,
+      9400,
+      10580,
+      7020
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t09-simple-audio.mp3": {
+    "file": "lesson-t09-simple-audio.mp3",
+    "total_ms": 53270,
+    "scene_audio_durs_ms": [
+      3120,
+      7660,
+      7320,
+      7610,
+      7560
+    ],
+    "scene_durations_ms": [
+      7120,
+      11660,
+      11320,
+      11610,
+      11560
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t09-complex-audio.mp3": {
+    "file": "lesson-t09-complex-audio.mp3",
+    "total_ms": 43009,
+    "scene_audio_durs_ms": [
+      3430,
+      3740,
+      8109,
+      3550,
+      4180
+    ],
+    "scene_durations_ms": [
+      7430,
+      7740,
+      12109,
+      7550,
+      8180
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t09-word-audio.mp3": {
+    "file": "lesson-t09-word-audio.mp3",
+    "total_ms": 55310,
+    "scene_audio_durs_ms": [
+      4010,
+      8620,
+      8280,
+      9910,
+      4490
+    ],
+    "scene_durations_ms": [
+      8010,
+      12620,
+      12280,
+      13910,
+      8490
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
   }
 }
