@@ -11,6 +11,79 @@ import io
 import re
 from pathlib import Path
 
+# ffmpeg for inserting silent pauses between scenes
+import subprocess
+import tempfile
+import os
+try:
+    import imageio_ffmpeg
+    FFMPEG = imageio_ffmpeg.get_ffmpeg_exe()
+    PAUSE_BETWEEN_SCENES_MS = 600  # silence inserted between scenes for comprehension
+except ImportError:
+    FFMPEG = None
+    PAUSE_BETWEEN_SCENES_MS = 0
+
+
+def insert_silent_pauses(input_mp3: str, scene_boundaries_ms, pause_ms: int) -> int:
+    """Split input mp3 at scene boundaries, concatenate with silent pauses between.
+    Returns total duration of the resulting audio in ms.
+    Overwrites input_mp3 with the padded version.
+    """
+    if FFMPEG is None or pause_ms <= 0 or len(scene_boundaries_ms) < 2:
+        return sum(int(e - s) for s, e in scene_boundaries_ms)
+
+    workdir = tempfile.mkdtemp(prefix="lesson_pad_")
+    try:
+        # Generate silence mp3 once
+        silence_path = os.path.join(workdir, "silence.mp3")
+        subprocess.run(
+            [FFMPEG, "-y", "-f", "lavfi", "-i", f"anullsrc=r=24000:cl=mono",
+             "-t", f"{pause_ms / 1000:.3f}", "-acodec", "libmp3lame", "-b:a", "48k",
+             silence_path],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+
+        # Extract each scene
+        scene_paths = []
+        for i, (start_ms, end_ms) in enumerate(scene_boundaries_ms):
+            scene_path = os.path.join(workdir, f"scene_{i:02d}.mp3")
+            subprocess.run(
+                [FFMPEG, "-y", "-i", input_mp3,
+                 "-ss", f"{start_ms / 1000:.3f}", "-to", f"{end_ms / 1000:.3f}",
+                 "-acodec", "libmp3lame", "-b:a", "48k", scene_path],
+                check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+            )
+            scene_paths.append(scene_path)
+
+        # Build concat list
+        concat_list = os.path.join(workdir, "list.txt")
+        with open(concat_list, "w", encoding="utf-8") as f:
+            for i, sp in enumerate(scene_paths):
+                f.write(f"file '{sp}'\n")
+                if i < len(scene_paths) - 1:
+                    f.write(f"file '{silence_path}'\n")
+
+        # Concatenate
+        subprocess.run(
+            [FFMPEG, "-y", "-f", "concat", "-safe", "0", "-i", concat_list,
+             "-acodec", "libmp3lame", "-b:a", "48k", input_mp3],
+            check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL,
+        )
+
+        total = sum(int(e - s) for s, e in scene_boundaries_ms) + pause_ms * (len(scene_boundaries_ms) - 1)
+        return total
+    finally:
+        # Cleanup temp files
+        for f in os.listdir(workdir):
+            try:
+                os.remove(os.path.join(workdir, f))
+            except OSError:
+                pass
+        try:
+            os.rmdir(workdir)
+        except OSError:
+            pass
+
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 
 VOICE = "kk-KZ-AigulNeural"
@@ -267,30 +340,47 @@ async def process_lesson(output_name, scenes):
         # Try to match by order — assume boundaries come in same order
     total_audio_ms = boundaries[-1]["offset_ms"] + boundaries[-1]["duration_ms"] if boundaries else 0
 
-    # Per-scene durations
-    durations = []
-    prev_end_ms = 0  # running pointer to end of last scene
+    # Per-scene durations (before silence insertion)
+    scene_boundaries_ms = []  # (start_ms, end_ms) in the ORIGINAL audio
     for si, (start_idx, end_idx) in enumerate(scene_ranges):
         last_scene = si == len(scene_ranges) - 1
-        # Clamp to available boundaries
         s_clamped = min(start_idx, len(boundaries) - 1) if boundaries else None
         e_clamped = min(end_idx, len(boundaries) - 1) if boundaries else None
         if s_clamped is None:
-            durations.append(0)
+            scene_boundaries_ms.append((0, 0))
             continue
         scene_start = boundaries[s_clamped]["offset_ms"]
         if last_scene:
-            # Extend last scene to end of audio
             scene_end = total_audio_ms
         else:
-            scene_end = boundaries[e_clamped]["offset_ms"] + boundaries[e_clamped]["duration_ms"]
-        durations.append(round(scene_end - scene_start))
-        prev_end_ms = scene_end
+            # Split POINT is midway between end of this scene's last sentence
+            # and start of next scene's first sentence (gives natural cut)
+            this_end = boundaries[e_clamped]["offset_ms"] + boundaries[e_clamped]["duration_ms"]
+            next_start_idx = scene_ranges[si + 1][0]
+            if next_start_idx < len(boundaries):
+                next_start = boundaries[next_start_idx]["offset_ms"]
+                scene_end = (this_end + next_start) / 2
+            else:
+                scene_end = this_end
+        scene_boundaries_ms.append((scene_start, scene_end))
 
-    # Initial silence: add to scene 1
-    if durations and boundaries:
-        initial_silence = boundaries[0]["offset_ms"]
-        durations[0] = round(durations[0] + initial_silence)
+    # First scene should include the initial silence (start from 0)
+    if scene_boundaries_ms:
+        scene_boundaries_ms[0] = (0, scene_boundaries_ms[0][1])
+
+    # Insert silent pauses between scenes via ffmpeg
+    durations = []
+    if FFMPEG is not None and PAUSE_BETWEEN_SCENES_MS > 0 and len(scene_boundaries_ms) > 1:
+        new_total = insert_silent_pauses(output_name, scene_boundaries_ms, PAUSE_BETWEEN_SCENES_MS)
+        for i, (start_ms, end_ms) in enumerate(scene_boundaries_ms):
+            base_dur = end_ms - start_ms
+            if i < len(scene_boundaries_ms) - 1:
+                base_dur += PAUSE_BETWEEN_SCENES_MS
+            durations.append(round(base_dur))
+        total_audio_ms = new_total
+    else:
+        for start_ms, end_ms in scene_boundaries_ms:
+            durations.append(round(end_ms - start_ms))
 
     return {
         "file": output_name,
