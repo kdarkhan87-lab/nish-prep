@@ -128,7 +128,8 @@ export const LESSON_01_NATURAL_NUMBERS: LessonConfig = {
 export type LessonKey =
   | "lesson-01-natural-numbers"
   | "lesson-02-razryad"
-  | "lesson-03-amaldar-reti";
+  | "lesson-03-amaldar-reti"
+  | "lesson-04-darezhe";
 
 export const LESSON_02_RAZRYAD: LessonConfig = {
   audioSrc: "/lessons/lesson-02-audio.mp3",
@@ -407,8 +408,175 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
   ],
 };
 
+export const LESSON_04_DAREZHE: LessonConfig = {
+  audioSrc: "/lessons/lesson-04-audio.mp3",
+  title: "БӨЛІМ №4 · ДӘРЕЖЕ",
+  durationLabel: "Ұзақтығы: 1:09",
+  matchSection: /^#*\s*дәреже/i,
+  scenes: [
+    {
+      duration: 7000,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 text-center">
+          <span className="px-5 py-2 rounded-full bg-indigo-500/15 border border-indigo-400/40 text-indigo-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            БӨЛІМ №4
+          </span>
+          <h1 className="text-5xl md:text-7xl font-black leading-tight bg-gradient-to-r from-white to-indigo-400 bg-clip-text text-transparent">
+            Дәреже
+          </h1>
+          <p className="text-slate-400 text-base md:text-xl mt-1">Қысқа жазудың күшті тәсілі</p>
+        </div>
+      ),
+    },
+    {
+      duration: 8000,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 text-center">
+          <h2 className="text-xl md:text-3xl font-bold">Дәреже дегеніміз не?</h2>
+          <p className="text-slate-300 text-base md:text-xl max-w-lg">
+            Санды өзіне <b className="text-amber-300">бірнеше рет көбейту</b>
+          </p>
+          <div className="font-mono text-2xl md:text-4xl font-bold mt-2 flex items-baseline gap-2">
+            <span>a</span>
+            <sup className="text-indigo-300 text-base md:text-2xl">n</sup>
+            <span className="text-slate-500 mx-2">=</span>
+            <span>a × a × ... × a</span>
+          </div>
+          <p className="text-xs md:text-sm text-slate-500">n рет</p>
+        </div>
+      ),
+    },
+    {
+      duration: 14000,
+      render: () => (
+        <div className="flex flex-col items-center gap-5 w-full max-w-2xl">
+          <h2 className="text-xl md:text-3xl font-bold">Мысалдар</h2>
+          <div className="flex flex-col gap-3 font-mono">
+            <div className="flex items-center justify-center gap-2 md:gap-4 opacity-0 animate-fade-up" style={{ animationDelay: "1s" }}>
+              <div className="text-2xl md:text-4xl font-bold flex items-baseline">
+                5<sup className="text-amber-400 text-base md:text-2xl">2</sup>
+              </div>
+              <span className="text-slate-500 text-xl md:text-3xl">=</span>
+              <div className="text-xl md:text-3xl text-slate-300">5 × 5</div>
+              <span className="text-slate-500 text-xl md:text-3xl">=</span>
+              <div className="text-2xl md:text-4xl font-black text-emerald-400">25</div>
+            </div>
+            <div className="flex items-center justify-center gap-2 md:gap-4 opacity-0 animate-fade-up" style={{ animationDelay: "5.5s" }}>
+              <div className="text-2xl md:text-4xl font-bold flex items-baseline">
+                2<sup className="text-amber-400 text-base md:text-2xl">3</sup>
+              </div>
+              <span className="text-slate-500 text-xl md:text-3xl">=</span>
+              <div className="text-xl md:text-3xl text-slate-300">2 × 2 × 2</div>
+              <span className="text-slate-500 text-xl md:text-3xl">=</span>
+              <div className="text-2xl md:text-4xl font-black text-emerald-400">8</div>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      duration: 12000,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
+          <h2 className="text-xl md:text-3xl font-bold">10-ның дәрежелері</h2>
+          <div className="grid grid-cols-3 gap-2 md:gap-4 font-mono w-full">
+            {[
+              { base: "10", exp: "2", val: "100", delay: "0.5s" },
+              { base: "10", exp: "3", val: "1 000", delay: "3s" },
+              { base: "10", exp: "4", val: "10 000", delay: "5.5s" },
+            ].map((p) => (
+              <div
+                key={p.exp}
+                className="flex flex-col items-center gap-2 p-3 md:p-4 bg-gradient-to-br from-indigo-500/15 to-purple-500/15 border border-indigo-500/30 rounded-xl opacity-0 animate-fade-up"
+                style={{ animationDelay: p.delay }}
+              >
+                <div className="text-2xl md:text-4xl font-bold flex items-baseline">
+                  {p.base}
+                  <sup className="text-indigo-300 text-sm md:text-xl">{p.exp}</sup>
+                </div>
+                <div className="text-slate-500 text-sm">=</div>
+                <div className="text-lg md:text-2xl font-black text-amber-300">{p.val}</div>
+              </div>
+            ))}
+          </div>
+          <p className="text-xs md:text-sm text-slate-400 text-center">
+            Көрсеткіш ↑ — нөлдер саны ↑
+          </p>
+        </div>
+      ),
+    },
+    {
+      duration: 9000,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 text-center">
+          <span className="px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            Маңызды ереже
+          </span>
+          <div className="font-mono text-4xl md:text-7xl font-black flex items-baseline">
+            a<sup className="text-indigo-300 text-xl md:text-3xl">0</sup>
+            <span className="mx-4 text-slate-500">=</span>
+            <span className="text-emerald-400">1</span>
+          </div>
+          <p className="text-slate-300 text-sm md:text-lg max-w-md">
+            Кез келген санның нөлінші дәрежесі — бір
+          </p>
+          <div className="font-mono text-base md:text-xl text-slate-400 flex gap-4 md:gap-6">
+            <span>5⁰ = 1</span>
+            <span>100⁰ = 1</span>
+            <span>99⁰ = 1</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      duration: 14000,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
+          <span className="px-4 py-1.5 rounded-full bg-red-500/15 border border-red-400/40 text-red-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            Жиі қате
+          </span>
+          <h2 className="text-lg md:text-2xl font-bold">Шатастырма!</h2>
+          <div className="grid grid-cols-2 gap-3 md:gap-5 w-full font-mono">
+            <div className="p-3 md:p-5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center opacity-0 animate-fade-up" style={{ animationDelay: "1s" }}>
+              <div className="text-xs md:text-sm text-emerald-400 uppercase tracking-wider mb-2">Дәреже</div>
+              <div className="text-2xl md:text-4xl font-bold flex items-baseline justify-center">
+                3<sup className="text-amber-400 text-base md:text-2xl">3</sup>
+              </div>
+              <div className="text-sm md:text-lg text-slate-400 mt-1">3×3×3</div>
+              <div className="text-2xl md:text-4xl font-black text-emerald-400 mt-1">27</div>
+            </div>
+            <div className="p-3 md:p-5 rounded-xl bg-red-500/10 border border-red-500/30 text-center opacity-0 animate-fade-up" style={{ animationDelay: "5s" }}>
+              <div className="text-xs md:text-sm text-red-400 uppercase tracking-wider mb-2">Көбейту</div>
+              <div className="text-2xl md:text-4xl font-bold">3 × 3</div>
+              <div className="text-sm md:text-lg text-slate-400 mt-3">тек екі рет</div>
+              <div className="text-2xl md:text-4xl font-black text-red-400 mt-1">9</div>
+            </div>
+          </div>
+          <p className="text-xs md:text-sm text-slate-400 text-center opacity-0 animate-fade-up" style={{ animationDelay: "9s" }}>
+            27 ≠ 9 — мүлдем басқа!
+          </p>
+        </div>
+      ),
+    },
+    {
+      duration: 5000,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 text-center">
+          <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent leading-tight">
+            Дәрежені
+            <br />
+            игеретін уақыт!
+          </div>
+          <p className="text-slate-400 text-sm md:text-base">Тесттерге дайындалайық →</p>
+        </div>
+      ),
+    },
+  ],
+};
+
 export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-01-natural-numbers": LESSON_01_NATURAL_NUMBERS,
   "lesson-02-razryad": LESSON_02_RAZRYAD,
   "lesson-03-amaldar-reti": LESSON_03_AMALDAR_RETI,
+  "lesson-04-darezhe": LESSON_04_DAREZHE,
 };
