@@ -192,7 +192,8 @@ export type LessonKey =
   | "lesson-t08-set"
   | "lesson-t08-module"
   | "lesson-t08-compare"
-  | "lesson-t08-addsubtract"
+  | "lesson-t08-add"
+  | "lesson-t08-subtract"
   | "lesson-t08-multdiv"
   // Topic 9 sections
   | "lesson-t09-what"
@@ -2291,17 +2292,29 @@ export const LESSON_T08_COMPARE: LessonConfig = makeSection({
   ],
 });
 
-export const LESSON_T08_ADDSUBTRACT: LessonConfig = makeSection({
-  audioSrc: "/lessons/lesson-t08-addsubtract-audio.mp3",
-  shortTitle: "Қосу, азайту",
+export const LESSON_T08_ADD: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t08-add-audio.mp3",
+  shortTitle: "Қосу",
   matchSection: /^#*\s*қосу\s*$/i,
   scenes: [
-    { duration: 7430, node: <BadgeTitle topicNum="№8·3" title="Қосу / Азайту" subtitle="Белгі ережесі" color="red" /> },
-    { duration: 10070, node: <BigText text="Белгілер = → модульдерді +, белгі қал" /> },
-    { duration: 8250, node: <BigText text="−3 + (−2) = −5" /> },
-    { duration: 10890, node: <BigText text="Белгілер ≠ → модульдерді −" sub="Үлкеннің белгісін ал" /> },
-    { duration: 10620, node: <BigText text="−7 + 5 = −2" /> },
-    { duration: 7720, node: <CTA text="Азайту = қарама-қарсы қосу" color="red" /> },
+    { duration: 8200, node: <BadgeTitle topicNum="№8·4" title="Қосу" subtitle="Белгі ережесі" color="red" /> },
+    { duration: 10070, node: <BigText text="Белгілер = → модульдерді +" sub="Белгі қалады" /> },
+    { duration: 8630, node: <BigText text="−3 + (−2) = −5" /> },
+    { duration: 10740, node: <BigText text="Белгілер ≠ → модульдерді −" sub="Үлкеннің белгісін ал" /> },
+    { duration: 10910, node: <BigText text="−7 + 5 = −2" /> },
+  ],
+});
+
+export const LESSON_T08_SUBTRACT: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t08-subtract-audio.mp3",
+  shortTitle: "Азайту",
+  matchSection: /^#*\s*азайту\s*$/i,
+  scenes: [
+    { duration: 8030, node: <BadgeTitle topicNum="№8·5" title="Азайту" subtitle="Қарама-қарсы қосу" color="red" /> },
+    { duration: 8800, node: <BigText text="− → қарама-қарсы санды +" /> },
+    { duration: 10020, node: <BigText text="5 − 3 = 5 + (−3) = 2" /> },
+    { duration: 13380, node: <BigText text="−2 − (−5) = −2 + 5 = 3" /> },
+    { duration: 8560, node: <CTA text="− − = +" color="red" /> },
   ],
 });
 
@@ -2700,7 +2713,8 @@ export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-t08-set": LESSON_T08_SET,
   "lesson-t08-module": LESSON_T08_MODULE,
   "lesson-t08-compare": LESSON_T08_COMPARE,
-  "lesson-t08-addsubtract": LESSON_T08_ADDSUBTRACT,
+  "lesson-t08-add": LESSON_T08_ADD,
+  "lesson-t08-subtract": LESSON_T08_SUBTRACT,
   "lesson-t08-multdiv": LESSON_T08_MULTDIV,
   // Topic 9 sections
   "lesson-t09-what": LESSON_T09_WHAT,

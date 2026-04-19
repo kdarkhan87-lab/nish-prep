@@ -78,7 +78,7 @@ export default async function TheoryPage({
               : topic.order === 7
               ? (["lesson-t07-ratio", "lesson-t07-what", "lesson-t07-unknown", "lesson-t07-direct", "lesson-t07-inverse", "lesson-t07-scale"] as LessonKey[])
               : topic.order === 8
-              ? (["lesson-t08-set", "lesson-t08-module", "lesson-t08-compare", "lesson-t08-addsubtract", "lesson-t08-multdiv"] as LessonKey[])
+              ? (["lesson-t08-set", "lesson-t08-module", "lesson-t08-compare", "lesson-t08-add", "lesson-t08-subtract", "lesson-t08-multdiv"] as LessonKey[])
               : topic.order === 9
               ? (["lesson-t09-what", "lesson-t09-simple", "lesson-t09-complex", "lesson-t09-word"] as LessonKey[])
               : topic.order === 10
