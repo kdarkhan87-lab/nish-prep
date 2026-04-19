@@ -157,18 +157,24 @@ export type LessonKey =
   | "lesson-t03-divisibility"
   | "lesson-t03-prime"
   | "lesson-t03-factor"
-  | "lesson-t03-gcd-lcm"
+  | "lesson-t03-gcd"
+  | "lesson-t03-lcm"
   // Topic 4 sections
   | "lesson-t04-what"
   | "lesson-t04-types"
   | "lesson-t04-reduce"
-  | "lesson-t04-addsubtract"
-  | "lesson-t04-multdiv"
+  | "lesson-t04-add"
+  | "lesson-t04-subtract"
+  | "lesson-t04-multiply"
+  | "lesson-t04-divide"
+  | "lesson-t04-compare"
   // Topic 5 sections
   | "lesson-t05-what"
   | "lesson-t05-digits"
+  | "lesson-t05-compare"
   | "lesson-t05-addsubtract"
-  | "lesson-t05-multdiv"
+  | "lesson-t05-multiply"
+  | "lesson-t05-divide"
   | "lesson-t05-convert"
   // Topic 6 sections
   | "lesson-t06-what"
@@ -179,7 +185,9 @@ export type LessonKey =
   | "lesson-t07-ratio"
   | "lesson-t07-what"
   | "lesson-t07-unknown"
-  | "lesson-t07-types"
+  | "lesson-t07-direct"
+  | "lesson-t07-inverse"
+  | "lesson-t07-scale"
   // Topic 8 sections
   | "lesson-t08-set"
   | "lesson-t08-module"
@@ -1882,16 +1890,29 @@ export const LESSON_T03_FACTOR: LessonConfig = makeSection({
   ],
 });
 
-export const LESSON_T03_GCD_LCM: LessonConfig = makeSection({
-  audioSrc: "/lessons/lesson-t03-gcd-lcm-audio.mp3",
-  shortTitle: "ЕҮОБ пен ЕКОЕ",
+export const LESSON_T03_GCD: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t03-gcd-audio.mp3",
+  shortTitle: "ЕҮОБ",
   matchSection: /еүоб/i,
   scenes: [
-    { duration: 10380, node: <BigText text="ЕҮОБ — Ең Үлкен Ортақ Бөлгіш" sub="Екі санды да бөлетін ең үлкен" /> },
-    { duration: 10890, node: <BigText text="ЕКОЕ — Ең Кіші Ортақ Еселік" sub="Екеуіне де бөлінетін ең кіші" /> },
-    { duration: 15760, node: <BigText text="12 мен 18" sub="Ортақ бөлгіштер: 1, 2, 3, 6 → ЕҮОБ = 6" /> },
-    { duration: 14510, node: <BigText text="Еселіктер: 36, 72, 108..." sub="Ең кішісі → ЕКОЕ = 36" /> },
-    { duration: 8700, node: <CTA text="Бөлшектерде қажет!" color="amber" /> },
+    { duration: 7100, node: <BadgeTitle topicNum="№3·4" title="ЕҮОБ" subtitle="Ең Үлкен Ортақ Бөлгіш" color="amber" /> },
+    { duration: 8250, node: <BigText text="Екі санды да ÷ ең үлкен сан" /> },
+    { duration: 11870, node: <BigText text="12 мен 18" sub="Ортақ бөлгіштері: 1, 2, 3, 6" /> },
+    { duration: 11150, node: <BigText text="Ең үлкені → ЕҮОБ = 6" /> },
+    { duration: 7580, node: <CTA text="Бөлшекті қысқартуда қажет" color="amber" /> },
+  ],
+});
+
+export const LESSON_T03_LCM: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t03-lcm-audio.mp3",
+  shortTitle: "ЕКОЕ",
+  matchSection: /екое|ekoе|кіші ортақ|ортақ көбейткіш/i,
+  scenes: [
+    { duration: 7360, node: <BadgeTitle topicNum="№3·5" title="ЕКОЕ" subtitle="Ең Кіші Ортақ Еселік" color="amber" /> },
+    { duration: 8630, node: <BigText text="Екі санға да ÷ ең кіші сан" /> },
+    { duration: 11940, node: <BigText text="12 мен 18" sub="Еселіктері: 36, 72, 108..." /> },
+    { duration: 11250, node: <BigText text="Ең кішісі → ЕКОЕ = 36" /> },
+    { duration: 9090, node: <CTA text="Бөлшекті қосуда қажет" color="amber" /> },
   ],
 });
 
@@ -1935,30 +1956,70 @@ export const LESSON_T04_REDUCE: LessonConfig = makeSection({
   ],
 });
 
-export const LESSON_T04_ADDSUBTRACT: LessonConfig = makeSection({
-  audioSrc: "/lessons/lesson-t04-addsubtract-audio.mp3",
-  shortTitle: "Қосу және азайту",
+export const LESSON_T04_ADD: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t04-add-audio.mp3",
+  shortTitle: "Қосу",
   matchSection: /бөлшектерді қосу/i,
   scenes: [
-    { duration: 10310, node: <BigText text="Бөлімдер = → алымдарды қосамыз" /> },
+    { duration: 9500, node: <BadgeTitle topicNum="№4·4" title="Қосу" subtitle="Бөлімдер бірдей болса" color="pink" /> },
+    { duration: 7190, node: <BigText text="Алымдарды +, бөлім қал" /> },
     { duration: 8490, node: <BigText text="1/5 + 2/5 = 3/5" /> },
     { duration: 8630, node: <BigText text="Бөлімдер ≠ → ортақ бөлімге" /> },
     { duration: 15180, node: <BigText text="1/2 + 1/3" sub="Ортақ = 6 → 3/6 + 2/6 = 5/6" /> },
-    { duration: 9210, node: <BigText text="1/2 = 3/6   ·   1/3 = 2/6" /> },
-    { duration: 8150, node: <CTA text="Азайту — дәл солай" color="pink" /> },
+    { duration: 9210, node: <BigText text="= 5/6" /> },
   ],
 });
 
-export const LESSON_T04_MULTDIV: LessonConfig = makeSection({
-  audioSrc: "/lessons/lesson-t04-multdiv-audio.mp3",
-  shortTitle: "Көбейту, бөлу, салыстыру",
+export const LESSON_T04_SUBTRACT: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t04-subtract-audio.mp3",
+  shortTitle: "Азайту",
+  matchSection: /бөлшектерді азайту/i,
+  scenes: [
+    { duration: 7550, node: <BadgeTitle topicNum="№4·5" title="Азайту" subtitle="Қосу сияқты" color="pink" /> },
+    { duration: 8750, node: <BigText text="Бөлімдер = → алымдарды −" /> },
+    { duration: 8630, node: <BigText text="3/5 − 1/5 = 2/5" /> },
+    { duration: 8630, node: <BigText text="Бөлімдер ≠ → ортақ бөлімге" /> },
+    { duration: 13020, node: <BigText text="1/2 − 1/3 = 3/6 − 2/6 = 1/6" /> },
+  ],
+});
+
+export const LESSON_T04_MULTIPLY: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t04-multiply-audio.mp3",
+  shortTitle: "Көбейту",
   matchSection: /бөлшектерді көбейту/i,
   scenes: [
-    { duration: 10600, node: <BigText text="× : алым×алым, бөлім×бөлім" /> },
-    { duration: 9020, node: <BigText text="2/3 × 4/5 = 8/15" /> },
-    { duration: 9880, node: <BigText text="÷ : екіншіні төңкер" sub="Көбейтуге айналады" /> },
-    { duration: 12830, node: <BigText text="2/3 ÷ 4/5 = 2/3 × 5/4 = 5/6" /> },
-    { duration: 19360, node: <BigText text="Айқас көбейту" sub="2/3 vs 3/5 → 10 vs 9 → 2/3 үлкен" /> },
+    { duration: 6780, node: <BadgeTitle topicNum="№4·6" title="Көбейту" subtitle="Ең оңай амал" color="pink" /> },
+    { duration: 7910, node: <BigText text="Алым × алым, бөлім × бөлім" /> },
+    { duration: 14540, node: <BigText text="2/3 × 4/5" sub="2×4 = 8, 3×5 = 15" /> },
+    { duration: 6830, node: <BigText text="= 8/15" /> },
+    { duration: 6740, node: <CTA text="Қажет болса қысқарт" color="pink" /> },
+  ],
+});
+
+export const LESSON_T04_DIVIDE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t04-divide-audio.mp3",
+  shortTitle: "Бөлу",
+  matchSection: /бөлшектерді бөлу/i,
+  scenes: [
+    { duration: 7770, node: <BadgeTitle topicNum="№4·7" title="Бөлу" subtitle="Көбейтуге ауысады" color="pink" /> },
+    { duration: 9090, node: <BigText text="2-шіні төңкер → көбейт" /> },
+    { duration: 7550, node: <BigText text="2/3 ÷ 4/5" /> },
+    { duration: 10670, node: <BigText text="= 2/3 × 5/4 = 10/12" /> },
+    { duration: 6830, node: <BigText text="= 5/6" /> },
+  ],
+});
+
+export const LESSON_T04_COMPARE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t04-compare-audio.mp3",
+  shortTitle: "Салыстыру",
+  matchSection: /бөлшектерді салыстыру/i,
+  scenes: [
+    { duration: 8150, node: <BadgeTitle topicNum="№4·8" title="Салыстыру" subtitle="Айқас көбейту" color="pink" /> },
+    { duration: 8130, node: <BigText text="2/3 vs 3/5" /> },
+    { duration: 9110, node: <BigText text="Айқас: алым × қарсы бөлім" /> },
+    { duration: 9280, node: <BigText text="2 × 5 = 10   ·   3 × 3 = 9" /> },
+    { duration: 8780, node: <BigText text="10 > 9 → 2/3 үлкен" /> },
+    { duration: 9860, node: <CTA text="Қайсы көбейтінді үлкен — сол бөлшек үлкен" color="pink" /> },
   ],
 });
 
@@ -2001,16 +2062,43 @@ export const LESSON_T05_ADDSUBTRACT: LessonConfig = makeSection({
   ],
 });
 
-export const LESSON_T05_MULTDIV: LessonConfig = makeSection({
-  audioSrc: "/lessons/lesson-t05-multdiv-audio.mp3",
+export const LESSON_T05_MULTIPLY: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t05-multiply-audio.mp3",
   shortTitle: "Көбейту",
   matchSection: /^#*\s*көбейту\s*$/i,
   scenes: [
-    { duration: 7410, node: <BigText text="× екі қадам" /> },
-    { duration: 6810, node: <BigText text="1) Үтірсіз көбейт" /> },
-    { duration: 10910, node: <BigText text="2) Үтірлерді санап, жауапта бөл" /> },
-    { duration: 19050, node: <BigText text="0,5 × 0,3" sub="5×3=15 · 1+1=2 үтірден кейін · = 0,15" /> },
-    { duration: 7550, node: <CTA text="÷ — бөлгіштің үтірін жылжыт" color="cyan" /> },
+    { duration: 7550, node: <BadgeTitle topicNum="№5·5" title="Көбейту" subtitle="Үтірмен жұмыс" color="cyan" /> },
+    { duration: 7360, node: <BigText text="2 қадам" /> },
+    { duration: 12590, node: <BigText text="1) Үтірсіз көбейт" sub="2) Үтірлерді сана, бөл" /> },
+    { duration: 19170, node: <BigText text="0,5 × 0,3" sub="5×3=15 · 2 цифр үтірден кейін · = 0,15" /> },
+    { duration: 9090, node: <CTA text="Қарапайым ереже" color="cyan" /> },
+  ],
+});
+
+export const LESSON_T05_DIVIDE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t05-divide-audio.mp3",
+  shortTitle: "Бөлу",
+  matchSection: /^#*\s*бөлу\s*$/i,
+  scenes: [
+    { duration: 7650, node: <BadgeTitle topicNum="№5·6" title="Бөлу" subtitle="Үтірлерді жылжыту" color="cyan" /> },
+    { duration: 9690, node: <BigText text="Бөлгіштің үтірін жоғалт" /> },
+    { duration: 14270, node: <BigText text="1,2 ÷ 0,5" sub="Үтірді 1 орынға → 12 ÷ 5" /> },
+    { duration: 9400, node: <BigText text="= 2,4" /> },
+    { duration: 8630, node: <CTA text="Әдеттегі бөлуге айналады" color="cyan" /> },
+  ],
+});
+
+export const LESSON_T05_COMPARE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t05-compare-audio.mp3",
+  shortTitle: "Салыстыру",
+  matchSection: /ондық бөлшектерді салыстыру/i,
+  scenes: [
+    { duration: 7890, node: <BadgeTitle topicNum="№5·3" title="Салыстыру" subtitle="Бірнеше қадаммен" color="cyan" /> },
+    { duration: 9860, node: <BigText text="1) Бүтін бөлікті салыстыр" /> },
+    { duration: 8750, node: <BigText text="2) Оныншы разрядты" /> },
+    { duration: 7600, node: <BigText text="3) Жүзінші, мыңыншы..." /> },
+    { duration: 11180, node: <BigText text="Соңына 0 қосуға болады" sub="0,5 = 0,50 = 0,500" /> },
+    { duration: 18860, node: <BigText text="0,2 vs 0,15" sub="0,20 > 0,15 → 0,2 үлкен" /> },
   ],
 });
 
@@ -2123,16 +2211,42 @@ export const LESSON_T07_UNKNOWN: LessonConfig = makeSection({
   ],
 });
 
-export const LESSON_T07_TYPES: LessonConfig = makeSection({
-  audioSrc: "/lessons/lesson-t07-types-audio.mp3",
-  shortTitle: "Тура, кері, масштаб",
+export const LESSON_T07_DIRECT: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t07-direct-audio.mp3",
+  shortTitle: "Тура пропорция",
   matchSection: /тура пропорция/i,
   scenes: [
-    { duration: 7020, node: <BadgeTitle topicNum="№7·4" title="Түрлері" subtitle="Тура, кері, масштаб" color="emerald" /> },
-    { duration: 12140, node: <BigText text="Тура: х↑ → у↑" sub="Мысалы, құс салмағы — құны" /> },
-    { duration: 15040, node: <BigText text="Кері: х↑ → у↓" sub="Жылдам жүрсең — аз уақыт" /> },
-    { duration: 8700, node: <BigText text="Масштаб = карта : нағыз" /> },
-    { duration: 10790, node: <BigText text="1 : 100 000" sub="1 см → 1 км" /> },
+    { duration: 7670, node: <BadgeTitle topicNum="№7·4" title="Тура пропорция" subtitle="х↑ → у↑" color="emerald" /> },
+    { duration: 9900, node: <BigText text="Бір шама өссе — екіншісі көбейеді" /> },
+    { duration: 7550, node: <BigText text="Мысалы: құс салмағы — құны" /> },
+    { duration: 7840, node: <BigText text="2× ауыр → 2× қымбат" /> },
+    { duration: 7770, node: <BigText text="3× ауыр → 3× қымбат" /> },
+  ],
+});
+
+export const LESSON_T07_INVERSE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t07-inverse-audio.mp3",
+  shortTitle: "Кері пропорция",
+  matchSection: /кері пропорция/i,
+  scenes: [
+    { duration: 7770, node: <BadgeTitle topicNum="№7·5" title="Кері пропорция" subtitle="х↑ → у↓" color="emerald" /> },
+    { duration: 9810, node: <BigText text="Бір шама өссе — екіншісі азаяды" /> },
+    { duration: 6780, node: <BigText text="Мысалы: жылдамдық пен уақыт" /> },
+    { duration: 8750, node: <BigText text="2× жылдам → 2× аз уақыт" /> },
+    { duration: 7100, node: <BigText text="х · у = const" sub="Көбейтіндісі тұрақты" /> },
+  ],
+});
+
+export const LESSON_T07_SCALE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t07-scale-audio.mp3",
+  shortTitle: "Масштаб",
+  matchSection: /^#*\s*масштаб/i,
+  scenes: [
+    { duration: 8700, node: <BadgeTitle topicNum="№7·6" title="Масштаб" subtitle="Карта мен нағыздың қатынасы" color="emerald" /> },
+    { duration: 9590, node: <BigText text="1 : 100 000" sub="Қос нүктемен жазылады" /> },
+    { duration: 8820, node: <BigText text="Картада 1 см" sub="Нағыз 100 000 см" /> },
+    { duration: 10260, node: <BigText text="= 1 км" sub="(100 000 см = 1 км)" /> },
+    { duration: 8080, node: <CTA text="Карта мен географияда қажет" color="emerald" /> },
   ],
 });
 
@@ -2551,18 +2665,24 @@ export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-t03-divisibility": LESSON_T03_DIVISIBILITY,
   "lesson-t03-prime": LESSON_T03_PRIME,
   "lesson-t03-factor": LESSON_T03_FACTOR,
-  "lesson-t03-gcd-lcm": LESSON_T03_GCD_LCM,
+  "lesson-t03-gcd": LESSON_T03_GCD,
+  "lesson-t03-lcm": LESSON_T03_LCM,
   // Topic 4 sections
   "lesson-t04-what": LESSON_T04_WHAT,
   "lesson-t04-types": LESSON_T04_TYPES,
   "lesson-t04-reduce": LESSON_T04_REDUCE,
-  "lesson-t04-addsubtract": LESSON_T04_ADDSUBTRACT,
-  "lesson-t04-multdiv": LESSON_T04_MULTDIV,
+  "lesson-t04-add": LESSON_T04_ADD,
+  "lesson-t04-subtract": LESSON_T04_SUBTRACT,
+  "lesson-t04-multiply": LESSON_T04_MULTIPLY,
+  "lesson-t04-divide": LESSON_T04_DIVIDE,
+  "lesson-t04-compare": LESSON_T04_COMPARE,
   // Topic 5 sections
   "lesson-t05-what": LESSON_T05_WHAT,
   "lesson-t05-digits": LESSON_T05_DIGITS,
+  "lesson-t05-compare": LESSON_T05_COMPARE,
   "lesson-t05-addsubtract": LESSON_T05_ADDSUBTRACT,
-  "lesson-t05-multdiv": LESSON_T05_MULTDIV,
+  "lesson-t05-multiply": LESSON_T05_MULTIPLY,
+  "lesson-t05-divide": LESSON_T05_DIVIDE,
   "lesson-t05-convert": LESSON_T05_CONVERT,
   // Topic 6 sections
   "lesson-t06-what": LESSON_T06_WHAT,
@@ -2573,7 +2693,9 @@ export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-t07-ratio": LESSON_T07_RATIO,
   "lesson-t07-what": LESSON_T07_WHAT,
   "lesson-t07-unknown": LESSON_T07_UNKNOWN,
-  "lesson-t07-types": LESSON_T07_TYPES,
+  "lesson-t07-direct": LESSON_T07_DIRECT,
+  "lesson-t07-inverse": LESSON_T07_INVERSE,
+  "lesson-t07-scale": LESSON_T07_SCALE,
   // Topic 8 sections
   "lesson-t08-set": LESSON_T08_SET,
   "lesson-t08-module": LESSON_T08_MODULE,

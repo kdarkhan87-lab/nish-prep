@@ -68,15 +68,15 @@ export default async function TheoryPage({
               : topic.order === 2
               ? (["lesson-t02-length", "lesson-t02-mass", "lesson-t02-time", "lesson-t02-area", "lesson-t02-volume", "lesson-t02-speed", "lesson-t02-compare"] as LessonKey[])
               : topic.order === 3
-              ? (["lesson-t03-divisibility", "lesson-t03-prime", "lesson-t03-factor", "lesson-t03-gcd-lcm"] as LessonKey[])
+              ? (["lesson-t03-divisibility", "lesson-t03-prime", "lesson-t03-factor", "lesson-t03-gcd", "lesson-t03-lcm"] as LessonKey[])
               : topic.order === 4
-              ? (["lesson-t04-what", "lesson-t04-types", "lesson-t04-reduce", "lesson-t04-addsubtract", "lesson-t04-multdiv"] as LessonKey[])
+              ? (["lesson-t04-what", "lesson-t04-types", "lesson-t04-reduce", "lesson-t04-add", "lesson-t04-subtract", "lesson-t04-multiply", "lesson-t04-divide", "lesson-t04-compare"] as LessonKey[])
               : topic.order === 5
-              ? (["lesson-t05-what", "lesson-t05-digits", "lesson-t05-addsubtract", "lesson-t05-multdiv", "lesson-t05-convert"] as LessonKey[])
+              ? (["lesson-t05-what", "lesson-t05-digits", "lesson-t05-compare", "lesson-t05-addsubtract", "lesson-t05-multiply", "lesson-t05-divide", "lesson-t05-convert"] as LessonKey[])
               : topic.order === 6
               ? (["lesson-t06-what", "lesson-t06-find", "lesson-t06-inverse", "lesson-t06-change"] as LessonKey[])
               : topic.order === 7
-              ? (["lesson-t07-ratio", "lesson-t07-what", "lesson-t07-unknown", "lesson-t07-types"] as LessonKey[])
+              ? (["lesson-t07-ratio", "lesson-t07-what", "lesson-t07-unknown", "lesson-t07-direct", "lesson-t07-inverse", "lesson-t07-scale"] as LessonKey[])
               : topic.order === 8
               ? (["lesson-t08-set", "lesson-t08-module", "lesson-t08-compare", "lesson-t08-addsubtract", "lesson-t08-multdiv"] as LessonKey[])
               : topic.order === 9
