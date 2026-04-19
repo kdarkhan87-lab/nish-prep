@@ -32,7 +32,9 @@ export default async function TheoryPage({
         &larr; {topic.subject.name}
       </Link>
 
-      {/* Интро-видео над теорией */}
+      {/* Интро-видео над теорией.
+          Убраны интро для тем где они дублируют контент секционных видео:
+          6 (Пайыз), 7 (Пропорция), 8 (Бүтін), 12 (Координата), 14 (Мәтінді), 15 (Жиындар) */}
       {topic.subject.slug === "math" && (() => {
         const introMap: Record<number, LessonKey> = {
           1: "lesson-01-natural-numbers",
@@ -40,16 +42,10 @@ export default async function TheoryPage({
           3: "lesson-t03-intro",
           4: "lesson-t04-intro",
           5: "lesson-t05-intro",
-          6: "lesson-t06-intro",
-          7: "lesson-t07-intro",
-          // 8: removed — intro was empty/generic, section videos cover everything
           9: "lesson-t09-intro",
           10: "lesson-t10-intro",
           11: "lesson-t11-intro",
-          12: "lesson-t12-intro",
           13: "lesson-t13-intro",
-          14: "lesson-t14-intro",
-          15: "lesson-t15-intro",
         };
         const key = introMap[topic.order];
         return key ? <LessonVideoByKey lessonKey={key} /> : null;
