@@ -33,12 +33,27 @@ export default async function TheoryPage({
       </Link>
 
       {/* Интро-видео над теорией */}
-      {topic.subject.slug === "math" && topic.order === 1 && (
-        <LessonVideoByKey lessonKey="lesson-01-natural-numbers" />
-      )}
-      {topic.subject.slug === "math" && topic.order === 2 && (
-        <LessonVideoByKey lessonKey="lesson-t02-intro-shamalar" />
-      )}
+      {topic.subject.slug === "math" && (() => {
+        const introMap: Record<number, LessonKey> = {
+          1: "lesson-01-natural-numbers",
+          2: "lesson-t02-intro-shamalar",
+          3: "lesson-t03-intro",
+          4: "lesson-t04-intro",
+          5: "lesson-t05-intro",
+          6: "lesson-t06-intro",
+          7: "lesson-t07-intro",
+          8: "lesson-t08-intro",
+          9: "lesson-t09-intro",
+          10: "lesson-t10-intro",
+          11: "lesson-t11-intro",
+          12: "lesson-t12-intro",
+          13: "lesson-t13-intro",
+          14: "lesson-t14-intro",
+          15: "lesson-t15-intro",
+        };
+        const key = introMap[topic.order];
+        return key ? <LessonVideoByKey lessonKey={key} /> : null;
+      })()}
 
       {/* Теория + инлайн quiz + секционные видео */}
       <div className="bg-white rounded-2xl shadow-lg p-6 md:p-10">

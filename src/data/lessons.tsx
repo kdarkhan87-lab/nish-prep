@@ -139,7 +139,20 @@ export type LessonKey =
   | "lesson-t02-area"
   | "lesson-t02-volume"
   | "lesson-t02-speed"
-  | "lesson-t02-compare";
+  | "lesson-t02-compare"
+  | "lesson-t03-intro"
+  | "lesson-t04-intro"
+  | "lesson-t05-intro"
+  | "lesson-t06-intro"
+  | "lesson-t07-intro"
+  | "lesson-t08-intro"
+  | "lesson-t09-intro"
+  | "lesson-t10-intro"
+  | "lesson-t11-intro"
+  | "lesson-t12-intro"
+  | "lesson-t13-intro"
+  | "lesson-t14-intro"
+  | "lesson-t15-intro";
 
 export const LESSON_02_RAZRYAD: LessonConfig = {
   audioSrc: "/lessons/lesson-02-audio.mp3",
@@ -1427,6 +1440,321 @@ export const LESSON_T02_COMPARE: LessonConfig = {
   ],
 };
 
+// ───────── Generic intro template ─────────
+// Для однотипных интро видео тем 3–15. Каждое 5-6 сцен:
+// 1. Badge + Title, 2. Определение/описание, 3. Ключевые концепции (список),
+// 4. (опц) Дополнение, 5. Призыв/финал.
+
+type IntroInput = {
+  key: LessonKey;
+  topicNum: string;
+  audioSrc: string;
+  title: string;
+  subtitle: string;
+  scenes: {
+    duration: number;
+    node: React.ReactNode;
+  }[];
+};
+
+function makeIntro(input: IntroInput): LessonConfig {
+  return {
+    audioSrc: input.audioSrc,
+    title: `ТАҚЫРЫП ${input.topicNum} · ${input.title.toUpperCase()}`,
+    durationLabel: `Ұзақтығы: ${Math.round(input.scenes.reduce((s, x) => s + x.duration, 0) / 1000)}с`,
+    scenes: input.scenes.map((s) => ({
+      duration: s.duration,
+      render: () => s.node,
+    })),
+  };
+}
+
+// Static Tailwind class mapping per color theme — JIT needs explicit class names
+type ColorKey = "amber" | "pink" | "cyan" | "yellow" | "emerald" | "red" | "blue" | "purple" | "indigo" | "teal" | "fuchsia" | "violet";
+
+const COLOR_THEMES: Record<ColorKey, {
+  badge: string;
+  gradientTo: string;
+  bulletBg: string;
+  bulletBorder: string;
+  bulletNum: string;
+  statBox: string;
+  ctaGrad: string;
+}> = {
+  amber:    { badge: "bg-amber-500/15 border-amber-400/40 text-amber-300",     gradientTo: "to-amber-400",     bulletBg: "bg-amber-500/10 border-amber-500",     bulletBorder: "", bulletNum: "text-amber-300",     statBox: "from-amber-800 to-amber-600",     ctaGrad: "from-amber-400 to-orange-400" },
+  pink:     { badge: "bg-pink-500/15 border-pink-400/40 text-pink-300",        gradientTo: "to-pink-400",      bulletBg: "bg-pink-500/10 border-pink-500",       bulletBorder: "", bulletNum: "text-pink-300",      statBox: "from-pink-800 to-pink-600",       ctaGrad: "from-pink-400 to-rose-400" },
+  cyan:     { badge: "bg-cyan-500/15 border-cyan-400/40 text-cyan-300",        gradientTo: "to-cyan-400",      bulletBg: "bg-cyan-500/10 border-cyan-500",       bulletBorder: "", bulletNum: "text-cyan-300",      statBox: "from-cyan-800 to-cyan-600",       ctaGrad: "from-cyan-400 to-sky-400" },
+  yellow:   { badge: "bg-yellow-500/15 border-yellow-400/40 text-yellow-300",  gradientTo: "to-yellow-400",    bulletBg: "bg-yellow-500/10 border-yellow-500",   bulletBorder: "", bulletNum: "text-yellow-300",    statBox: "from-yellow-700 to-yellow-500",   ctaGrad: "from-yellow-400 to-amber-400" },
+  emerald:  { badge: "bg-emerald-500/15 border-emerald-400/40 text-emerald-300", gradientTo: "to-emerald-400", bulletBg: "bg-emerald-500/10 border-emerald-500", bulletBorder: "", bulletNum: "text-emerald-300",   statBox: "from-emerald-800 to-emerald-600", ctaGrad: "from-emerald-400 to-teal-400" },
+  red:      { badge: "bg-red-500/15 border-red-400/40 text-red-300",           gradientTo: "to-red-400",       bulletBg: "bg-red-500/10 border-red-500",         bulletBorder: "", bulletNum: "text-red-300",       statBox: "from-red-800 to-red-600",         ctaGrad: "from-red-400 to-orange-400" },
+  blue:     { badge: "bg-blue-500/15 border-blue-400/40 text-blue-300",        gradientTo: "to-blue-400",      bulletBg: "bg-blue-500/10 border-blue-500",       bulletBorder: "", bulletNum: "text-blue-300",      statBox: "from-blue-800 to-blue-600",       ctaGrad: "from-blue-400 to-sky-400" },
+  purple:   { badge: "bg-purple-500/15 border-purple-400/40 text-purple-300",  gradientTo: "to-purple-400",    bulletBg: "bg-purple-500/10 border-purple-500",   bulletBorder: "", bulletNum: "text-purple-300",    statBox: "from-purple-800 to-purple-600",   ctaGrad: "from-purple-400 to-pink-400" },
+  indigo:   { badge: "bg-indigo-500/15 border-indigo-400/40 text-indigo-300",  gradientTo: "to-indigo-400",    bulletBg: "bg-indigo-500/10 border-indigo-500",   bulletBorder: "", bulletNum: "text-indigo-300",    statBox: "from-indigo-800 to-indigo-600",   ctaGrad: "from-indigo-400 to-purple-400" },
+  teal:     { badge: "bg-teal-500/15 border-teal-400/40 text-teal-300",        gradientTo: "to-teal-400",      bulletBg: "bg-teal-500/10 border-teal-500",       bulletBorder: "", bulletNum: "text-teal-300",      statBox: "from-teal-800 to-teal-600",       ctaGrad: "from-teal-400 to-cyan-400" },
+  fuchsia:  { badge: "bg-fuchsia-500/15 border-fuchsia-400/40 text-fuchsia-300", gradientTo: "to-fuchsia-400", bulletBg: "bg-fuchsia-500/10 border-fuchsia-500", bulletBorder: "", bulletNum: "text-fuchsia-300",   statBox: "from-fuchsia-800 to-fuchsia-600", ctaGrad: "from-fuchsia-400 to-pink-400" },
+  violet:   { badge: "bg-violet-500/15 border-violet-400/40 text-violet-300",  gradientTo: "to-violet-400",    bulletBg: "bg-violet-500/10 border-violet-500",   bulletBorder: "", bulletNum: "text-violet-300",    statBox: "from-violet-800 to-violet-600",   ctaGrad: "from-violet-400 to-purple-400" },
+};
+
+const BadgeTitle = ({ topicNum, title, subtitle, color }: { topicNum: string; title: string; subtitle: string; color: ColorKey }) => {
+  const t = COLOR_THEMES[color];
+  return (
+    <div className="flex flex-col items-center gap-3 text-center px-4">
+      <span className={`px-5 py-2 rounded-full border text-xs font-semibold tracking-[0.2em] uppercase ${t.badge}`}>
+        ТАҚЫРЫП {topicNum}
+      </span>
+      <h1 className={`text-3xl md:text-5xl font-black leading-tight bg-gradient-to-r from-white ${t.gradientTo} bg-clip-text text-transparent`}>{title}</h1>
+      <p className="text-slate-400 text-base md:text-xl mt-1">{subtitle}</p>
+    </div>
+  );
+};
+
+const BigText = ({ text, sub }: { text: string; sub?: string }) => (
+  <div className="flex flex-col items-center gap-3 text-center px-6 max-w-3xl">
+    <p className="text-lg md:text-3xl font-bold text-slate-100 leading-tight">{text}</p>
+    {sub && <p className="text-sm md:text-lg text-slate-400">{sub}</p>}
+  </div>
+);
+
+const BulletList = ({ title, items, color }: { title: string; items: string[]; color: ColorKey }) => {
+  const t = COLOR_THEMES[color];
+  return (
+    <div className="flex flex-col items-center gap-3 w-full max-w-2xl px-4">
+      {title && <h2 className="text-lg md:text-2xl font-bold">{title}</h2>}
+      <div className="flex flex-col gap-2 w-full">
+        {items.map((it, i) => (
+          <div key={i} className={`flex items-start gap-3 p-3 border-l-4 rounded-lg text-left text-sm md:text-lg ${t.bulletBg}`}>
+            <span className={`font-bold flex-shrink-0 ${t.bulletNum}`}>{i + 1}.</span>
+            <span className="text-slate-100">{it}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const StatBox = ({ num, label, sub, color }: { num: string; label: string; sub?: string; color: ColorKey }) => {
+  const t = COLOR_THEMES[color];
+  return (
+    <div className="flex flex-col items-center gap-3 text-center">
+      <div className={`px-10 py-6 rounded-2xl bg-gradient-to-br shadow-[0_20px_60px_rgba(0,0,0,0.3)] ${t.statBox}`}>
+        <div className="text-5xl md:text-7xl font-black text-white leading-none">{num}</div>
+        <div className="text-sm md:text-base text-white/80 mt-2">{label}</div>
+      </div>
+      {sub && <p className="text-sm text-slate-400">{sub}</p>}
+    </div>
+  );
+};
+
+const CTA = ({ text, color }: { text: string; color: ColorKey }) => {
+  const t = COLOR_THEMES[color];
+  return (
+    <div className="flex flex-col items-center gap-3 text-center px-6">
+      <div className={`text-3xl md:text-5xl font-black bg-gradient-to-r bg-clip-text text-transparent leading-tight ${t.ctaGrad}`}>
+        {text}
+      </div>
+    </div>
+  );
+};
+
+// ───────── TOPIC INTROS 3–15 ─────────
+
+export const LESSON_T03_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t03-intro",
+  topicNum: "№3",
+  audioSrc: "/lessons/lesson-t03-intro-audio.mp3",
+  title: "Бөлу белгілері, ЕҮОБ, ЕКОЕ",
+  subtitle: "Бөлшектер мен теңдеулердің кілті",
+  scenes: [
+    { duration: 8750, node: <BadgeTitle topicNum="№3" title="Бөлу белгілері, ЕҮОБ, ЕКОЕ" subtitle="Санның жаратылысы туралы" color="amber" /> },
+    { duration: 15930, node: <BigText text="Бөлу белгісі — бір санның екіншіге қалдықсыз бөлінетінін тез анықтаудың жолы." sub="2, 3, 5, 9, 10-ға бөлу — әрқайсысының өз ережесі бар" /> },
+    { duration: 19100, node: <BulletList title="Үш маңызды ұғым" items={["Бөлу белгілері — тез есептеу", "Жай және құрама сандар — санның жаратылысы", "ЕҮОБ пен ЕКОЕ — бөлшектерге қажет"]} color="amber" /> },
+    { duration: 8220, node: <StatBox num="3–4" label="сұрақ НИШ тестінен" color="amber" /> },
+    { duration: 6420, node: <CTA text="Бастадық!" color="amber" /> },
+  ],
+});
+
+export const LESSON_T04_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t04-intro",
+  topicNum: "№4",
+  audioSrc: "/lessons/lesson-t04-intro-audio.mp3",
+  title: "Бөлшектер",
+  subtitle: "Бүтіннің бір бөлігі",
+  scenes: [
+    { duration: 10700, node: <BadgeTitle topicNum="№4" title="Бөлшектер" subtitle="Математиканың маңызды түсінігі" color="pink" /> },
+    { duration: 11610, node: <BigText text="Бөлшек — бүтіннің бір бөлігін көрсететін сан." sub="Тортты төртке бөлсек, бір бөлігі — ширек" /> },
+    { duration: 14320, node: <BulletList title="Бөлшекте екі бөлік" items={["Алым (жоғарыда) — қанша бөлік алдық", "Бөлім (төменде) — бүтін неше бөлікке бөлінген"]} color="pink" /> },
+    { duration: 14970, node: <BulletList title="Үйренесің" items={["Төрт амал: қосу, азайту, көбейту, бөлу", "Қысқарту және ортақ бөлімге келтіру"]} color="pink" /> },
+    { duration: 8730, node: <StatBox num="3–5" label="сұрақ НИШ-те" color="pink" /> },
+    { duration: 5580, node: <CTA text="Бастайық!" color="pink" /> },
+  ],
+});
+
+export const LESSON_T05_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t05-intro",
+  topicNum: "№5",
+  audioSrc: "/lessons/lesson-t05-intro-audio.mp3",
+  title: "Ондық бөлшектер",
+  subtitle: "Үтір арқылы жазылатын бөлшек",
+  scenes: [
+    { duration: 7190, node: <BadgeTitle topicNum="№5" title="Ондық бөлшектер" subtitle="Үтірмен жазылатын сандар" color="cyan" /> },
+    { duration: 11970, node: <BigText text="0,5 = жарты" sub="Ондық бөлшек — әдеттегі бөлшектің басқа жазылуы" /> },
+    { duration: 12590, node: <BulletList title="Разрядтар" items={["Оныншы бөлік", "Жүзінші бөлік", "Мыңыншы бөлік..."]} color="cyan" /> },
+    { duration: 11920, node: <BulletList title="Үйренесің" items={["Жазу, оқу, төрт амал", "Әдеттегі бөлшекке ауыстыру"]} color="cyan" /> },
+    { duration: 8970, node: <CTA text="Дайын болсақ — бастадық!" color="cyan" /> },
+  ],
+});
+
+export const LESSON_T06_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t06-intro",
+  topicNum: "№6",
+  audioSrc: "/lessons/lesson-t06-intro-audio.mp3",
+  title: "Пайыз",
+  subtitle: "Күнделікті өмірде жиі",
+  scenes: [
+    { duration: 9540, node: <BadgeTitle topicNum="№6" title="Пайыз" subtitle="Жүзден алынған бөлік" color="yellow" /> },
+    { duration: 11680, node: <BigText text="50% = жарты" sub="Пайыз — жүзден алынған бөлік" /> },
+    { duration: 14920, node: <BulletList title="Үш түрі" items={["Санның пайызын табу", "Пайыздан санды табу", "Қанша пайыз екенін табу"]} color="yellow" /> },
+    { duration: 13380, node: <BigText text="200 × 20 ÷ 100 = 40" sub="Санды жүзге бөл, пайызға көбейт" /> },
+    { duration: 8610, node: <StatBox num="2–3" label="сұрақ НИШ-те" color="yellow" /> },
+  ],
+});
+
+export const LESSON_T07_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t07-intro",
+  topicNum: "№7",
+  audioSrc: "/lessons/lesson-t07-intro-audio.mp3",
+  title: "Пропорция",
+  subtitle: "Екі қатынастың теңдігі",
+  scenes: [
+    { duration: 7020, node: <BadgeTitle topicNum="№7" title="Пропорция" subtitle="Қатынастар теңдігі" color="emerald" /> },
+    { duration: 12640, node: <BigText text="3 алма = 20 тг" sub="6 алма = 40 тг" /> },
+    { duration: 12400, node: <BigText text="a · d = b · c" sub="Шеткілердің көбейтіндісі ортақтардың көбейтіндісіне тең" /> },
+    { duration: 11390, node: <BigText text="Қиылысқа көбейт, қалғанына бөл" sub="Белгісіз мүшені осылай табамыз" /> },
+    { duration: 8320, node: <StatBox num="3–4" label="сұрақ НИШ-те" color="emerald" /> },
+  ],
+});
+
+export const LESSON_T08_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t08-intro",
+  topicNum: "№8",
+  audioSrc: "/lessons/lesson-t08-intro-audio.mp3",
+  title: "Бүтін сандар (теріс)",
+  subtitle: "Нөлден кіші сандар",
+  scenes: [
+    { duration: 9470, node: <BadgeTitle topicNum="№8" title="Бүтін сандар" subtitle="Теріс сандарды үйренейік" color="red" /> },
+    { duration: 14340, node: <BigText text="−3, −10, 0, 5, 17" sub="Термометр, шот, биіктік — бәрінде теріс сандар бар" /> },
+    { duration: 12690, node: <BigText text="Бүтін сандар = оң + теріс + 0" sub="Олармен төрт амал жасауға болады" /> },
+    { duration: 15570, node: <BulletList title="Ең маңызды ережелер" items={["(−) + (−) = теріс", "(−) × (+) = теріс", "(−) × (−) = оң!"]} color="red" /> },
+    { duration: 8270, node: <StatBox num="3–5" label="сұрақ НИШ-те" color="red" /> },
+  ],
+});
+
+export const LESSON_T09_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t09-intro",
+  topicNum: "№9",
+  audioSrc: "/lessons/lesson-t09-intro-audio.mp3",
+  title: "Теңдеулер",
+  subtitle: "Алгебраның бастауы",
+  scenes: [
+    { duration: 9140, node: <BadgeTitle topicNum="№9" title="Теңдеулер" subtitle="Белгісізді табу өнері" color="blue" /> },
+    { duration: 14510, node: <BigText text="x + 5 = 10" sub="Теңдеу — ішінде белгісізі бар теңдік" /> },
+    { duration: 15660, node: <BigText text="x = 10 − 5 = 5" sub="Белгісізді бір жағына, қалғанын екінші жағына" /> },
+    { duration: 15470, node: <BulletList title="Үйренесің" items={["Қарапайым теңдеулер", "Теңдеулер жүйесі", "Мәтінді есептен теңдеу құру"]} color="blue" /> },
+    { duration: 7310, node: <StatBox num="3–5" label="сұрақ НИШ-те" color="blue" /> },
+  ],
+});
+
+export const LESSON_T10_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t10-intro",
+  topicNum: "№10",
+  audioSrc: "/lessons/lesson-t10-intro-audio.mp3",
+  title: "Өрнектер және формулалар",
+  subtitle: "Символдардың әлемі",
+  scenes: [
+    { duration: 8080, node: <BadgeTitle topicNum="№10" title="Өрнектер" subtitle="Әріптер мен сандар" color="purple" /> },
+    { duration: 12520, node: <BigText text="x + 3 · y" sub="Өрнек — сандар, әріптер, амал белгілерінен құралған жазба" /> },
+    { duration: 11420, node: <BigText text="Әріптер — белгісіздер" sub="Орнына сан қойып мәнін табамыз" /> },
+    { duration: 12500, node: <BigText text="S = a · b" sub="Формула — әмбебап ереже өрнек түрінде" /> },
+    { duration: 9780, node: <BulletList title="Үйренесің" items={["Өрнектерді жеңілдету", "Формулалармен есептеу"]} color="purple" /> },
+    { duration: 6520, node: <StatBox num="2–3" label="сұрақ НИШ-те" color="purple" /> },
+  ],
+});
+
+export const LESSON_T11_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t11-intro",
+  topicNum: "№11",
+  audioSrc: "/lessons/lesson-t11-intro-audio.mp3",
+  title: "Геометрия",
+  subtitle: "Фигуралар туралы ғылым",
+  scenes: [
+    { duration: 9900, node: <BadgeTitle topicNum="№11" title="Геометрия" subtitle="Фигуралар мен өлшемдер" color="indigo" /> },
+    { duration: 12760, node: <BigText text="Нүкте · Түзу · Бұрыш" sub="Үшбұрыш · Шаршы · Шеңбер" /> },
+    { duration: 14440, node: <BulletList title="Қасиеттері" items={["Тіктөртбұрыш: қарама-қарсы қабырғалар тең", "Шаршы: барлық қабырғалары тең"]} color="indigo" /> },
+    { duration: 12380, node: <BulletList title="Үйренесің" items={["Периметр мен ауданды есептеу", "Бұрыштарды өлшеу", "Фигураларды салыстыру"]} color="indigo" /> },
+    { duration: 7720, node: <StatBox num="4–5" label="сұрақ НИШ-те" color="indigo" /> },
+  ],
+});
+
+export const LESSON_T12_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t12-intro",
+  topicNum: "№12",
+  audioSrc: "/lessons/lesson-t12-intro-audio.mp3",
+  title: "Координаталық жазықтық",
+  subtitle: "Нүктелер мен координаттар",
+  scenes: [
+    { duration: 7770, node: <BadgeTitle topicNum="№12" title="Координаталық жазықтық" subtitle="x және y осьтері" color="teal" /> },
+    { duration: 13580, node: <BigText text="x — горизонталь" sub="y — вертикаль. Қиылысу нүктесі — (0; 0)" /> },
+    { duration: 14510, node: <BigText text="A (3; 2)" sub="Нүктенің екі координатасы бар" /> },
+    { duration: 10840, node: <BulletList title="Қолданамыз" items={["Фигураларды орналастыру", "Қашықтықты есептеу"]} color="teal" /> },
+    { duration: 6520, node: <StatBox num="2–3" label="сұрақ НИШ-те" color="teal" /> },
+  ],
+});
+
+export const LESSON_T13_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t13-intro",
+  topicNum: "№13",
+  audioSrc: "/lessons/lesson-t13-intro-audio.mp3",
+  title: "Симметрия",
+  subtitle: "Фигуралардың ұқсастығы",
+  scenes: [
+    { duration: 9500, node: <BadgeTitle topicNum="№13" title="Симметрия" subtitle="Фигураларды түрлендіру" color="fuchsia" /> },
+    { duration: 11800, node: <BigText text="🦋 Көбелектің қанаттары" sub="Симметрия — өз-өзіне ұқсас болу" /> },
+    { duration: 14490, node: <BulletList title="Үш түрі" items={["Осьтік — сызыққа қатысты", "Нүктелік — нүктеге қатысты", "Айналма — бұрышқа қатысты"]} color="fuchsia" /> },
+    { duration: 10310, node: <BulletList title="Үйренесің" items={["Фигураларды түрлендіру", "Симметрия осьтерін табу"]} color="fuchsia" /> },
+    { duration: 6520, node: <StatBox num="2–3" label="сұрақ НИШ-те" color="fuchsia" /> },
+  ],
+});
+
+export const LESSON_T14_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t14-intro",
+  topicNum: "№14",
+  audioSrc: "/lessons/lesson-t14-intro-audio.mp3",
+  title: "Мәтінді есептер",
+  subtitle: "Ең қиын бөлімдердің бірі",
+  scenes: [
+    { duration: 10100, node: <BadgeTitle topicNum="№14" title="Мәтінді есептер" subtitle="Сөзбен берілген есептер" color="amber" /> },
+    { duration: 12039, node: <BigText text="Сан емес, сөзбен жазылған есеп." sub="Сондықтан көңіл-қойып оқу маңызды" /> },
+    { duration: 15090, node: <BulletList title="Шешу реті" items={["Шартты оқы", "Белгісізді тап", "Теңдеу/сурет құр", "Шешіп жауап бер"]} color="amber" /> },
+    { duration: 10460, node: <BulletList title="Түрлері" items={["Қозғалыс", "Жұмыс", "Пайыз", "Қоспа мен ерітінді"]} color="amber" /> },
+    { duration: 9900, node: <StatBox num="5–6" label="сұрақ НИШ-те" sub="Жиі ең қиын бөлім" color="amber" /> },
+  ],
+});
+
+export const LESSON_T15_INTRO: LessonConfig = makeIntro({
+  key: "lesson-t15-intro",
+  topicNum: "№15",
+  audioSrc: "/lessons/lesson-t15-intro-audio.mp3",
+  title: "Жиындар",
+  subtitle: "Соңғы тақырып",
+  scenes: [
+    { duration: 8250, node: <BadgeTitle topicNum="№15" title="Жиындар" subtitle="Соңғы тақырып" color="violet" /> },
+    { duration: 11900, node: <BigText text="Сыныптағы оқушылар жиыны" sub="Жиын — бір қасиетпен біріктірілген нысандар" /> },
+    { duration: 12350, node: <BigText text="Элементтер — жиынның мүшелері" sub="Оларды салыстыруға, қосуға, қиылыстыруға болады" /> },
+    { duration: 15090, node: <BulletList title="Амалдар" items={["∪ Бірігу — екі жиынды бір жинау", "∩ Қиылысу — ортақ элементтер", "− Айырма — тек біреуіндегілер"]} color="violet" /> },
+    { duration: 11750, node: <CTA text="Барлығын үйрендің — сәттілік!" color="violet" /> },
+  ],
+});
+
 export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-01-natural-numbers": LESSON_01_NATURAL_NUMBERS,
   "lesson-02-razryad": LESSON_02_RAZRYAD,
@@ -1442,4 +1770,17 @@ export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-t02-volume": LESSON_T02_VOLUME,
   "lesson-t02-speed": LESSON_T02_SPEED,
   "lesson-t02-compare": LESSON_T02_COMPARE,
+  "lesson-t03-intro": LESSON_T03_INTRO,
+  "lesson-t04-intro": LESSON_T04_INTRO,
+  "lesson-t05-intro": LESSON_T05_INTRO,
+  "lesson-t06-intro": LESSON_T06_INTRO,
+  "lesson-t07-intro": LESSON_T07_INTRO,
+  "lesson-t08-intro": LESSON_T08_INTRO,
+  "lesson-t09-intro": LESSON_T09_INTRO,
+  "lesson-t10-intro": LESSON_T10_INTRO,
+  "lesson-t11-intro": LESSON_T11_INTRO,
+  "lesson-t12-intro": LESSON_T12_INTRO,
+  "lesson-t13-intro": LESSON_T13_INTRO,
+  "lesson-t14-intro": LESSON_T14_INTRO,
+  "lesson-t15-intro": LESSON_T15_INTRO,
 };
