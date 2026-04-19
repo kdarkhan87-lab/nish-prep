@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { TheoryRenderer } from "@/components/TheoryRenderer";
 import { LessonVideo } from "@/components/LessonVideo";
+import { LESSON_01_NATURAL_NUMBERS, LESSON_02_RAZRYAD, type LessonConfig } from "@/data/lessons";
 
 export default async function TheoryPage({
   params,
@@ -31,14 +32,27 @@ export default async function TheoryPage({
         &larr; {topic.subject.name}
       </Link>
 
-      {/* Анимированный видео-урок (пока только для темы 1) */}
+      {/* Интро-видео для темы 1 (натурал сандар) — показывается сверху */}
       {topic.order === 1 && topic.subject.slug === "math" && (
-        <LessonVideo audioSrc="/lessons/lesson-01-audio.mp3" />
+        <LessonVideo
+          audioSrc={LESSON_01_NATURAL_NUMBERS.audioSrc}
+          scenes={LESSON_01_NATURAL_NUMBERS.scenes}
+          title={LESSON_01_NATURAL_NUMBERS.title}
+          durationLabel={LESSON_01_NATURAL_NUMBERS.durationLabel}
+        />
       )}
 
-      {/* Теория + инлайн quiz */}
+      {/* Теория + инлайн quiz + секционные видео */}
       <div className="bg-white rounded-2xl shadow-lg p-6 md:p-10">
-        <TheoryRenderer theory={topic.theory} quizzes={quizzes} />
+        <TheoryRenderer
+          theory={topic.theory}
+          quizzes={quizzes}
+          sectionLessons={
+            topic.order === 1 && topic.subject.slug === "math"
+              ? ([LESSON_02_RAZRYAD] as LessonConfig[])
+              : []
+          }
+        />
       </div>
 
       {/* Есте сақта блогы */}

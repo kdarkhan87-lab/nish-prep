@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { LessonVideo } from "@/components/LessonVideo";
+import type { LessonConfig } from "@/data/lessons";
 
 interface QuizData {
   question: string;
@@ -242,15 +244,29 @@ function fmt(text: string) {
 // Тақырып атауынан визуализацияны анықтау
 function detectVisuals(sectionText: string): string | null {
   const lower = sectionText.toLowerCase();
+
+  // Геометриялық контекст: фигура атаулары немесе нақты формула (S = a..., P = ...)
+  const hasGeometryShape = /тіктөртбұрыш|үшбұрыш|шаршы|квадрат|параллелограм|ромб|трапеция/.test(lower);
+  const hasAreaFormula = /\bS\s*=\s*a/.test(sectionText);
+  const hasPerimFormula = /\bP\s*=\s*[0-9a-zа-я(]/i.test(sectionText);
+
   if (lower.includes("бөлшек") && (lower.includes("дегеніміз") || lower.includes("не?"))) return "fraction-intro";
-  if (lower.includes("периметр")) return "perimeter";
-  if (lower.includes("аудан") && !lower.includes("кері")) return "area";
-  if (lower.includes("бұрыш")) return "angles";
-  if (lower.includes("шеңбер") || lower.includes("дөңгелек")) return "circle";
+  if (lower.includes("периметр") && (hasGeometryShape || hasPerimFormula)) return "perimeter";
+  if (lower.includes("аудан") && !lower.includes("кері") && (hasGeometryShape || hasAreaFormula)) return "area";
+  if (lower.includes("бұрыш") && /°|тік бұрыш|сүйір|доғал|градус/.test(lower)) return "angles";
+  if (lower.includes("шеңбер") || (lower.includes("дөңгелек") && /радиус|диаметр|πr|π\s*r/.test(lower))) return "circle";
   return null;
 }
 
-export function TheoryRenderer({ theory, quizzes }: { theory: string; quizzes: QuizData[] | QuizData[][] }) {
+export function TheoryRenderer({
+  theory,
+  quizzes,
+  sectionLessons = [],
+}: {
+  theory: string;
+  quizzes: QuizData[] | QuizData[][];
+  sectionLessons?: LessonConfig[];
+}) {
   const sections = theory.split(/(?=^## )/m);
 
   const isNested = quizzes.length > 0 && Array.isArray(quizzes[0]);
@@ -258,8 +274,21 @@ export function TheoryRenderer({ theory, quizzes }: { theory: string; quizzes: Q
     ? (quizzes as QuizData[][])
     : (quizzes as QuizData[]).map(q => [q]);
 
+  // Map section index → matching lesson config
+  const sectionToLesson = new Map<number, LessonConfig>();
+  for (const lesson of sectionLessons) {
+    if (!lesson.matchSection) continue;
+    for (let si = 1; si < sections.length; si++) {
+      const firstLine = sections[si].split("\n")[0] || "";
+      if (lesson.matchSection.test(firstLine) && !sectionToLesson.has(si)) {
+        sectionToLesson.set(si, lesson);
+        break;
+      }
+    }
+  }
+
   const combined: Array<
-    | { type: "section"; html: string; visual: string | null }
+    | { type: "section"; html: string; visual: string | null; lesson?: LessonConfig }
     | { type: "quizGroup"; items: QuizData[] }
   > = [];
 
@@ -397,7 +426,12 @@ export function TheoryRenderer({ theory, quizzes }: { theory: string; quizzes: Q
       sectionNumber = undefined; // Кіріспе/қорытынды — номерсіз
     }
 
-    combined.push({ type: "section", html: renderTheoryHTML(sections[i], sectionNumber), visual: uniqueVisual });
+    combined.push({
+      type: "section",
+      html: renderTheoryHTML(sections[i], sectionNumber),
+      visual: uniqueVisual,
+      lesson: sectionToLesson.get(i),
+    });
     // Осы секцияға тағайындалған квиздерді қою
     const quizzesForSection = sectionToQuizzes.get(i);
     if (quizzesForSection) {
@@ -413,6 +447,14 @@ export function TheoryRenderer({ theory, quizzes }: { theory: string; quizzes: Q
         item.type === "section" ? (
           <div key={`s-${i}`}>
             <div dangerouslySetInnerHTML={{ __html: item.html }} />
+            {item.lesson && (
+              <LessonVideo
+                audioSrc={item.lesson.audioSrc}
+                scenes={item.lesson.scenes}
+                title={item.lesson.title}
+                durationLabel={item.lesson.durationLabel}
+              />
+            )}
             {item.visual && <TheoryVisualBlock type={item.visual} />}
           </div>
         ) : (
