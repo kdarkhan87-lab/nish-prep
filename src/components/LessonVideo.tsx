@@ -119,52 +119,54 @@ export function LessonVideo({
           animation: pulse 3s ease-in-out infinite;
         }
       `}</style>
-      <div className="relative w-full aspect-video rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 text-white shadow-2xl my-6">
+      <div className="w-full rounded-2xl overflow-hidden bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 text-white shadow-2xl my-6">
         <audio ref={audioRef} src={audioSrc} preload="auto" />
 
-        <div
-          className="absolute inset-0 pointer-events-none opacity-10"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
+        <div className="relative w-full aspect-video">
+          <div
+            className="absolute inset-0 pointer-events-none opacity-10"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
 
-        <div className="absolute top-4 right-5 text-[10px] md:text-xs font-bold tracking-[0.3em] text-white/40">
-          NISH PREP
+          <div className="absolute top-4 right-5 text-[10px] md:text-xs font-bold tracking-[0.3em] text-white/40">
+            NISH PREP
+          </div>
+
+          {started &&
+            scenes.map((scene, i) => (
+              <div
+                key={i}
+                className={`absolute inset-0 flex items-center justify-center p-4 md:p-8 transition-all duration-700 ${
+                  i === sceneIdx ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+                }`}
+              >
+                {scene.render()}
+              </div>
+            ))}
+
+          {!started && (
+            <button
+              onClick={start}
+              className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-md cursor-pointer group"
+            >
+              <div className="text-xs md:text-sm text-slate-400 tracking-[0.3em] mb-4 text-center px-4">{title}</div>
+              <div className="px-10 py-5 md:px-16 md:py-6 rounded-full bg-gradient-to-r from-sky-400 to-amber-400 text-slate-900 font-black text-xl md:text-3xl shadow-[0_20px_60px_rgba(99,179,237,0.4)] tracking-[0.1em] group-hover:scale-105 transition-transform">
+                ▶ БАСТАУ
+              </div>
+              <div className="text-xs text-slate-500 mt-4">{durationLabel}</div>
+            </button>
+          )}
         </div>
 
-        {started &&
-          scenes.map((scene, i) => (
-            <div
-              key={i}
-              className={`absolute inset-0 flex items-center justify-center p-6 md:p-12 transition-all duration-700 ${
-                i === sceneIdx ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
-              }`}
-            >
-              {scene.render()}
-            </div>
-          ))}
-
-        {!started && (
-          <button
-            onClick={start}
-            className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/95 backdrop-blur-md cursor-pointer group"
-          >
-            <div className="text-xs md:text-sm text-slate-400 tracking-[0.3em] mb-4">{title}</div>
-            <div className="px-10 py-5 md:px-16 md:py-6 rounded-full bg-gradient-to-r from-sky-400 to-amber-400 text-slate-900 font-black text-xl md:text-3xl shadow-[0_20px_60px_rgba(99,179,237,0.4)] tracking-[0.1em] group-hover:scale-105 transition-transform">
-              ▶ БАСТАУ
-            </div>
-            <div className="text-xs text-slate-500 mt-4">{durationLabel}</div>
-          </button>
-        )}
-
         {started && (
-          <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/70 to-transparent flex items-center gap-2 md:gap-3">
+          <div className="px-3 py-2.5 md:px-4 md:py-3 bg-slate-950/80 border-t border-white/5 flex items-center gap-2 md:gap-3">
             <button
               onClick={togglePause}
-              className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 backdrop-blur transition"
+              className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 transition flex-shrink-0"
               title={paused ? "Жалғастыру" : "Пауза"}
             >
               {paused ? (
@@ -175,14 +177,14 @@ export function LessonVideo({
             </button>
             <button
               onClick={stop}
-              className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 backdrop-blur transition"
+              className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 transition flex-shrink-0"
               title="Тоқтату"
             >
               <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h12v12H6z" /></svg>
             </button>
             <button
               onClick={restart}
-              className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 backdrop-blur transition"
+              className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 transition flex-shrink-0"
               title="Басынан"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -190,13 +192,13 @@ export function LessonVideo({
                 <path d="M3 3v5h5" />
               </svg>
             </button>
-            <div className="flex-1 h-1.5 bg-white/15 rounded-full overflow-hidden mx-2">
+            <div className="flex-1 h-1.5 bg-white/15 rounded-full overflow-hidden mx-1 md:mx-2">
               <div
                 className="h-full bg-gradient-to-r from-sky-400 to-amber-400 transition-[width] duration-100"
                 style={{ width: `${progress * 100}%` }}
               />
             </div>
-            <div className="text-xs font-mono text-white/70 tabular-nums">
+            <div className="text-xs font-mono text-white/70 tabular-nums flex-shrink-0">
               {Math.floor(elapsedRef.current / 1000)}s / {Math.floor(totalDuration / 1000)}s
             </div>
           </div>
