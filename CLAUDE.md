@@ -24,9 +24,20 @@ npx vercel --prod --yes
 **Полный гайд с пайплайном генерации аудио + создания сцен:**
 → [scripts/lessons/README.md](scripts/lessons/README.md)
 
+### Текущий стандарт видео (v2 — 2026-04-20):
+
+Каждая сцена = **2с тишины + аудио + 2с тишины**. Каждая сцена генерится отдельным TTS-запросом (а не одним big TTS с разбивкой по boundaries — это давало рассинхрон).
+
+Pattern: текст появляется → 2с молчит (ребёнок читает) → аудио играет полностью → 2с молчит (ребёнок усваивает) → переход.
+
+Реализация в [scripts/lessons/generate_all.py](scripts/lessons/generate_all.py):
+- `PRE_MS = 2000`, `POST_MS = 2000`
+- Per-scene TTS → ffmpeg concat с silence mp3
+- Scene duration в lessons.tsx = `PRE_MS + audio + POST_MS`
+
 ### Критически важно при работе с видео:
 
-1. **Длительности сцен** (`duration: NNNN`) в [src/data/lessons.tsx](src/data/lessons.tsx) **ОБЯЗАТЕЛЬНО** брать из `timings.json`, который производит [scripts/lessons/generate_all.py](scripts/lessons/generate_all.py). Ручной подбор = рассинхрон аудио.
+1. **Длительности сцен** (`duration: NNNN`) в [src/data/lessons.tsx](src/data/lessons.tsx) **ОБЯЗАТЕЛЬНО** брать из `timings.json` (поле `scene_durations_ms`), который производит [scripts/lessons/generate_all.py](scripts/lessons/generate_all.py). Ручной подбор = рассинхрон.
 
 2. **Сцены проигрываются через `audio.currentTime`** в [src/components/LessonVideo.tsx](src/components/LessonVideo.tsx) — тик привязан к реальному времени аудио, не к wall clock. Это гарантирует идеальную синхронизацию.
 

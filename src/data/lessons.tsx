@@ -21,7 +21,7 @@ export const LESSON_01_NATURAL_NUMBERS: LessonConfig = {
   durationLabel: "Ұзақтығы: 1 минут",
   scenes: [
     {
-      duration: 9558,
+      duration: 13020,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="px-5 py-2 rounded-full bg-sky-500/15 border border-sky-400/40 text-sky-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -37,7 +37,7 @@ export const LESSON_01_NATURAL_NUMBERS: LessonConfig = {
       ),
     },
     {
-      duration: 8989,
+      duration: 12500,
       render: () => (
         <div className="flex flex-col items-center gap-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold">Натурал сан дегеніміз не?</h2>
@@ -49,7 +49,7 @@ export const LESSON_01_NATURAL_NUMBERS: LessonConfig = {
       ),
     },
     {
-      duration: 16336,
+      duration: 19860,
       render: () => (
         <div className="flex flex-col items-center gap-6 w-full max-w-2xl">
           <h2 className="text-3xl md:text-5xl font-bold">3 негізгі ереже</h2>
@@ -71,7 +71,7 @@ export const LESSON_01_NATURAL_NUMBERS: LessonConfig = {
       ),
     },
     {
-      duration: 18503,
+      duration: 22020,
       render: () => (
         <div className="flex flex-col items-center gap-6 w-full max-w-3xl">
           <h2 className="text-3xl md:text-5xl font-bold">4 негізгі амал</h2>
@@ -94,7 +94,7 @@ export const LESSON_01_NATURAL_NUMBERS: LessonConfig = {
       ),
     },
     {
-      duration: 8364,
+      duration: 11870,
       render: () => (
         <div className="flex flex-col items-center gap-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold">НИШ емтиханында</h2>
@@ -107,7 +107,7 @@ export const LESSON_01_NATURAL_NUMBERS: LessonConfig = {
       ),
     },
     {
-      duration: 4972,
+      duration: 9090,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="px-5 py-2 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -148,7 +148,7 @@ export const LESSON_02_RAZRYAD: LessonConfig = {
   matchSection: /разряд/i,
   scenes: [
     {
-      duration: 7044,
+      duration: 10500,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="px-5 py-2 rounded-full bg-purple-500/15 border border-purple-400/40 text-purple-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -162,7 +162,7 @@ export const LESSON_02_RAZRYAD: LessonConfig = {
       ),
     },
     {
-      duration: 7975,
+      duration: 11490,
       render: () => (
         <div className="flex flex-col items-center gap-6 text-center">
           <h2 className="text-3xl md:text-5xl font-bold">Разряд дегеніміз не?</h2>
@@ -175,7 +175,7 @@ export const LESSON_02_RAZRYAD: LessonConfig = {
       ),
     },
     {
-      duration: 16558,
+      duration: 20079,
       render: () => (
         <div className="flex flex-col items-center gap-6 w-full max-w-3xl">
           <h2 className="text-2xl md:text-4xl font-bold">Мысал: 3847</h2>
@@ -201,7 +201,7 @@ export const LESSON_02_RAZRYAD: LessonConfig = {
       ),
     },
     {
-      duration: 17586,
+      duration: 21110,
       render: () => (
         <div className="flex flex-col items-center gap-5 w-full max-w-3xl">
           <h2 className="text-2xl md:text-4xl font-bold">Негізгі разрядтар</h2>
@@ -233,7 +233,7 @@ export const LESSON_02_RAZRYAD: LessonConfig = {
       ),
     },
     {
-      duration: 12544,
+      duration: 16070,
       render: () => (
         <div className="flex flex-col items-center gap-6 text-center">
           <h2 className="text-2xl md:text-4xl font-bold">Сұрақ:</h2>
@@ -251,7 +251,7 @@ export const LESSON_02_RAZRYAD: LessonConfig = {
       ),
     },
     {
-      duration: 6583,
+      duration: 10700,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="px-5 py-2 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -275,7 +275,7 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
   matchSection: /амалдар реті|амалдар\s*рет/i,
   scenes: [
     {
-      duration: 11350,
+      duration: 14800,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="px-5 py-2 rounded-full bg-rose-500/15 border border-rose-400/40 text-rose-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -291,7 +291,7 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
       ),
     },
     {
-      duration: 16794,
+      duration: 20320,
       render: () => (
         <div className="flex flex-col items-center gap-2 md:gap-4 w-full max-w-2xl">
           <h2 className="text-lg md:text-3xl font-bold">4 қадамдық тәртіп</h2>
@@ -319,7 +319,7 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
       ),
     },
     {
-      duration: 9933,
+      duration: 10310,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center">
           <p className="text-slate-400 text-base md:text-lg uppercase tracking-[0.3em]">
@@ -338,7 +338,7 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
       ),
     },
     {
-      duration: 13447,
+      duration: 17030,
       render: () => (
         <div className="flex flex-col items-center gap-5 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold text-slate-300">Оңай мысал</h2>
@@ -360,7 +360,7 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
       ),
     },
     {
-      duration: 13781,
+      duration: 15330,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-xl">
           <span className="px-5 py-2 rounded-full bg-red-500/15 border border-red-400/40 text-red-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -380,7 +380,7 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
       ),
     },
     {
-      duration: 19375,
+      duration: 22620,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold text-slate-300">Күрделі мысал</h2>
@@ -405,7 +405,7 @@ export const LESSON_03_AMALDAR_RETI: LessonConfig = {
       ),
     },
     {
-      duration: 5775,
+      duration: 9860,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-rose-400 to-orange-400 bg-clip-text text-transparent leading-tight">
@@ -425,7 +425,7 @@ export const LESSON_04_DAREZHE: LessonConfig = {
   matchSection: /^#*\s*дәреже/i,
   scenes: [
     {
-      duration: 8156,
+      duration: 11610,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-indigo-500/15 border border-indigo-400/40 text-indigo-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -439,7 +439,7 @@ export const LESSON_04_DAREZHE: LessonConfig = {
       ),
     },
     {
-      duration: 11892,
+      duration: 15400,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <h2 className="text-xl md:text-3xl font-bold">Дәреже дегеніміз не?</h2>
@@ -457,7 +457,7 @@ export const LESSON_04_DAREZHE: LessonConfig = {
       ),
     },
     {
-      duration: 11586,
+      duration: 15110,
       render: () => (
         <div className="flex flex-col items-center gap-5 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold">Мысалдар</h2>
@@ -485,7 +485,7 @@ export const LESSON_04_DAREZHE: LessonConfig = {
       ),
     },
     {
-      duration: 9406,
+      duration: 12930,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold">10-ның дәрежелері</h2>
@@ -516,7 +516,7 @@ export const LESSON_04_DAREZHE: LessonConfig = {
       ),
     },
     {
-      duration: 11892,
+      duration: 15400,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="px-4 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -539,7 +539,7 @@ export const LESSON_04_DAREZHE: LessonConfig = {
       ),
     },
     {
-      duration: 15267,
+      duration: 18780,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
           <span className="px-4 py-1.5 rounded-full bg-red-500/15 border border-red-400/40 text-red-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -569,7 +569,7 @@ export const LESSON_04_DAREZHE: LessonConfig = {
       ),
     },
     {
-      duration: 8414,
+      duration: 12500,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent leading-tight">
@@ -591,7 +591,7 @@ export const LESSON_05_ADDITION_PROPS: LessonConfig = {
   matchSection: /қосу.*қасиет/i,
   scenes: [
     {
-      duration: 8128,
+      duration: 11580,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -605,7 +605,7 @@ export const LESSON_05_ADDITION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 14267,
+      duration: 17780,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold">1. Ауыстыру қасиеті</h2>
@@ -625,7 +625,7 @@ export const LESSON_05_ADDITION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 10989,
+      duration: 14510,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold">2. Топтау қасиеті</h2>
@@ -639,7 +639,7 @@ export const LESSON_05_ADDITION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 9989,
+      duration: 13500,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-xl">
           <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -657,7 +657,7 @@ export const LESSON_05_ADDITION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 9989,
+      duration: 13500,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-2xl font-mono">
           <div className="text-xl md:text-3xl font-bold text-slate-300">37 + 48 + 63</div>
@@ -672,7 +672,7 @@ export const LESSON_05_ADDITION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 4569,
+      duration: 8680,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-emerald-400 to-sky-400 bg-clip-text text-transparent leading-tight">
@@ -691,7 +691,7 @@ export const LESSON_06_MULTIPLICATION_PROPS: LessonConfig = {
   matchSection: /көбейту.*қасиет/i,
   scenes: [
     {
-      duration: 8767,
+      duration: 12230,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-pink-500/15 border border-pink-400/40 text-pink-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -705,7 +705,7 @@ export const LESSON_06_MULTIPLICATION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 11683,
+      duration: 15210,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold">1. Ауыстыру</h2>
@@ -719,7 +719,7 @@ export const LESSON_06_MULTIPLICATION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 11683,
+      duration: 15210,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
           <span className="px-4 py-1.5 rounded-full bg-pink-500/15 border border-pink-400/40 text-pink-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -733,7 +733,7 @@ export const LESSON_06_MULTIPLICATION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 8404,
+      duration: 11900,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -747,7 +747,7 @@ export const LESSON_06_MULTIPLICATION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 9268,
+      duration: 12810,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-2xl font-mono">
           <div className="text-lg md:text-2xl text-slate-300">36 × 5 + 64 × 5</div>
@@ -760,7 +760,7 @@ export const LESSON_06_MULTIPLICATION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 6919,
+      duration: 10430,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-xl font-mono">
           <div className="text-xl md:text-3xl text-slate-300 opacity-0 animate-fade-up" style={{ animationDelay: "0.3s" }}>
@@ -776,7 +776,7 @@ export const LESSON_06_MULTIPLICATION_PROPS: LessonConfig = {
       ),
     },
     {
-      duration: 4000,
+      duration: 8100,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent leading-tight">
@@ -798,7 +798,7 @@ export const LESSON_T02_INTRO_SHAMALAR: LessonConfig = {
   durationLabel: "Ұзақтығы: 1 минут",
   scenes: [
     {
-      duration: 9044,
+      duration: 12500,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-teal-500/15 border border-teal-400/40 text-teal-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -814,7 +814,7 @@ export const LESSON_T02_INTRO_SHAMALAR: LessonConfig = {
       ),
     },
     {
-      duration: 12350,
+      duration: 15880,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold">Шама дегеніміз не?</h2>
@@ -839,7 +839,7 @@ export const LESSON_T02_INTRO_SHAMALAR: LessonConfig = {
       ),
     },
     {
-      duration: 16739,
+      duration: 20250,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-3xl">
           <h2 className="text-xl md:text-3xl font-bold">6 түрлі өлшем</h2>
@@ -867,7 +867,7 @@ export const LESSON_T02_INTRO_SHAMALAR: LessonConfig = {
       ),
     },
     {
-      duration: 12483,
+      duration: 15950,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center w-full max-w-xl">
           <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -884,7 +884,7 @@ export const LESSON_T02_INTRO_SHAMALAR: LessonConfig = {
       ),
     },
     {
-      duration: 10356,
+      duration: 13910,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center">
           <h2 className="text-xl md:text-3xl font-bold">НИШ емтиханында</h2>
@@ -899,7 +899,7 @@ export const LESSON_T02_INTRO_SHAMALAR: LessonConfig = {
       ),
     },
     {
-      duration: 5306,
+      duration: 9420,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center">
           <span className="px-5 py-2 rounded-full bg-amber-400/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
@@ -923,7 +923,7 @@ export const LESSON_T02_LENGTH: LessonConfig = {
   matchSection: /ұзындық/i,
   scenes: [
     {
-      duration: 5475,
+      duration: 8940,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-sky-500/15 border border-sky-400/40 text-sky-300 text-xs font-semibold tracking-[0.2em] uppercase">БӨЛІМ №1</span>
@@ -933,7 +933,7 @@ export const LESSON_T02_LENGTH: LessonConfig = {
       ),
     },
     {
-      duration: 17475,
+      duration: 20990,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold">Негізгі бірліктер</h2>
@@ -954,7 +954,7 @@ export const LESSON_T02_LENGTH: LessonConfig = {
       ),
     },
     {
-      duration: 10392,
+      duration: 15640,
       render: () => (
         <div className="flex flex-col items-center gap-4 w-full max-w-xl">
           <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">Ауыстыру</span>
@@ -966,7 +966,7 @@ export const LESSON_T02_LENGTH: LessonConfig = {
       ),
     },
     {
-      duration: 4142,
+      duration: 11780,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center max-w-xl">
           <p className="text-base md:text-xl text-slate-300">
@@ -978,7 +978,7 @@ export const LESSON_T02_LENGTH: LessonConfig = {
       ),
     },
     {
-      duration: 10347,
+      duration: 8610,
       render: () => (
         <div className="flex flex-col items-center gap-2 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent">Ұзындық — негіз!</div>
@@ -1078,7 +1078,7 @@ export const LESSON_T02_TIME: LessonConfig = {
   matchSection: /уақыт/i,
   scenes: [
     {
-      duration: 5433,
+      duration: 8900,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-purple-500/15 border border-purple-400/40 text-purple-300 text-xs font-semibold tracking-[0.2em] uppercase">БӨЛІМ №3</span>
@@ -1087,7 +1087,7 @@ export const LESSON_T02_TIME: LessonConfig = {
       ),
     },
     {
-      duration: 12808,
+      duration: 17390,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-2xl">
           <h2 className="text-xl md:text-3xl font-bold">Негізгі бірліктер</h2>
@@ -1109,7 +1109,7 @@ export const LESSON_T02_TIME: LessonConfig = {
       ),
     },
     {
-      duration: 8128,
+      duration: 13700,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-xl">
           <span className="px-4 py-1.5 rounded-full bg-red-500/15 border border-red-400/40 text-red-300 text-xs font-semibold tracking-[0.2em] uppercase">Назар!</span>
@@ -1125,7 +1125,7 @@ export const LESSON_T02_TIME: LessonConfig = {
       ),
     },
     {
-      duration: 9531,
+      duration: 11130,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center font-mono">
           <span className="px-4 py-1.5 rounded-full bg-sky-500/15 border border-sky-400/40 text-sky-300 text-xs font-semibold tracking-[0.2em] uppercase">Мысал</span>
@@ -1136,7 +1136,7 @@ export const LESSON_T02_TIME: LessonConfig = {
       ),
     },
     {
-      duration: 7069,
+      duration: 7480,
       render: () => (
         <div className="flex flex-col items-center gap-2 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Уақыт — қымбат!</div>
@@ -1153,7 +1153,7 @@ export const LESSON_T02_AREA: LessonConfig = {
   matchSection: /аудан/i,
   scenes: [
     {
-      duration: 5586,
+      duration: 8510,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-[0.2em] uppercase">БӨЛІМ №4</span>
@@ -1163,7 +1163,7 @@ export const LESSON_T02_AREA: LessonConfig = {
       ),
     },
     {
-      duration: 8017,
+      duration: 11540,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <p className="text-base md:text-xl text-slate-300 max-w-lg">
@@ -1176,7 +1176,7 @@ export const LESSON_T02_AREA: LessonConfig = {
       ),
     },
     {
-      duration: 11461,
+      duration: 14970,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-xl">
           <span className="px-4 py-1.5 rounded-full bg-red-500/15 border border-red-400/40 text-red-300 text-xs font-semibold tracking-[0.2em] uppercase">Маңызды!</span>
@@ -1190,7 +1190,7 @@ export const LESSON_T02_AREA: LessonConfig = {
       ),
     },
     {
-      duration: 13419,
+      duration: 21280,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-2xl">
           <h2 className="text-lg md:text-2xl font-bold">Бірліктер кестесі</h2>
@@ -1212,7 +1212,7 @@ export const LESSON_T02_AREA: LessonConfig = {
       ),
     },
     {
-      duration: 8406,
+      duration: 13960,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center max-w-xl">
           <span className="px-4 py-1.5 rounded-full bg-red-500/15 border border-red-400/40 text-red-300 text-xs font-semibold tracking-[0.2em] uppercase">Жиі қате</span>
@@ -1225,7 +1225,7 @@ export const LESSON_T02_AREA: LessonConfig = {
       ),
     },
     {
-      duration: 9750,
+      duration: 7500,
       render: () => (
         <div className="flex flex-col items-center gap-2 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">Квадратын ұмытпа!</div>
@@ -1242,7 +1242,7 @@ export const LESSON_T02_VOLUME: LessonConfig = {
   matchSection: /көлем/i,
   scenes: [
     {
-      duration: 5892,
+      duration: 9350,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-pink-500/15 border border-pink-400/40 text-pink-300 text-xs font-semibold tracking-[0.2em] uppercase">БӨЛІМ №5</span>
@@ -1251,7 +1251,7 @@ export const LESSON_T02_VOLUME: LessonConfig = {
       ),
     },
     {
-      duration: 6781,
+      duration: 10290,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <p className="text-base md:text-xl text-slate-300 max-w-lg">
@@ -1262,7 +1262,7 @@ export const LESSON_T02_VOLUME: LessonConfig = {
       ),
     },
     {
-      duration: 5642,
+      duration: 15260,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-xl font-mono text-center">
           <div className="text-base md:text-xl text-slate-400">1 м = 100 см</div>
@@ -1272,7 +1272,7 @@ export const LESSON_T02_VOLUME: LessonConfig = {
       ),
     },
     {
-      duration: 15669,
+      duration: 17010,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-2xl">
           <h2 className="text-lg md:text-2xl font-bold">Көлем ↔ Сыйымдылық</h2>
@@ -1292,7 +1292,7 @@ export const LESSON_T02_VOLUME: LessonConfig = {
       ),
     },
     {
-      duration: 7083,
+      duration: 7290,
       render: () => (
         <div className="flex flex-col items-center gap-2 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-pink-400 to-rose-400 bg-clip-text text-transparent">Айналамызда — көлем</div>
@@ -1309,7 +1309,7 @@ export const LESSON_T02_SPEED: LessonConfig = {
   matchSection: /жылдамдық/i,
   scenes: [
     {
-      duration: 6239,
+      duration: 9690,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-rose-500/15 border border-rose-400/40 text-rose-300 text-xs font-semibold tracking-[0.2em] uppercase">БӨЛІМ №6</span>
@@ -1318,7 +1318,7 @@ export const LESSON_T02_SPEED: LessonConfig = {
       ),
     },
     {
-      duration: 6683,
+      duration: 10190,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <p className="text-base md:text-xl text-slate-300 max-w-lg">Бір уақытта өтілген жол</p>
@@ -1329,7 +1329,7 @@ export const LESSON_T02_SPEED: LessonConfig = {
       ),
     },
     {
-      duration: 4669,
+      duration: 10770,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center font-mono">
           <div className="text-2xl md:text-4xl font-bold">км/сағ</div>
@@ -1339,7 +1339,7 @@ export const LESSON_T02_SPEED: LessonConfig = {
       ),
     },
     {
-      duration: 10947,
+      duration: 15300,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-xl font-mono text-center">
           <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">Ереже</span>
@@ -1352,7 +1352,7 @@ export const LESSON_T02_SPEED: LessonConfig = {
       ),
     },
     {
-      duration: 5917,
+      duration: 7290,
       render: () => (
         <div className="flex flex-col items-center gap-2 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-rose-400 to-orange-400 bg-clip-text text-transparent">Жылдамдыққа қадам!</div>
@@ -1369,7 +1369,7 @@ export const LESSON_T02_COMPARE: LessonConfig = {
   matchSection: /салыстыру/i,
   scenes: [
     {
-      duration: 4792,
+      duration: 8220,
       render: () => (
         <div className="flex flex-col items-center gap-3 text-center">
           <span className="px-5 py-2 rounded-full bg-indigo-500/15 border border-indigo-400/40 text-indigo-300 text-xs font-semibold tracking-[0.2em] uppercase">БӨЛІМ №7</span>
@@ -1378,7 +1378,7 @@ export const LESSON_T02_COMPARE: LessonConfig = {
       ),
     },
     {
-      duration: 9475,
+      duration: 13000,
       render: () => (
         <div className="flex flex-col items-center gap-4 text-center max-w-xl">
           <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">Ереже</span>
@@ -1390,7 +1390,7 @@ export const LESSON_T02_COMPARE: LessonConfig = {
       ),
     },
     {
-      duration: 17656,
+      duration: 21180,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-xl font-mono text-center">
           <div className="text-lg md:text-2xl">Қайсы үлкен?</div>
@@ -1404,7 +1404,7 @@ export const LESSON_T02_COMPARE: LessonConfig = {
       ),
     },
     {
-      duration: 11211,
+      duration: 16960,
       render: () => (
         <div className="flex flex-col items-center gap-3 w-full max-w-xl font-mono text-center">
           <div className="text-base md:text-xl">½ сағат vs 20 мин</div>
@@ -1417,7 +1417,7 @@ export const LESSON_T02_COMPARE: LessonConfig = {
       ),
     },
     {
-      duration: 6000,
+      duration: 7890,
       render: () => (
         <div className="flex flex-col items-center gap-2 text-center">
           <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Бір бірлік — сенің көмекшің!</div>
