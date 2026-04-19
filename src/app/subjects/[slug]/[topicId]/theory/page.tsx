@@ -2,6 +2,7 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { TheoryRenderer } from "@/components/TheoryRenderer";
+import { LessonVideo } from "@/components/LessonVideo";
 
 export default async function TheoryPage({
   params,
@@ -29,6 +30,11 @@ export default async function TheoryPage({
       <Link href={`/subjects/${slug}`} className="text-blue-600 hover:underline mb-6 inline-flex items-center gap-1 text-sm">
         &larr; {topic.subject.name}
       </Link>
+
+      {/* Анимированный видео-урок (пока только для темы 1) */}
+      {topic.order === 1 && topic.subject.slug === "math" && (
+        <LessonVideo audioSrc="/lessons/lesson-01-audio.mp3" />
+      )}
 
       {/* Теория + инлайн quiz */}
       <div className="bg-white rounded-2xl shadow-lg p-6 md:p-10">
