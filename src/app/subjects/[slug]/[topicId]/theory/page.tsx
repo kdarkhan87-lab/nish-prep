@@ -48,6 +48,8 @@ export default async function TheoryPage({
                   "lesson-02-razryad",
                   "lesson-03-amaldar-reti",
                   "lesson-04-darezhe",
+                  "lesson-05-addition-properties",
+                  "lesson-06-multiplication-properties",
                 ] as LessonKey[])
               : []
           }

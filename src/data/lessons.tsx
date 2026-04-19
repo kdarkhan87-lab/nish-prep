@@ -129,7 +129,9 @@ export type LessonKey =
   | "lesson-01-natural-numbers"
   | "lesson-02-razryad"
   | "lesson-03-amaldar-reti"
-  | "lesson-04-darezhe";
+  | "lesson-04-darezhe"
+  | "lesson-05-addition-properties"
+  | "lesson-06-multiplication-properties";
 
 export const LESSON_02_RAZRYAD: LessonConfig = {
   audioSrc: "/lessons/lesson-02-audio.mp3",
@@ -574,9 +576,215 @@ export const LESSON_04_DAREZHE: LessonConfig = {
   ],
 };
 
+export const LESSON_05_ADDITION_PROPS: LessonConfig = {
+  audioSrc: "/lessons/lesson-05-audio.mp3",
+  title: "БӨЛІМ №5 · ҚОСУДЫҢ ҚАСИЕТТЕРІ",
+  durationLabel: "Ұзақтығы: 52с",
+  matchSection: /қосу.*қасиет/i,
+  scenes: [
+    {
+      duration: 7132,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 text-center">
+          <span className="px-5 py-2 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            БӨЛІМ №5
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black leading-tight bg-gradient-to-r from-white to-emerald-400 bg-clip-text text-transparent">
+            Қосудың қасиеттері
+          </h1>
+          <p className="text-slate-400 text-base md:text-xl mt-1">Жылдам санаудың кілті</p>
+        </div>
+      ),
+    },
+    {
+      duration: 12947,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
+          <h2 className="text-xl md:text-3xl font-bold">1. Ауыстыру қасиеті</h2>
+          <div className="font-mono text-3xl md:text-5xl font-black p-4 md:p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
+            a + b <span className="text-emerald-400">=</span> b + a
+          </div>
+          <div className="flex gap-4 md:gap-8 font-mono text-lg md:text-2xl">
+            <div className="opacity-0 animate-fade-up" style={{ animationDelay: "4s" }}>
+              3 + 7 = <span className="text-amber-400 font-bold">10</span>
+            </div>
+            <div className="opacity-0 animate-fade-up" style={{ animationDelay: "7s" }}>
+              7 + 3 = <span className="text-amber-400 font-bold">10</span>
+            </div>
+          </div>
+          <p className="text-xs md:text-sm text-slate-400">Орын ауысса да — жауап бірдей</p>
+        </div>
+      ),
+    },
+    {
+      duration: 9842,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
+          <h2 className="text-xl md:text-3xl font-bold">2. Топтау қасиеті</h2>
+          <div className="font-mono text-2xl md:text-4xl font-black p-4 md:p-6 rounded-xl bg-sky-500/10 border border-sky-500/30 text-center">
+            (a + b) + c <span className="text-sky-400">=</span> a + (b + c)
+          </div>
+          <p className="text-sm md:text-base text-slate-300 text-center max-w-lg">
+            Қосылғыштарды қалағанша <b className="text-amber-300">топтауға</b> болады
+          </p>
+        </div>
+      ),
+    },
+    {
+      duration: 8895,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 w-full max-w-xl">
+          <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            Пайдалы мысал
+          </span>
+          <div className="font-mono text-3xl md:text-5xl font-black">
+            37 + 48 + 63 <span className="text-slate-500">= ?</span>
+          </div>
+          <p className="text-sm md:text-base text-slate-400 text-center">
+            Тікелей есептеу ауыр...
+            <br />
+            Қолайлы жұп табайық!
+          </p>
+        </div>
+      ),
+    },
+    {
+      duration: 8895,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 w-full max-w-2xl font-mono">
+          <div className="text-xl md:text-3xl font-bold text-slate-300">37 + 48 + 63</div>
+          <div className="px-4 py-2 rounded-lg bg-emerald-500/15 border border-emerald-400/40 text-lg md:text-2xl opacity-0 animate-fade-up" style={{ animationDelay: "0.5s" }}>
+            <span className="text-emerald-400">37 + 63</span> + 48 = <span className="text-amber-300 font-bold">100</span> + 48
+          </div>
+          <div className="px-4 py-2 rounded-lg bg-amber-500/15 border border-amber-400/40 text-2xl md:text-4xl font-black opacity-0 animate-fade-up" style={{ animationDelay: "4.5s" }}>
+            = <span className="text-amber-300">148</span>
+          </div>
+          <p className="text-xs md:text-sm text-slate-400 text-center mt-1">Жұмыр санды бірінші — үш есе жылдам!</p>
+        </div>
+      ),
+    },
+    {
+      duration: 4329,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 text-center">
+          <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-emerald-400 to-sky-400 bg-clip-text text-transparent leading-tight">
+            Қолданып көрейік!
+          </div>
+        </div>
+      ),
+    },
+  ],
+};
+
+export const LESSON_06_MULTIPLICATION_PROPS: LessonConfig = {
+  audioSrc: "/lessons/lesson-06-audio.mp3",
+  title: "БӨЛІМ №6 · КӨБЕЙТУДІҢ ҚАСИЕТТЕРІ",
+  durationLabel: "Ұзақтығы: 54с",
+  matchSection: /көбейту.*қасиет/i,
+  scenes: [
+    {
+      duration: 7737,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 text-center">
+          <span className="px-5 py-2 rounded-full bg-pink-500/15 border border-pink-400/40 text-pink-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            БӨЛІМ №6
+          </span>
+          <h1 className="text-3xl md:text-5xl font-black leading-tight bg-gradient-to-r from-white to-pink-400 bg-clip-text text-transparent">
+            Көбейтудің қасиеттері
+          </h1>
+          <p className="text-slate-400 text-base md:text-xl mt-1">Үлестіру — ең күшті қару</p>
+        </div>
+      ),
+    },
+    {
+      duration: 10500,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
+          <h2 className="text-xl md:text-3xl font-bold">1. Ауыстыру</h2>
+          <div className="font-mono text-3xl md:text-5xl font-black p-4 md:p-6 rounded-xl bg-sky-500/10 border border-sky-500/30">
+            a × b <span className="text-sky-400">=</span> b × a
+          </div>
+          <div className="font-mono text-lg md:text-2xl text-slate-300">
+            4 × 25 = 25 × 4 = <span className="text-amber-300 font-bold">100</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      duration: 10500,
+      render: () => (
+        <div className="flex flex-col items-center gap-4 w-full max-w-2xl">
+          <span className="px-4 py-1.5 rounded-full bg-pink-500/15 border border-pink-400/40 text-pink-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            Ең маңыздысы
+          </span>
+          <h2 className="text-xl md:text-3xl font-bold">2. Үлестіру қасиеті</h2>
+          <div className="font-mono text-xl md:text-3xl font-black p-4 md:p-6 rounded-xl bg-gradient-to-br from-pink-500/15 to-purple-500/15 border border-pink-500/40 text-center">
+            a × (b + c) <span className="text-pink-400">=</span> a×b + a×c
+          </div>
+        </div>
+      ),
+    },
+    {
+      duration: 7394,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 text-center">
+          <span className="px-4 py-1.5 rounded-full bg-amber-500/15 border border-amber-400/40 text-amber-300 text-xs font-semibold tracking-[0.2em] uppercase">
+            Мысал
+          </span>
+          <div className="font-mono text-2xl md:text-4xl font-black">
+            36 × 5 + 64 × 5 <span className="text-slate-500">= ?</span>
+          </div>
+          <p className="text-sm md:text-base text-slate-400">Тікелей санау ауыр...</p>
+        </div>
+      ),
+    },
+    {
+      duration: 8211,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 w-full max-w-2xl font-mono">
+          <div className="text-lg md:text-2xl text-slate-300">36 × 5 + 64 × 5</div>
+          <div className="text-slate-500 text-lg md:text-2xl">↓</div>
+          <div className="px-4 py-3 rounded-lg bg-pink-500/15 border border-pink-400/40 text-xl md:text-3xl font-bold opacity-0 animate-fade-up" style={{ animationDelay: "0.5s" }}>
+            (<span className="text-amber-300">36 + 64</span>) × 5
+          </div>
+          <p className="text-xs md:text-sm text-slate-400 mt-1">Бесті жақшаның сыртына шығардық</p>
+        </div>
+      ),
+    },
+    {
+      duration: 5987,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 w-full max-w-xl font-mono">
+          <div className="text-xl md:text-3xl text-slate-300 opacity-0 animate-fade-up" style={{ animationDelay: "0.3s" }}>
+            (36 + 64) × 5
+          </div>
+          <div className="text-xl md:text-3xl opacity-0 animate-fade-up" style={{ animationDelay: "2s" }}>
+            = <span className="text-amber-300 font-bold">100</span> × 5
+          </div>
+          <div className="text-3xl md:text-5xl font-black opacity-0 animate-fade-up" style={{ animationDelay: "4s" }}>
+            = <span className="text-emerald-400">500</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      duration: 3789,
+      render: () => (
+        <div className="flex flex-col items-center gap-3 text-center">
+          <div className="text-3xl md:text-5xl font-black bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent leading-tight">
+            Үлестіру — күш!
+          </div>
+        </div>
+      ),
+    },
+  ],
+};
+
 export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-01-natural-numbers": LESSON_01_NATURAL_NUMBERS,
   "lesson-02-razryad": LESSON_02_RAZRYAD,
   "lesson-03-amaldar-reti": LESSON_03_AMALDAR_RETI,
   "lesson-04-darezhe": LESSON_04_DAREZHE,
+  "lesson-05-addition-properties": LESSON_05_ADDITION_PROPS,
+  "lesson-06-multiplication-properties": LESSON_06_MULTIPLICATION_PROPS,
 };
