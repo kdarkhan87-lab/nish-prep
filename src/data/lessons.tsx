@@ -189,7 +189,32 @@ export type LessonKey =
   | "lesson-t09-what"
   | "lesson-t09-simple"
   | "lesson-t09-complex"
-  | "lesson-t09-word";
+  | "lesson-t09-word"
+  // Topic 10 sections
+  | "lesson-t10-numeric"
+  | "lesson-t10-similar"
+  | "lesson-t10-brackets"
+  | "lesson-t10-formulas"
+  // Topic 11 sections
+  | "lesson-t11-perimeter"
+  | "lesson-t11-area"
+  | "lesson-t11-angles"
+  // Topic 12 sections
+  | "lesson-t12-plane"
+  | "lesson-t12-quadrants"
+  | "lesson-t12-distance"
+  // Topic 13 sections
+  | "lesson-t13-axis"
+  | "lesson-t13-other"
+  | "lesson-t13-shapes"
+  // Topic 14 sections
+  | "lesson-t14-motion"
+  | "lesson-t14-work"
+  | "lesson-t14-algorithm"
+  // Topic 15 sections
+  | "lesson-t15-what"
+  | "lesson-t15-ops"
+  | "lesson-t15-venn";
 
 export const LESSON_02_RAZRYAD: LessonConfig = {
   audioSrc: "/lessons/lesson-02-audio.mp3",
@@ -2219,6 +2244,267 @@ export const LESSON_T09_WORD: LessonConfig = makeSection({
   ],
 });
 
+// ───────── TOPIC 10 sections ─────────
+
+export const LESSON_T10_NUMERIC: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t10-numeric-audio.mp3",
+  shortTitle: "Сандық/әріпті өрнек",
+  matchSection: /сандық өрнек/i,
+  scenes: [
+    { duration: 9210, node: <BadgeTitle topicNum="№10·1" title="Өрнек түрлері" subtitle="Сандық пен әріпті" color="purple" /> },
+    { duration: 10260, node: <BigText text="Сандық: 2 + 3 · 4" /> },
+    { duration: 9930, node: <BigText text="Әріпті: 2x + 3" sub="Әріп = айнымалы" /> },
+    { duration: 9380, node: <BigText text="Айнымалы орнына сан қой → мәнін тап" /> },
+    { duration: 12810, node: <BigText text="a = −2 → a² = 4" sub="Теріс × теріс = оң" /> },
+  ],
+});
+
+export const LESSON_T10_SIMILAR: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t10-similar-audio.mp3",
+  shortTitle: "Ұқсас қосылғыштар",
+  matchSection: /ұқсас қосылғыш/i,
+  scenes: [
+    { duration: 8510, node: <BadgeTitle topicNum="№10·2" title="Ұқсас біріктіру" subtitle="Бірдей әріпті бөлік" color="purple" /> },
+    { duration: 8180, node: <BigText text="3x  ·  5x — ұқсас" /> },
+    { duration: 15020, node: <BigText text="3x + 5x = 8x" sub="Коэффициенттерді +" /> },
+    { duration: 12140, node: <BigText text="2x + 3y — ұқсас емес!" /> },
+    { duration: 8680, node: <CTA text="Жеңілдетудің 1-қадамы" color="purple" /> },
+  ],
+});
+
+export const LESSON_T10_BRACKETS: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t10-brackets-audio.mp3",
+  shortTitle: "Жақшаны ашу",
+  matchSection: /жақшаны ашу/i,
+  scenes: [
+    { duration: 8100, node: <BadgeTitle topicNum="№10·3" title="Жақшаны ашу" subtitle="Әр мүшеге көбейту" color="purple" /> },
+    { duration: 8390, node: <BigText text="3 · (x + 2) = 3x + 6" /> },
+    { duration: 10480, node: <BigText text="Әр мүшеге көбейтеміз" /> },
+    { duration: 9280, node: <BigText text="Алдында − болса → белгілерді ауыстыр" /> },
+    { duration: 10430, node: <BigText text="−(x − 3) = −x + 3" /> },
+  ],
+});
+
+export const LESSON_T10_FORMULAS: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t10-formulas-audio.mp3",
+  shortTitle: "Формулалар",
+  matchSection: /^#*\s*формулалар/i,
+  scenes: [
+    { duration: 8100, node: <BadgeTitle topicNum="№10·4" title="Формулалар" subtitle="Әмбебап ережелер" color="purple" /> },
+    { duration: 9810, node: <BigText text="P = 2(a + b)   ·   S = a · b" sub="Тіктөртбұрыш" /> },
+    { duration: 8730, node: <BigText text="P = 4a   ·   S = a²" sub="Шаршы" /> },
+    { duration: 8130, node: <BigText text="S = a · h ÷ 2" sub="Үшбұрыш" /> },
+    { duration: 9060, node: <CTA text="Шапшаңдықтың кілті!" color="purple" /> },
+  ],
+});
+
+// ───────── TOPIC 11 sections ─────────
+
+export const LESSON_T11_PERIMETER: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t11-perimeter-audio.mp3",
+  shortTitle: "Периметр",
+  matchSection: /^#*\s*периметр/i,
+  scenes: [
+    { duration: 8270, node: <BadgeTitle topicNum="№11·1" title="Периметр" subtitle="Қабырғалардың ұзындығы" color="indigo" /> },
+    { duration: 8920, node: <BigText text="Шаршы: P = 4a" /> },
+    { duration: 8580, node: <BigText text="Тіктөртбұрыш: P = 2(a + b)" /> },
+    { duration: 9620, node: <BigText text="Үшбұрыш: P = a + b + c" /> },
+    { duration: 8150, node: <CTA text="см немесе м" color="indigo" /> },
+  ],
+});
+
+export const LESSON_T11_AREA: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t11-area-audio.mp3",
+  shortTitle: "Аудан",
+  matchSection: /^#*\s*аудан\s*$/i,
+  scenes: [
+    { duration: 7460, node: <BadgeTitle topicNum="№11·2" title="Аудан" subtitle="Бет мөлшері" color="indigo" /> },
+    { duration: 6930, node: <BigText text="Шаршы: S = a²" /> },
+    { duration: 7170, node: <BigText text="Тіктөртбұрыш: S = a · b" /> },
+    { duration: 11080, node: <BigText text="Үшбұрыш: S = a · h ÷ 2" sub="h — биіктік" /> },
+    { duration: 8900, node: <CTA text="см² немесе м²" color="indigo" /> },
+  ],
+});
+
+export const LESSON_T11_ANGLES: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t11-angles-audio.mp3",
+  shortTitle: "Бұрыштар",
+  matchSection: /^#*\s*бұрыштар/i,
+  scenes: [
+    { duration: 7740, node: <BadgeTitle topicNum="№11·3" title="Бұрыштар" subtitle="Градуспен өлшеу" color="indigo" /> },
+    { duration: 6660, node: <BigText text="Градус (°)" /> },
+    { duration: 7620, node: <BigText text="Сүйір: < 90°" /> },
+    { duration: 7170, node: <BigText text="Тік: = 90°" /> },
+    { duration: 8680, node: <BigText text="Доғал: 90° < x < 180°" /> },
+    { duration: 7500, node: <BigText text="Жайылған: 180°" /> },
+  ],
+});
+
+// ───────── TOPIC 12 sections ─────────
+
+export const LESSON_T12_PLANE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t12-plane-audio.mp3",
+  shortTitle: "Жазықтық",
+  matchSection: /координаталық жазықтық дегеніміз|нүктені белгілеу/i,
+  scenes: [
+    { duration: 7820, node: <BadgeTitle topicNum="№12·1" title="Координата жазықтығы" subtitle="x пен y осьтері" color="teal" /> },
+    { duration: 9860, node: <BigText text="x — горизонталь   ·   y — вертикаль" /> },
+    { duration: 9620, node: <BigText text="(0; 0) — координаттар басы" /> },
+    { duration: 8390, node: <BigText text="Әр нүктеде 2 координата" /> },
+    { duration: 11850, node: <BigText text="A (3; 5)" sub="x = 3, y = 5" /> },
+  ],
+});
+
+export const LESSON_T12_QUADRANTS: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t12-quadrants-audio.mp3",
+  shortTitle: "Ширектер",
+  matchSection: /ширек|квадрант/i,
+  scenes: [
+    { duration: 6860, node: <BadgeTitle topicNum="№12·2" title="4 ширек" subtitle="Жазықтық бөлінеді" color="teal" /> },
+    { duration: 7700, node: <BigText text="I: x > 0, y > 0" /> },
+    { duration: 7430, node: <BigText text="II: x < 0, y > 0" /> },
+    { duration: 7530, node: <BigText text="III: x < 0, y < 0" /> },
+    { duration: 7620, node: <BigText text="IV: x > 0, y < 0" /> },
+    { duration: 8630, node: <CTA text="Таңбаға қарап тап" color="teal" /> },
+  ],
+});
+
+export const LESSON_T12_DISTANCE: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t12-distance-audio.mp3",
+  shortTitle: "Қашықтық",
+  matchSection: /арасындағы қашықтық/i,
+  scenes: [
+    { duration: 7100, node: <BadgeTitle topicNum="№12·3" title="Қашықтық" subtitle="Нүктелер арасы" color="teal" /> },
+    { duration: 9780, node: <BigText text="y бірдей → |x₁ − x₂|" /> },
+    { duration: 9660, node: <BigText text="x бірдей → |y₁ − y₂|" /> },
+    { duration: 8250, node: <BigText text="Жалпы → Пифагор" /> },
+    { duration: 9450, node: <CTA text="Кіші класта — горизонталь/вертикаль" color="teal" /> },
+  ],
+});
+
+// ───────── TOPIC 13 sections ─────────
+
+export const LESSON_T13_AXIS: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t13-axis-audio.mp3",
+  shortTitle: "Ось симметриясы",
+  matchSection: /ось симметрия/i,
+  scenes: [
+    { duration: 9620, node: <BadgeTitle topicNum="№13·1" title="Ось симметриясы" subtitle="Сызыққа қатысты" color="fuchsia" /> },
+    { duration: 7910, node: <BigText text="Симметрия осі — бөлуші сызық" /> },
+    { duration: 9160, node: <BigText text="🦋 Көбелек — классикалық мысал" /> },
+    { duration: 9330, node: <BigText text="Шаршы: 4 ось   ·   Тіктөртбұрыш: 2 ось" /> },
+    { duration: 8870, node: <BigText text="Шеңбер: ∞ ось" sub="Кез келген диаметр" /> },
+  ],
+});
+
+export const LESSON_T13_OTHER: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t13-other-audio.mp3",
+  shortTitle: "Центрлік, көшіру, бұру",
+  matchSection: /центрлік симметрия|параллель көшіру/i,
+  scenes: [
+    { duration: 8750, node: <BadgeTitle topicNum="№13·2" title="Басқа түрлендірулер" subtitle="Центр, көшіру, бұру" color="fuchsia" /> },
+    { duration: 8850, node: <BigText text="Центрлік — нүктеге қатысты" /> },
+    { duration: 7940, node: <BigText text="Параллель көшіру — жылжыту" /> },
+    { duration: 8970, node: <BigText text="Бұру — нүкте айналасында айналдыру" /> },
+    { duration: 8080, node: <CTA text="Өлшем өзгермейді" color="fuchsia" /> },
+  ],
+});
+
+export const LESSON_T13_SHAPES: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t13-shapes-audio.mp3",
+  shortTitle: "Куб, параллелепипед",
+  matchSection: /^#*\s*куб|параллелепипед/i,
+  scenes: [
+    { duration: 7820, node: <BadgeTitle topicNum="№13·3" title="3D фигуралар" subtitle="Куб мен параллелепипед" color="fuchsia" /> },
+    { duration: 10600, node: <BigText text="Куб: 6 шаршы беті" sub="V = a³   ·   S = 6a²" /> },
+    { duration: 8440, node: <BigText text="Тікбұрышты параллелепипед" sub="Қыры әртүрлі болуы мүмкін" /> },
+    { duration: 7000, node: <BigText text="V = a · b · c" /> },
+    { duration: 8440, node: <BigText text="Жайылма: 6 шаршы крест" /> },
+  ],
+});
+
+// ───────── TOPIC 14 sections ─────────
+
+export const LESSON_T14_MOTION: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t14-motion-audio.mp3",
+  shortTitle: "Қозғалыс есептері",
+  matchSection: /қозғалысқа байланысты/i,
+  scenes: [
+    { duration: 7770, node: <BadgeTitle topicNum="№14·1" title="Қозғалыс есептері" subtitle="Ең көп кездесетін" color="amber" /> },
+    { duration: 8250, node: <BigText text="s = v · t" sub="жол = жылдамдық × уақыт" /> },
+    { duration: 11510, node: <BigText text="Қарсы: V = v₁ + v₂" sub="Жалпы жылдамдық — сумма" /> },
+    { duration: 10790, node: <BigText text="Қуу: V = v₁ − v₂" sub="Жалпы жылдамдық — айырма" /> },
+    { duration: 11660, node: <BigText text="Ағыспен → +   ·   Қарсы → −" /> },
+  ],
+});
+
+export const LESSON_T14_WORK: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t14-work-audio.mp3",
+  shortTitle: "Жұмыс, баға, жас",
+  matchSection: /жұмысқа байланысты/i,
+  scenes: [
+    { duration: 8900, node: <BadgeTitle topicNum="№14·2" title="Басқа түрлер" subtitle="Жұмыс, баға, жас" color="amber" /> },
+    { duration: 9500, node: <BigText text="Жұмыс = өнімділік × уақыт" /> },
+    { duration: 9300, node: <BigText text="1 жұмысшы a сағатта → 1/a өнімділік" /> },
+    { duration: 9500, node: <BigText text="Құн = сан × баға" /> },
+    { duration: 8900, node: <BigText text="Жас: қазіргі = x → теңдеу" /> },
+  ],
+});
+
+export const LESSON_T14_ALGORITHM: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t14-algorithm-audio.mp3",
+  shortTitle: "Шешу алгоритмі",
+  matchSection: /шешу алгоритмі/i,
+  scenes: [
+    { duration: 7410, node: <BadgeTitle topicNum="№14·3" title="5 қадамдық алгоритм" subtitle="Кез келген есеп" color="amber" /> },
+    { duration: 7020, node: <BigText text="1. Шартты бірнеше рет оқы" /> },
+    { duration: 8780, node: <BigText text="2. Белгісізді анықтап, x деп бел" /> },
+    { duration: 8010, node: <BigText text="3. Теңдеу немесе сурет құр" /> },
+    { duration: 6500, node: <BigText text="4. Теңдеуді шеш" /> },
+    { duration: 7770, node: <BigText text="5. Жауапты тексер және сөзбен жаз" /> },
+  ],
+});
+
+// ───────── TOPIC 15 sections ─────────
+
+export const LESSON_T15_WHAT: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t15-what-audio.mp3",
+  shortTitle: "Жиын деген не",
+  matchSection: /жиын дегеніміз/i,
+  scenes: [
+    { duration: 8630, node: <BadgeTitle topicNum="№15·1" title="Жиын деген не?" subtitle="Бір қасиетпен біріктірілген" color="violet" /> },
+    { duration: 10380, node: <BigText text="Жиын = A, B, C..." sub="Бас әріппен" /> },
+    { duration: 11820, node: <BigText text="Элементтер { ... } ішінде" /> },
+    { duration: 10620, node: <BigText text="∅ — бос жиын" sub="Ешбір элементі жоқ" /> },
+    { duration: 9900, node: <BigText text="⊂ — ішкі жиын" /> },
+  ],
+});
+
+export const LESSON_T15_OPS: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t15-ops-audio.mp3",
+  shortTitle: "Жиындар амалдары",
+  matchSection: /жиындар амалдары/i,
+  scenes: [
+    { duration: 7000, node: <BadgeTitle topicNum="№15·2" title="3 амал" subtitle="∪ ∩ −" color="violet" /> },
+    { duration: 13430, node: <BigText text="∪ Бірігу" sub="Екі жиынды бір жинау" /> },
+    { duration: 9280, node: <BigText text="∩ Қиылысу" sub="Тек ортақ элементтер" /> },
+    { duration: 11180, node: <BigText text="A − B" sub="Тек A-да, B-да жоқ" /> },
+  ],
+});
+
+export const LESSON_T15_VENN: LessonConfig = makeSection({
+  audioSrc: "/lessons/lesson-t15-venn-audio.mp3",
+  shortTitle: "Венн диаграммасы",
+  matchSection: /венн диаграмма/i,
+  scenes: [
+    { duration: 8660, node: <BadgeTitle topicNum="№15·3" title="Венн диаграммасы" subtitle="Жиындарды суретпен" color="violet" /> },
+    { duration: 10020, node: <BigText text="Әр жиын = дөңгелек" /> },
+    { duration: 8420, node: <BigText text="Көзбен шешу — оңай" /> },
+    { duration: 11010, node: <BigText text="|A ∪ B| = |A| + |B| − |A ∩ B|" /> },
+    { duration: 9660, node: <CTA text="Кіші класта жиі" color="violet" /> },
+  ],
+});
+
 export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-01-natural-numbers": LESSON_01_NATURAL_NUMBERS,
   "lesson-02-razryad": LESSON_02_RAZRYAD,
@@ -2284,4 +2570,29 @@ export const LESSONS_BY_KEY: Record<LessonKey, LessonConfig> = {
   "lesson-t09-simple": LESSON_T09_SIMPLE,
   "lesson-t09-complex": LESSON_T09_COMPLEX,
   "lesson-t09-word": LESSON_T09_WORD,
+  // Topic 10
+  "lesson-t10-numeric": LESSON_T10_NUMERIC,
+  "lesson-t10-similar": LESSON_T10_SIMILAR,
+  "lesson-t10-brackets": LESSON_T10_BRACKETS,
+  "lesson-t10-formulas": LESSON_T10_FORMULAS,
+  // Topic 11
+  "lesson-t11-perimeter": LESSON_T11_PERIMETER,
+  "lesson-t11-area": LESSON_T11_AREA,
+  "lesson-t11-angles": LESSON_T11_ANGLES,
+  // Topic 12
+  "lesson-t12-plane": LESSON_T12_PLANE,
+  "lesson-t12-quadrants": LESSON_T12_QUADRANTS,
+  "lesson-t12-distance": LESSON_T12_DISTANCE,
+  // Topic 13
+  "lesson-t13-axis": LESSON_T13_AXIS,
+  "lesson-t13-other": LESSON_T13_OTHER,
+  "lesson-t13-shapes": LESSON_T13_SHAPES,
+  // Topic 14
+  "lesson-t14-motion": LESSON_T14_MOTION,
+  "lesson-t14-work": LESSON_T14_WORK,
+  "lesson-t14-algorithm": LESSON_T14_ALGORITHM,
+  // Topic 15
+  "lesson-t15-what": LESSON_T15_WHAT,
+  "lesson-t15-ops": LESSON_T15_OPS,
+  "lesson-t15-venn": LESSON_T15_VENN,
 };

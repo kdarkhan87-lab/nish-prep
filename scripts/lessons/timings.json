@@ -1168,5 +1168,389 @@
     ],
     "scene_count": 5,
     "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t10-numeric-audio.mp3": {
+    "file": "lesson-t10-numeric-audio.mp3",
+    "total_ms": 51590,
+    "scene_audio_durs_ms": [
+      5210,
+      6260,
+      5930,
+      5380,
+      8810
+    ],
+    "scene_durations_ms": [
+      9210,
+      10260,
+      9930,
+      9380,
+      12810
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t10-similar-audio.mp3": {
+    "file": "lesson-t10-similar-audio.mp3",
+    "total_ms": 52530,
+    "scene_audio_durs_ms": [
+      4510,
+      4180,
+      11020,
+      8140,
+      4680
+    ],
+    "scene_durations_ms": [
+      8510,
+      8180,
+      15020,
+      12140,
+      8680
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t10-brackets-audio.mp3": {
+    "file": "lesson-t10-brackets-audio.mp3",
+    "total_ms": 46680,
+    "scene_audio_durs_ms": [
+      4100,
+      4390,
+      6480,
+      5280,
+      6430
+    ],
+    "scene_durations_ms": [
+      8100,
+      8390,
+      10480,
+      9280,
+      10430
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t10-formulas-audio.mp3": {
+    "file": "lesson-t10-formulas-audio.mp3",
+    "total_ms": 43830,
+    "scene_audio_durs_ms": [
+      4100,
+      5810,
+      4730,
+      4130,
+      5060
+    ],
+    "scene_durations_ms": [
+      8100,
+      9810,
+      8730,
+      8130,
+      9060
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t11-perimeter-audio.mp3": {
+    "file": "lesson-t11-perimeter-audio.mp3",
+    "total_ms": 43540,
+    "scene_audio_durs_ms": [
+      4270,
+      4920,
+      4580,
+      5620,
+      4150
+    ],
+    "scene_durations_ms": [
+      8270,
+      8920,
+      8580,
+      9620,
+      8150
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t11-area-audio.mp3": {
+    "file": "lesson-t11-area-audio.mp3",
+    "total_ms": 41540,
+    "scene_audio_durs_ms": [
+      3460,
+      2930,
+      3170,
+      7080,
+      4900
+    ],
+    "scene_durations_ms": [
+      7460,
+      6930,
+      7170,
+      11080,
+      8900
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t11-angles-audio.mp3": {
+    "file": "lesson-t11-angles-audio.mp3",
+    "total_ms": 45370,
+    "scene_audio_durs_ms": [
+      3740,
+      2660,
+      3620,
+      3170,
+      4680,
+      3500
+    ],
+    "scene_durations_ms": [
+      7740,
+      6660,
+      7620,
+      7170,
+      8680,
+      7500
+    ],
+    "scene_count": 6,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t12-plane-audio.mp3": {
+    "file": "lesson-t12-plane-audio.mp3",
+    "total_ms": 47540,
+    "scene_audio_durs_ms": [
+      3820,
+      5860,
+      5620,
+      4390,
+      7850
+    ],
+    "scene_durations_ms": [
+      7820,
+      9860,
+      9620,
+      8390,
+      11850
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t12-quadrants-audio.mp3": {
+    "file": "lesson-t12-quadrants-audio.mp3",
+    "total_ms": 45770,
+    "scene_audio_durs_ms": [
+      2860,
+      3700,
+      3430,
+      3530,
+      3620,
+      4630
+    ],
+    "scene_durations_ms": [
+      6860,
+      7700,
+      7430,
+      7530,
+      7620,
+      8630
+    ],
+    "scene_count": 6,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t12-distance-audio.mp3": {
+    "file": "lesson-t12-distance-audio.mp3",
+    "total_ms": 44240,
+    "scene_audio_durs_ms": [
+      3100,
+      5780,
+      5660,
+      4250,
+      5450
+    ],
+    "scene_durations_ms": [
+      7100,
+      9780,
+      9660,
+      8250,
+      9450
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t13-axis-audio.mp3": {
+    "file": "lesson-t13-axis-audio.mp3",
+    "total_ms": 44890,
+    "scene_audio_durs_ms": [
+      5620,
+      3910,
+      5160,
+      5330,
+      4870
+    ],
+    "scene_durations_ms": [
+      9620,
+      7910,
+      9160,
+      9330,
+      8870
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t13-other-audio.mp3": {
+    "file": "lesson-t13-other-audio.mp3",
+    "total_ms": 42590,
+    "scene_audio_durs_ms": [
+      4750,
+      4850,
+      3940,
+      4970,
+      4080
+    ],
+    "scene_durations_ms": [
+      8750,
+      8850,
+      7940,
+      8970,
+      8080
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t13-shapes-audio.mp3": {
+    "file": "lesson-t13-shapes-audio.mp3",
+    "total_ms": 42300,
+    "scene_audio_durs_ms": [
+      3820,
+      6600,
+      4440,
+      3000,
+      4440
+    ],
+    "scene_durations_ms": [
+      7820,
+      10600,
+      8440,
+      7000,
+      8440
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t14-motion-audio.mp3": {
+    "file": "lesson-t14-motion-audio.mp3",
+    "total_ms": 49980,
+    "scene_audio_durs_ms": [
+      3770,
+      4250,
+      7510,
+      6790,
+      7660
+    ],
+    "scene_durations_ms": [
+      7770,
+      8250,
+      11510,
+      10790,
+      11660
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t14-work-audio.mp3": {
+    "file": "lesson-t14-work-audio.mp3",
+    "total_ms": 46100,
+    "scene_audio_durs_ms": [
+      4900,
+      5500,
+      5300,
+      5500,
+      4900
+    ],
+    "scene_durations_ms": [
+      8900,
+      9500,
+      9300,
+      9500,
+      8900
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t14-algorithm-audio.mp3": {
+    "file": "lesson-t14-algorithm-audio.mp3",
+    "total_ms": 45490,
+    "scene_audio_durs_ms": [
+      3410,
+      3020,
+      4780,
+      4010,
+      2500,
+      3770
+    ],
+    "scene_durations_ms": [
+      7410,
+      7020,
+      8780,
+      8010,
+      6500,
+      7770
+    ],
+    "scene_count": 6,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t15-what-audio.mp3": {
+    "file": "lesson-t15-what-audio.mp3",
+    "total_ms": 51350,
+    "scene_audio_durs_ms": [
+      4630,
+      6380,
+      7820,
+      6620,
+      5900
+    ],
+    "scene_durations_ms": [
+      8630,
+      10380,
+      11820,
+      10620,
+      9900
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t15-ops-audio.mp3": {
+    "file": "lesson-t15-ops-audio.mp3",
+    "total_ms": 40890,
+    "scene_audio_durs_ms": [
+      3000,
+      9430,
+      5280,
+      7180
+    ],
+    "scene_durations_ms": [
+      7000,
+      13430,
+      9280,
+      11180
+    ],
+    "scene_count": 4,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
+  },
+  "lesson-t15-venn-audio.mp3": {
+    "file": "lesson-t15-venn-audio.mp3",
+    "total_ms": 47770,
+    "scene_audio_durs_ms": [
+      4660,
+      6020,
+      4420,
+      7010,
+      5660
+    ],
+    "scene_durations_ms": [
+      8660,
+      10020,
+      8420,
+      11010,
+      9660
+    ],
+    "scene_count": 5,
+    "pattern": "separate-TTS + PRE_2000ms + POST_2000ms"
   }
 }
