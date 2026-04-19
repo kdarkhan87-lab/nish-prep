@@ -86,16 +86,23 @@
   },
   "lesson-t02-mass-audio.mp3": {
     "file": "lesson-t02-mass-audio.mp3",
-    "total_ms": 57666,
-    "sentence_count": 18,
-    "scene_durations_ms": [
-      7097,
-      12986,
-      14000,
-      9929,
-      13654
+    "total_ms": 70160,
+    "scene_audio_durs_ms": [
+      5160,
+      14040,
+      19870,
+      7180,
+      3910
     ],
-    "scene_count": 5
+    "scene_durations_ms": [
+      9160,
+      18040,
+      23870,
+      11180,
+      7910
+    ],
+    "scene_count": 5,
+    "pattern": "separate-tts-per-scene + PRE_2000ms + POST_2000ms"
   },
   "lesson-t02-time-audio.mp3": {
     "file": "lesson-t02-time-audio.mp3",
