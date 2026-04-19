@@ -291,7 +291,7 @@ export function TheoryRenderer({
   }
 
   const combined: Array<
-    | { type: "section"; html: string; visual: string | null; lesson?: LessonConfig }
+    | { type: "section"; titleHtml: string; bodyHtml: string; visual: string | null; lesson?: LessonConfig }
     | { type: "quizGroup"; items: QuizData[] }
   > = [];
 
@@ -429,9 +429,22 @@ export function TheoryRenderer({
       sectionNumber = undefined; // Кіріспе/қорытынды — номерсіз
     }
 
+    // Разделяем секцию на заголовок (## Title) и остальное тело.
+    // Видео вставляется между заголовком и телом.
+    const allLines = sections[i].split("\n");
+    const firstTitleIdx = allLines.findIndex((l) => l.startsWith("## ") || l.startsWith("# "));
+    const titleHtml =
+      firstTitleIdx >= 0
+        ? renderTheoryHTML(allLines.slice(0, firstTitleIdx + 1).join("\n"), sectionNumber)
+        : "";
+    const bodyHtml =
+      firstTitleIdx >= 0
+        ? renderTheoryHTML(allLines.slice(firstTitleIdx + 1).join("\n"), sectionNumber)
+        : renderTheoryHTML(sections[i], sectionNumber);
     combined.push({
       type: "section",
-      html: renderTheoryHTML(sections[i], sectionNumber),
+      titleHtml,
+      bodyHtml,
       visual: uniqueVisual,
       lesson: sectionToLesson.get(i),
     });
@@ -449,7 +462,7 @@ export function TheoryRenderer({
       {combined.map((item, i) =>
         item.type === "section" ? (
           <div key={`s-${i}`}>
-            <div dangerouslySetInnerHTML={{ __html: item.html }} />
+            <div dangerouslySetInnerHTML={{ __html: item.titleHtml }} />
             {item.lesson && (
               <LessonVideo
                 audioSrc={item.lesson.audioSrc}
@@ -458,6 +471,7 @@ export function TheoryRenderer({
                 durationLabel={item.lesson.durationLabel}
               />
             )}
+            <div dangerouslySetInnerHTML={{ __html: item.bodyHtml }} />
             {item.visual && <TheoryVisualBlock type={item.visual} />}
           </div>
         ) : (
