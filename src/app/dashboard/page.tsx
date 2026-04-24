@@ -18,6 +18,7 @@ interface TopicInfo {
   name: string;
   subjectName: string;
   subjectSlug: string;
+  order: number;
 }
 
 export default function DashboardPage() {
@@ -26,6 +27,7 @@ export default function DashboardPage() {
   const [results, setResults] = useState<TestResultData[]>([]);
   const [topics, setTopics] = useState<Record<string, TopicInfo>>({});
   const [loading, setLoading] = useState(true);
+  const [nowMs, setNowMs] = useState<number | null>(null);
 
   useEffect(() => {
     if (status === "unauthenticated") {
@@ -50,10 +52,12 @@ export default function DashboardPage() {
             name: topic.name,
             subjectName: subject.name,
             subjectSlug: subject.slug,
+            order: topic.order,
           };
         }
       }
       setTopics(topicMap);
+      setNowMs(Date.now());
       setLoading(false);
     });
   }, [status]);
@@ -78,20 +82,85 @@ export default function DashboardPage() {
     totalTests > 0
       ? Math.max(...results.map((r) => Math.round((r.score / r.total) * 100)))
       : 0;
+  const attemptedTopicIds = new Set(results.map((r) => r.topicId));
+  const sortedTopics = Object.values(topics).sort((a, b) => {
+    if (a.subjectSlug === b.subjectSlug) return a.order - b.order;
+    if (a.subjectSlug === "math") return -1;
+    if (b.subjectSlug === "math") return 1;
+    return a.subjectSlug.localeCompare(b.subjectSlug);
+  });
+  const resultsWithPct = results
+    .map((r) => ({ ...r, pct: Math.round((r.score / r.total) * 100), topic: topics[r.topicId] }))
+    .filter((r) => r.topic);
+  const weakestResult = [...resultsWithPct].sort((a, b) => a.pct - b.pct)[0];
+  const nextNewTopic = sortedTopics.find((topic) => !attemptedTopicIds.has(topic.id));
+  const hasWeakTopic = weakestResult ? weakestResult.pct < 75 : false;
+  const recommendedTopic = totalTests === 0 ? sortedTopics[0] : hasWeakTopic ? weakestResult?.topic : nextNewTopic;
+  const recommendationType =
+    totalTests === 0 ? "Старт" : hasWeakTopic ? "Қайталау" : "Жаңа тақырып";
+  const recommendationText =
+    totalTests === 0
+      ? "Алдымен теорияны оқып, қысқа тест тапсыр. Бірінші нәтиже жеке жоспарды ашады."
+      : hasWeakTopic && weakestResult
+      ? `${weakestResult.topic.name} тақырыбында ${weakestResult.pct}%. Мақсат: 80%+ нәтижеге көтеру.`
+      : "Жақсы жүріп келесің. Енді жаңа тақырыпты ашып, серияны жалғастыр.";
+  const activeDays = new Set(results.map((r) => new Date(r.createdAt).toDateString())).size;
+  const lastResultDate = results[0]?.createdAt ? new Date(results[0].createdAt) : null;
+  const daysSinceLast = lastResultDate
+    ? Math.floor(((nowMs ?? lastResultDate.getTime()) - lastResultDate.getTime()) / (1000 * 60 * 60 * 24))
+    : null;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold text-gray-800 mb-2">
         Сәлем, {session.user?.name}! 👋
       </h1>
-      <p className="text-gray-500 mb-8">Дайындық статистикаң</p>
+      <p className="text-gray-500 mb-8">
+        {daysSinceLast === null
+          ? "Бүгін алғашқы қадамыңды бастайық"
+          : daysSinceLast === 0
+          ? "Бүгін дайындық жасалды. Енді келесі қадамды бекітейік"
+          : `${daysSinceLast} күн үзіліс болды. Қысқа тапсырмадан қайта бастайық`}
+      </p>
+
+      {/* Daily plan */}
+      <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg p-6 md:p-7 text-white mb-8">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+          <div>
+            <div className="inline-flex items-center gap-2 bg-white/15 px-3 py-1 rounded-full text-sm font-medium mb-3">
+              🎯 Бүгінгі жоспар · {recommendationType}
+            </div>
+            <h2 className="text-2xl font-bold mb-2">
+              {recommendedTopic ? recommendedTopic.name : "Дайындық жоспары"}
+            </h2>
+            <p className="text-blue-100 max-w-2xl">{recommendationText}</p>
+          </div>
+          {recommendedTopic && (
+            <div className="flex flex-col sm:flex-row md:flex-col gap-3 md:w-52">
+              <Link
+                href={`/subjects/${recommendedTopic.subjectSlug}/${recommendedTopic.id}/theory`}
+                className="bg-white text-blue-700 hover:bg-blue-50 px-5 py-3 rounded-xl font-bold text-center transition"
+              >
+                Теория
+              </Link>
+              <Link
+                href={`/subjects/${recommendedTopic.subjectSlug}/${recommendedTopic.id}/test`}
+                className="bg-orange-500 hover:bg-orange-400 text-white px-5 py-3 rounded-xl font-bold text-center transition"
+              >
+                Тест тапсыру
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
         {[
           { label: "Тест тапсырылды", value: totalTests, icon: "📝", color: "blue" },
           { label: "Орташа балл", value: `${avgScore}%`, icon: "📊", color: "orange" },
           { label: "Ең жақсы нәтиже", value: `${bestScore}%`, icon: "🏆", color: "green" },
+          { label: "Белсенді күн", value: activeDays, icon: "🔥", color: "red" },
         ].map((stat) => (
           <div key={stat.label} className="bg-white rounded-2xl shadow-md p-6 text-center">
             <div className="text-3xl mb-2">{stat.icon}</div>
