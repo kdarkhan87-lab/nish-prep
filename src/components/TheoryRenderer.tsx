@@ -217,7 +217,7 @@ function renderTheoryHTML(text: string, sectionNumber?: number): string {
         items.push(fmt(lines[i].slice(2)));
         i++;
       }
-      blocks.push(`<div class="bg-gray-50 rounded-xl p-4 my-3"><ul class="space-y-2">${items.map(item => `<li class="flex items-start gap-2 text-gray-700"><span class="text-blue-500 mt-1 flex-shrink-0">●</span><span>${item}</span></li>`).join("")}</ul></div>`);
+      blocks.push(`<div class="bg-gray-50 rounded-xl p-4 my-3"><ul class="space-y-2">${items.map(item => `<li class="flex items-start gap-2 text-gray-700 text-[16px] leading-relaxed"><span class="text-blue-500 mt-1 flex-shrink-0">●</span><span>${item}</span></li>`).join("")}</ul></div>`);
       continue;
     }
 
@@ -229,7 +229,7 @@ function renderTheoryHTML(text: string, sectionNumber?: number): string {
 
     if (line.trim() === "") { i++; continue; }
 
-    blocks.push(`<p class="text-gray-600 leading-relaxed my-2 text-[15px]">${fmt(line)}</p>`);
+    blocks.push(`<p class="text-gray-700 leading-[1.8] my-3 text-[17px]">${fmt(line)}</p>`);
     i++;
   }
   return blocks.join("\n");

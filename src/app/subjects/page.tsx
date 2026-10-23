@@ -2,8 +2,14 @@ import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
+import type { Metadata } from "next";
 
 export const dynamic = "force-dynamic";
+
+export const metadata: Metadata = {
+  title: "Пәндер",
+  description: "Математика және логика бойынша НИШ/БИЛ-ге дайындық тақырыптары: теория, видео-сабақтар, тесттер.",
+};
 
 export default async function SubjectsPage() {
   const subjects = await prisma.subject.findMany({

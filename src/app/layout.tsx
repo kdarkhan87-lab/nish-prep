@@ -1,14 +1,41 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
 import { Navbar } from "@/components/Navbar";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
-const geist = Geist({ variable: "--font-geist", subsets: ["latin", "latin-ext"] });
+const geist = Geist({ variable: "--font-geist", subsets: ["latin", "latin-ext", "cyrillic"] });
 
 export const metadata: Metadata = {
-  title: "НИШ/БИЛ Дайындық — Математика және Логика",
-  description: "5-6 сынып оқушыларына НИШ және БИЛ-ге түсуге дайындық онлайн-платформасы",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${SITE_NAME} — Математика және Логика`,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: ["НИШ", "БИЛ", "дайындық", "математика", "логика", "5 сынып", "6 сынып", "тест", "емтихан", "подготовка к НИШ"],
+  openGraph: {
+    type: "website",
+    locale: "kk_KZ",
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — Математика және Логика`,
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary",
+    title: `${SITE_NAME} — Математика және Логика`,
+    description: SITE_DESCRIPTION,
+  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#2563eb",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

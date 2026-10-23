@@ -61,12 +61,32 @@ export async function POST(req: Request) {
     data: { score, total, userId, topicId },
   });
 
+  // Келесі тақырып — оқушыға «келесі қадам» ұсыну үшін
+  let nextTopic: { id: string; name: string; subjectSlug: string } | null = null;
+  try {
+    const current = await prisma.topic.findUnique({
+      where: { id: topicId },
+      select: { order: true, subjectId: true, subject: { select: { slug: true } } },
+    });
+    if (current) {
+      const next = await prisma.topic.findFirst({
+        where: { subjectId: current.subjectId, order: { gt: current.order } },
+        orderBy: { order: "asc" },
+        select: { id: true, name: true },
+      });
+      if (next) nextTopic = { id: next.id, name: next.name, subjectSlug: current.subject.slug };
+    }
+  } catch (err) {
+    console.error("[results] nextTopic lookup failed", err);
+  }
+
   return NextResponse.json({
     id: result.id,
     score,
     total,
     percentage: Math.round((score / total) * 100),
     details,
+    nextTopic,
   });
 }
 

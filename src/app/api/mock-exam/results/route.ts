@@ -52,7 +52,7 @@ export async function POST(req: Request) {
   }
 
   let score = 0;
-  const byTopic: Record<string, { correct: number; total: number; name: string }> = {};
+  const byTopic: Record<string, { correct: number; total: number; name: string; topicId: string; subjectSlug: string }> = {};
 
   const details = questions.map((q) => {
     const userAnswer = answers[q.id];
@@ -61,7 +61,7 @@ export async function POST(req: Request) {
 
     // Тақырып бойынша статистика
     if (!byTopic[q.topicId]) {
-      byTopic[q.topicId] = { correct: 0, total: 0, name: q.topic.name };
+      byTopic[q.topicId] = { correct: 0, total: 0, name: q.topic.name, topicId: q.topicId, subjectSlug: q.topic.subject.slug };
     }
     byTopic[q.topicId].total++;
     if (isCorrect) byTopic[q.topicId].correct++;
@@ -81,6 +81,8 @@ export async function POST(req: Request) {
 
   const topicStats = Object.values(byTopic).map((t) => ({
     name: t.name,
+    topicId: t.topicId,
+    subjectSlug: t.subjectSlug,
     correct: t.correct,
     total: t.total,
     percentage: t.total > 0 ? Math.round((t.correct / t.total) * 100) : 0,

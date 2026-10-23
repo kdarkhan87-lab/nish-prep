@@ -4,6 +4,23 @@ import { notFound } from "next/navigation";
 import { TheoryRenderer } from "@/components/TheoryRenderer";
 import { LessonVideoByKey } from "@/components/LessonVideoByKey";
 import type { LessonKey } from "@/data/lessons";
+import type { Metadata } from "next";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string; topicId: string }>;
+}): Promise<Metadata> {
+  const { topicId } = await params;
+  const topic = await prisma.topic
+    .findUnique({ where: { id: topicId }, select: { name: true, subject: { select: { name: true } } } })
+    .catch(() => null);
+  if (!topic) return { title: "Тақырып табылмады" };
+  return {
+    title: `${topic.name} — теория`,
+    description: `${topic.subject.name}: «${topic.name}» — түсінікті теория, мысалдар, видео-сабақ және тест. НИШ/БИЛ-ге дайындық.`,
+  };
+}
 
 export default async function TheoryPage({
   params,

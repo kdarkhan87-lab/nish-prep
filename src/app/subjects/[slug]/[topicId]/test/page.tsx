@@ -26,6 +26,7 @@ interface Result {
   total: number;
   percentage: number;
   details: QuestionDetail[];
+  nextTopic?: { id: string; name: string; subjectSlug: string } | null;
 }
 
 export default function TestPage() {
@@ -270,6 +271,64 @@ export default function TestPage() {
               <div className="text-2xl font-bold text-blue-600">{result.total}</div>
               <div className="text-xs text-blue-600">Барлығы</div>
             </div>
+          </div>
+
+          {/* Келесі қадам — нәтижеге қарай */}
+          <div className={`rounded-xl p-4 mb-6 text-left border ${
+            result.percentage >= 80 ? "bg-emerald-50 border-emerald-200" : "bg-orange-50 border-orange-200"
+          }`}>
+            <div className={`font-bold mb-1 ${result.percentage >= 80 ? "text-emerald-800" : "text-orange-800"}`}>
+              💡 Келесі қадам
+            </div>
+            {result.percentage >= 80 ? (
+              <>
+                <p className="text-sm text-emerald-700">
+                  Тақырып меңгерілді!{" "}
+                  {result.nextTopic
+                    ? <>Келесі тақырыпқа өтуге болады: <strong>{result.nextTopic.name}</strong>.</>
+                    : "Бұл пәндегі барлық тақырып өтілді — пробный емтихан тапсырып көр."}
+                </p>
+                <div className="mt-3 flex gap-2 flex-wrap">
+                  {result.nextTopic ? (
+                    <Link
+                      href={`/subjects/${result.nextTopic.subjectSlug}/${result.nextTopic.id}/theory`}
+                      className="inline-block bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition"
+                    >
+                      Келесі тақырып →
+                    </Link>
+                  ) : (
+                    <Link
+                      href="/mock-exam"
+                      className="inline-block bg-rose-500 hover:bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-bold transition"
+                    >
+                      🎯 Пробный емтихан
+                    </Link>
+                  )}
+                </div>
+              </>
+            ) : (
+              <>
+                <p className="text-sm text-orange-700">
+                  {result.percentage >= 50
+                    ? "Жақсы бастама. 80%-ке жету үшін қате жауаптардың түсіндірмесін оқып, теорияны қайта қарап, тестті тағы бір рет тапсыр."
+                    : "Асықпа — қате де оқудың бір бөлігі. Алдымен теорияны қайта оқы, сосын тестті қайта тапсыр."}
+                </p>
+                <div className="mt-3 flex gap-2 flex-wrap">
+                  <Link
+                    href={`/subjects/${slug}/${topicId}/theory`}
+                    className="inline-block bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-bold transition"
+                  >
+                    📚 Теорияны қайта оқу
+                  </Link>
+                  <button
+                    onClick={() => setShowDetails(true)}
+                    className="inline-block bg-white border border-orange-300 hover:bg-orange-100 text-orange-700 px-4 py-2 rounded-lg text-sm font-bold transition"
+                  >
+                    Қателерді қарау
+                  </button>
+                </div>
+              </>
+            )}
           </div>
 
           <div className="flex gap-4 justify-center flex-wrap">

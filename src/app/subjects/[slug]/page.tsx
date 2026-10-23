@@ -1,10 +1,21 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const subject = await prisma.subject.findUnique({ where: { slug }, select: { name: true } }).catch(() => null);
+  if (!subject) return { title: "Пән табылмады" };
+  return {
+    title: subject.name,
+    description: `${subject.name}: НИШ/БИЛ-ге дайындық тақырыптары — теория, видео-сабақтар және тесттер.`,
+  };
+}
 
 export default async function SubjectPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

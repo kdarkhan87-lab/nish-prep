@@ -27,6 +27,8 @@ interface QuestionDetail {
 
 interface TopicStat {
   name: string;
+  topicId?: string;
+  subjectSlug?: string;
   correct: number;
   total: number;
   percentage: number;
@@ -217,7 +219,17 @@ export default function MockExamPage() {
           <div className="text-5xl font-bold text-blue-600 mb-2">
             {result.score}/{result.total}
           </div>
-          <div className="text-lg text-gray-500 mb-6">{result.percentage}% дұрыс</div>
+          <div className="text-lg text-gray-500 mb-1">{result.percentage}% дұрыс</div>
+          {(() => {
+            const skipped = result.details.filter((d) => d.userAnswer === -1).length;
+            return skipped > 0 ? (
+              <div className="text-sm text-gray-400 mb-6">
+                жауапсыз қалды: {skipped} сұрақ — келесі жолы барлығына жауап беруге тырыс
+              </div>
+            ) : (
+              <div className="mb-6" />
+            );
+          })()}
 
           <div className="w-full bg-gray-200 rounded-full h-4 mb-6">
             <div
@@ -233,7 +245,7 @@ export default function MockExamPage() {
           {/* Тақырып бойынша статистика */}
           <h3 className="text-lg font-bold text-gray-800 mb-3 text-left">Тақырып бойынша нәтиже:</h3>
           <div className="space-y-2 mb-6">
-            {result.topicStats
+            {[...result.topicStats]
               .sort((a, b) => a.percentage - b.percentage)
               .map((t) => (
                 <div key={t.name} className="flex items-center gap-3 text-sm">
@@ -257,9 +269,42 @@ export default function MockExamPage() {
                   }`}>
                     {t.correct}/{t.total}
                   </span>
+                  {t.percentage < 80 && t.topicId && t.subjectSlug ? (
+                    <Link
+                      href={`/subjects/${t.subjectSlug}/${t.topicId}/theory`}
+                      className="text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 px-2 py-1 rounded-md transition flex-shrink-0"
+                      title="Теорияны қайталау"
+                    >
+                      📚 Қайталау
+                    </Link>
+                  ) : (
+                    <span className="w-[82px] flex-shrink-0" />
+                  )}
                 </div>
               ))}
           </div>
+
+          {/* Келесі қадам — әлсіз тақырыптар */}
+          {(() => {
+            const weak = result.topicStats.filter((t) => t.percentage < 80 && t.topicId && t.subjectSlug);
+            if (weak.length === 0) return null;
+            const worst = [...weak].sort((a, b) => a.percentage - b.percentage)[0];
+            return (
+              <div className="bg-orange-50 border border-orange-200 rounded-xl p-4 mb-6 text-left">
+                <div className="font-bold text-orange-800 mb-1">💡 Келесі қадам</div>
+                <p className="text-sm text-orange-700">
+                  Ең әлсіз тақырып — <strong>{worst.name}</strong> ({worst.percentage}%). Теориясын қайта оқып,
+                  тақырып бойынша тест тапсыр, сосын емтиханды қайталап көр.
+                </p>
+                <Link
+                  href={`/subjects/${worst.subjectSlug}/${worst.topicId}/theory`}
+                  className="inline-block mt-3 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-bold transition"
+                >
+                  📚 {worst.name} — теория
+                </Link>
+              </div>
+            );
+          })()}
 
           <div className="flex gap-4 justify-center flex-wrap">
             <button
