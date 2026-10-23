@@ -19,7 +19,7 @@ export default async function SubjectPage({ params }: { params: Promise<{ slug: 
   const session = await getServerSession(authOptions);
   const userId = (session?.user as { id?: string })?.id;
 
-  let topicResults: Record<string, { best: number; total: number; attempts: number }> = {};
+  const topicResults: Record<string, { best: number; total: number; attempts: number }> = {};
 
   if (userId) {
     const results = await prisma.testResult.findMany({

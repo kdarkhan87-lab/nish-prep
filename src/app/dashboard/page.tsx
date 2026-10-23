@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { MOCK_EXAM_LABEL, MOCK_EXAM_TOPIC_ID } from "@/lib/mock-exam";
 
 interface TestResultData {
   id: string;
@@ -70,14 +71,10 @@ export default function DashboardPage() {
   if (!session) return null;
 
   const totalTests = results.length;
+  const pctOf = (r: TestResultData) => (r.total > 0 ? Math.round((r.score / r.total) * 100) : 0);
   const avgScore =
-    totalTests > 0
-      ? Math.round(results.reduce((acc, r) => acc + (r.score / r.total) * 100, 0) / totalTests)
-      : 0;
-  const bestScore =
-    totalTests > 0
-      ? Math.max(...results.map((r) => Math.round((r.score / r.total) * 100)))
-      : 0;
+    totalTests > 0 ? Math.round(results.reduce((acc, r) => acc + pctOf(r), 0) / totalTests) : 0;
+  const bestScore = totalTests > 0 ? Math.max(...results.map(pctOf)) : 0;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
@@ -119,7 +116,8 @@ export default function DashboardPage() {
         <div className="space-y-3">
           {results.map((r) => {
             const topic = topics[r.topicId];
-            const pct = Math.round((r.score / r.total) * 100);
+            const isMockExam = r.topicId === MOCK_EXAM_TOPIC_ID;
+            const pct = r.total > 0 ? Math.round((r.score / r.total) * 100) : 0;
             return (
               <div
                 key={r.id}
@@ -127,8 +125,10 @@ export default function DashboardPage() {
               >
                 <div>
                   <div className="font-medium text-gray-800">
-                    {topic?.name || "Тақырып"}{" "}
-                    <span className="text-sm text-gray-400">({topic?.subjectName})</span>
+                    {isMockExam ? `🎯 ${MOCK_EXAM_LABEL}` : topic?.name || "Тақырып"}
+                    {!isMockExam && topic?.subjectName && (
+                      <span className="text-sm text-gray-400"> ({topic.subjectName})</span>
+                    )}
                   </div>
                   <div className="text-sm text-gray-400">
                     {new Date(r.createdAt).toLocaleDateString("kk-KZ", {

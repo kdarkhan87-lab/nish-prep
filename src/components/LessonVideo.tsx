@@ -199,7 +199,7 @@ export function LessonVideo({
               />
             </div>
             <div className="text-xs font-mono text-white/70 tabular-nums flex-shrink-0">
-              {Math.floor(elapsedRef.current / 1000)}s / {Math.floor(totalDuration / 1000)}s
+              {Math.floor((progress * totalDuration) / 1000)}s / {Math.floor(totalDuration / 1000)}s
             </div>
           </div>
         )}

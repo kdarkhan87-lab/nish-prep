@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { MOCK_EXAM_DURATION_SEC, MOCK_EXAM_SIZE } from "@/lib/mock-exam";
 
 interface Question {
   id: string;
@@ -42,7 +42,6 @@ interface Result {
 
 export default function MockExamPage() {
   const { data: session } = useSession();
-  const router = useRouter();
 
   const [started, setStarted] = useState(false);
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -52,40 +51,55 @@ export default function MockExamPage() {
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Таймер — 60 минут
-  const [timeLeft, setTimeLeft] = useState(60 * 60);
+  const [timeLeft, setTimeLeft] = useState(MOCK_EXAM_DURATION_SEC);
 
   const submitExam = useCallback(async () => {
-    if (!session || submitting) return;
+    if (!session || submitting || questions.length === 0) return;
     setSubmitting(true);
-    const res = await fetch("/api/mock-exam/results", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        answers,
-        questionIds: questions.map((q) => q.id),
-      }),
-    });
-    const data = await res.json();
-    setResult(data);
-    setSubmitting(false);
+    setError(null);
+    try {
+      const res = await fetch("/api/mock-exam/results", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          answers,
+          questionIds: questions.map((q) => q.id),
+        }),
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data || typeof data.score !== "number") {
+        throw new Error(data?.error || "Нәтижені тексеру мүмкін болмады");
+      }
+      setResult(data as Result);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Нәтижені тексеру мүмкін болмады");
+    } finally {
+      setSubmitting(false);
+    }
   }, [session, submitting, answers, questions]);
 
+  // Таймер тек бір рет іске қосылады; әр секундта қайта жасалмайды
   useEffect(() => {
-    if (!started || timeLeft <= 0 || result) return;
+    if (!started || result) return;
     const interval = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          submitExam();
-          return 0;
-        }
-        return prev - 1;
-      });
+      setTimeLeft((prev) => (prev <= 1 ? 0 : prev - 1));
     }, 1000);
     return () => clearInterval(interval);
-  }, [started, timeLeft, result, submitExam]);
+  }, [started, result]);
+
+  // Уақыт біткенде — автоматты тапсыру (side effect setState ішінде емес)
+  const submitRef = useRef(submitExam);
+  useEffect(() => {
+    submitRef.current = submitExam;
+  }, [submitExam]);
+  useEffect(() => {
+    if (started && !result && timeLeft === 0) {
+      submitRef.current();
+    }
+  }, [started, result, timeLeft]);
 
   function formatTime(seconds: number) {
     const m = Math.floor(seconds / 60);
@@ -95,12 +109,37 @@ export default function MockExamPage() {
 
   async function startExam() {
     setLoading(true);
-    const res = await fetch("/api/mock-exam");
-    const data = await res.json();
-    setQuestions(data);
-    setStarted(true);
-    setTimeLeft(60 * 60);
-    setLoading(false);
+    setError(null);
+    try {
+      const res = await fetch("/api/mock-exam", { cache: "no-store" });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !Array.isArray(data)) {
+        throw new Error(data?.error || "Сұрақтарды жүктеу мүмкін болмады");
+      }
+      if (data.length === 0) {
+        throw new Error("Базада әзірше сұрақтар жоқ. Кейінірек қайталап көріңіз.");
+      }
+      setQuestions(data);
+      setAnswers({});
+      setCurrent(0);
+      setStarted(true);
+      setTimeLeft(MOCK_EXAM_DURATION_SEC);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Сұрақтарды жүктеу мүмкін болмады");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  function finishExam() {
+    const unanswered = questions.length - Object.keys(answers).length;
+    if (unanswered > 0) {
+      const ok = window.confirm(
+        `${unanswered} сұраққа жауап берілмеді. Бәрібір емтиханды аяқтайсыз ба?`
+      );
+      if (!ok) return;
+    }
+    submitExam();
   }
 
   // ========== БАСТАУ БЕТІ ==========
@@ -114,11 +153,11 @@ export default function MockExamPage() {
             <p>Нақты емтихан форматы:</p>
             <div className="grid grid-cols-3 gap-4 mt-4">
               <div className="bg-blue-50 rounded-xl p-4">
-                <div className="text-2xl font-bold text-blue-600">30</div>
+                <div className="text-2xl font-bold text-blue-600">{MOCK_EXAM_SIZE}</div>
                 <div className="text-xs text-blue-600">сұрақ</div>
               </div>
               <div className="bg-orange-50 rounded-xl p-4">
-                <div className="text-2xl font-bold text-orange-600">60</div>
+                <div className="text-2xl font-bold text-orange-600">{MOCK_EXAM_DURATION_SEC / 60}</div>
                 <div className="text-xs text-orange-600">минут</div>
               </div>
               <div className="bg-green-50 rounded-xl p-4">
@@ -134,6 +173,12 @@ export default function MockExamPage() {
               60 минут біткенде тест автоматты түрде тапсырылады. Дайын болсаңыз — бастаңыз!
             </p>
           </div>
+
+          {error && (
+            <div className="bg-red-50 border border-red-200 rounded-xl p-4 mb-6 text-left text-sm text-red-700">
+              ⚠️ {error}
+            </div>
+          )}
 
           <button
             onClick={startExam}
@@ -235,6 +280,9 @@ export default function MockExamPage() {
             >
               🔄 Қайта тапсыру
             </button>
+            <Link href="/dashboard" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-bold transition">
+              📊 Менің кабинетім
+            </Link>
             <Link href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-6 py-3 rounded-xl font-bold transition">
               Басты бет
             </Link>
@@ -297,8 +345,30 @@ export default function MockExamPage() {
   const q = questions[current];
   const answeredCount = Object.keys(answers).length;
 
+  if (!q) {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-16 text-center">
+        <div className="bg-white rounded-2xl shadow-lg p-10">
+          <div className="text-5xl mb-4">📭</div>
+          <p className="text-gray-600 mb-6">Сұрақтар табылмады. Емтиханды қайта бастаңыз.</p>
+          <button
+            onClick={() => { setStarted(false); setQuestions([]); setAnswers({}); setCurrent(0); }}
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold transition"
+          >
+            Басына қайту
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-3xl mx-auto px-4 py-6">
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-3 mb-4 text-sm text-red-700">
+          ⚠️ {error}
+        </div>
+      )}
       {/* Таймер + прогресс */}
       <div className="flex items-center justify-between mb-4">
         <span className="text-sm text-gray-500 font-medium">
@@ -371,7 +441,7 @@ export default function MockExamPage() {
           </button>
         ) : (
           <button
-            onClick={submitExam}
+            onClick={finishExam}
             disabled={submitting}
             className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-bold transition disabled:opacity-30"
           >

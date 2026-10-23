@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { requireAdmin } from "@/lib/admin";
+import { MOCK_EXAM_LABEL, MOCK_EXAM_TOPIC_ID } from "@/lib/mock-exam";
 
 export async function GET() {
   const { error } = await requireAdmin();
@@ -19,7 +20,9 @@ export async function GET() {
   });
 
   const avgScore = results.length > 0
-    ? Math.round(results.reduce((a, r) => a + (r.score / r.total) * 100, 0) / results.length)
+    ? Math.round(
+        results.reduce((a, r) => a + (r.total > 0 ? (r.score / r.total) * 100 : 0), 0) / results.length
+      )
     : 0;
 
   const recentResults = await prisma.testResult.findMany({
@@ -37,6 +40,7 @@ export async function GET() {
     select: { id: true, name: true },
   });
   const topicMap = Object.fromEntries(topics.map(t => [t.id, t.name]));
+  topicMap[MOCK_EXAM_TOPIC_ID] = MOCK_EXAM_LABEL;
 
   const recentWithTopics = recentResults.map(r => ({
     ...r,

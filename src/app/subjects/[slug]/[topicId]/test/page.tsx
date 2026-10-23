@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -40,6 +40,7 @@ export default function TestPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Мгновенная обратная связь
   const [instantFeedback, setInstantFeedback] = useState<{
@@ -54,21 +55,52 @@ export default function TestPage() {
   const [timeLeft, setTimeLeft] = useState(0);
   const [timerMinutes, setTimerMinutes] = useState(15);
 
-  useEffect(() => {
-    if (!timerEnabled || timeLeft <= 0 || result) return;
-    const interval = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(interval);
-          submitTest();
-          return 0;
-        }
-        return prev - 1;
+  const submitTest = useCallback(async () => {
+    if (!session) {
+      router.push("/auth/login");
+      return;
+    }
+    if (submitting) return;
+
+    setSubmitting(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/results", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topicId, answers }),
       });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !data || typeof data.score !== "number") {
+        throw new Error(data?.error || "Нәтижені сақтау мүмкін болмады");
+      }
+      setResult(data as Result);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Нәтижені сақтау мүмкін болмады");
+    } finally {
+      setSubmitting(false);
+    }
+  }, [session, router, submitting, topicId, answers]);
+
+  // Таймер тек бір рет іске қосылады; әр секундта қайта жасалмайды
+  useEffect(() => {
+    if (!timerEnabled || result) return;
+    const interval = setInterval(() => {
+      setTimeLeft((prev) => (prev <= 1 ? 0 : prev - 1));
     }, 1000);
     return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timerEnabled, timeLeft, result]);
+  }, [timerEnabled, result]);
+
+  // Уақыт біткенде — автоматты тапсыру
+  const submitRef = useRef(submitTest);
+  useEffect(() => {
+    submitRef.current = submitTest;
+  }, [submitTest]);
+  useEffect(() => {
+    if (timerEnabled && !result && timeLeft === 0) {
+      submitRef.current();
+    }
+  }, [timerEnabled, result, timeLeft]);
 
   function startTimer() {
     setTimerEnabled(true);
@@ -81,14 +113,27 @@ export default function TestPage() {
     return `${m}:${s.toString().padStart(2, "0")}`;
   }
 
-  useEffect(() => {
-    fetch(`/api/tests/${topicId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setQuestions(data);
-        setLoading(false);
-      });
+  const loadQuestions = useCallback(async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(`/api/tests/${topicId}`, { cache: "no-store" });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !Array.isArray(data)) {
+        throw new Error(data?.error || "Сұрақтарды жүктеу мүмкін болмады");
+      }
+      setQuestions(data);
+    } catch (e) {
+      setQuestions([]);
+      setError(e instanceof Error ? e.message : "Сұрақтарды жүктеу мүмкін болмады");
+    } finally {
+      setLoading(false);
+    }
   }, [topicId]);
+
+  useEffect(() => {
+    loadQuestions();
+  }, [loadQuestions]);
 
   function selectAnswer(questionId: string, optionIndex: number) {
     if (answers[questionId] !== undefined) return; // Жауап берілген, өзгертуге болмайды
@@ -114,29 +159,47 @@ export default function TestPage() {
       });
   }
 
-  async function submitTest() {
-    if (!session) {
-      router.push("/auth/login");
-      return;
-    }
-
-    setSubmitting(true);
-    const res = await fetch("/api/results", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ topicId, answers }),
-    });
-
-    const data = await res.json();
-    setResult(data);
-    setSubmitting(false);
-  }
-
   if (loading) {
     return (
       <div className="max-w-3xl mx-auto px-4 py-20 text-center">
         <div className="text-4xl animate-pulse">📝</div>
         <p className="text-gray-500 mt-4">Тест жүктелуде...</p>
+      </div>
+    );
+  }
+
+  // ========== СҰРАҚТАР ЖОҚ / ҚАТЕ ==========
+  if (!result && questions.length === 0) {
+    return (
+      <div className="max-w-3xl mx-auto px-4 py-10">
+        <Link href={`/subjects/${slug}`} className="text-blue-600 hover:underline mb-4 inline-block">
+          &larr; Тақырыптарға оралу
+        </Link>
+        <div className="bg-white rounded-2xl shadow-lg p-10 text-center">
+          <div className="text-5xl mb-4">{error ? "⚠️" : "📭"}</div>
+          <h2 className="text-xl font-bold text-gray-800 mb-2">
+            {error ? "Қате орын алды" : "Бұл тақырыпта әзірше сұрақтар жоқ"}
+          </h2>
+          <p className="text-gray-500 mb-6">
+            {error ?? "Теорияны оқып, басқа тақырыптан тест тапсырып көріңіз."}
+          </p>
+          <div className="flex gap-3 justify-center flex-wrap">
+            {error && (
+              <button
+                onClick={loadQuestions}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold transition"
+              >
+                🔄 Қайта жүктеу
+              </button>
+            )}
+            <Link
+              href={`/subjects/${slug}/${topicId}/theory`}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-xl font-bold transition"
+            >
+              📚 Теорияны оқу
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
@@ -223,13 +286,9 @@ export default function TestPage() {
                 setCurrent(0);
                 setShowDetails(false);
                 setInstantFeedback(null);
-                setLoading(true);
-                fetch(`/api/tests/${topicId}`)
-                  .then((res) => res.json())
-                  .then((data) => {
-                    setQuestions(data);
-                    setLoading(false);
-                  });
+                setTimerEnabled(false);
+                setTimeLeft(0);
+                loadQuestions();
               }}
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold transition"
             >
@@ -368,6 +427,12 @@ export default function TestPage() {
             Таймерді қосу
           </button>
           <span className="text-xs text-gray-400">немесе таймерсіз шеш</span>
+        </div>
+      )}
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 rounded-xl p-3 mb-4 text-sm text-red-700">
+          ⚠️ {error}
         </div>
       )}
 

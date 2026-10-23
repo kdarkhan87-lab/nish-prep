@@ -14,7 +14,7 @@ export default async function SubjectsPage() {
   const session = await getServerSession(authOptions);
   const userId = (session?.user as { id?: string })?.id;
 
-  let topicResults: Record<string, number> = {};
+  const topicResults: Record<string, number> = {};
 
   if (userId) {
     const results = await prisma.testResult.findMany({

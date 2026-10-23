@@ -8,13 +8,22 @@ import Link from "next/link";
 interface Question { id: string; text: string; options: string; answer: number }
 interface Topic { id: string; name: string; theory: string; order: number; questions: Question[] }
 interface Subject { id: string; name: string; slug: string; icon: string; topics: Topic[] }
+interface RecentResult {
+  id: string;
+  score: number;
+  total: number;
+  createdAt: string;
+  topicName: string;
+  user?: { name?: string | null; email?: string | null } | null;
+}
+interface AdminStats { userCount: number; resultCount: number; avgScore: number; recentResults: RecentResult[] }
 
 export default function AdminPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState<{ userCount: number; resultCount: number; avgScore: number; recentResults: any[] } | null>(null);
+  const [stats, setStats] = useState<AdminStats | null>(null);
 
   // New subject form
   const [newName, setNewName] = useState("");
@@ -119,8 +128,8 @@ export default function AdminPage() {
         <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
           <h2 className="text-xl font-bold text-gray-800 mb-4">Последние результаты тестов</h2>
           <div className="space-y-2">
-            {stats.recentResults.slice(0, 10).map((r: any) => {
-              const pct = Math.round((r.score / r.total) * 100);
+            {stats.recentResults.slice(0, 10).map((r) => {
+              const pct = r.total > 0 ? Math.round((r.score / r.total) * 100) : 0;
               return (
                 <div key={r.id} className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
                   <div className="flex items-center gap-3">

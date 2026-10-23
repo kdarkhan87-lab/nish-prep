@@ -14,9 +14,13 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
-        });
+        // Email-дер регистрге тәуелсіз: телефондар бас әріппен жазады
+        const normalized = credentials.email.trim().toLowerCase();
+        let user = await prisma.user.findUnique({ where: { email: normalized } });
+        if (!user && normalized !== credentials.email) {
+          // Ескі тіркелгілер бастапқы жазылуымен сақталған болуы мүмкін
+          user = await prisma.user.findUnique({ where: { email: credentials.email } });
+        }
 
         if (!user) return null;
         if (user.blocked) throw new Error("blocked");
